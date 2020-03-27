@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  platform-advertiser:
+    build: .
+    container_name: platform-advertiser    
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=platform-advertiser.test
+    volumes:
+      - .:/var/www/
+    tty: true  
+
+      
