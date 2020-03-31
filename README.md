@@ -7,7 +7,7 @@
 
 ``` bash
 docker build -t platform-advertiser .
-docker run -it -p 8080:8080 --rm --name platform-advertiser
+docker run -it -p 8080:8080 --rm --name platform-advertiser-  platform-advertiser
 
 # install dependencies
 npm install
