@@ -1,36 +1,30 @@
 # sfl-platform-advertiser
-Advertiser UI
 
-[Build]
-docker-compose build
+> A Vue.js project
+ 
 
-[Start Build]
-docker-compose up
+## Build Setup
 
-[Start Build In Background]
-docker-compose up -d
+``` bash
+docker build -t platform-advertiser .
+docker run -it -p 8080:8080 --rm --name platform-advertiser
 
-[Start Build With Debug]
-docker-compose --verbose up
+# install dependencies
+npm install
 
-[Build & Start]
-docker-compose up --build
+# serve with hot reload at localhost:8080
+npm run dev
 
-[List Images Created]
-docker Images
+# build for production with minification
+npm run build
 
-[List active containers]
-docker ps
+# build for production and view the bundle analyzer report
+npm run build --report
 
-[List Inactive containers]
-docker ps -l
+# run unit tests
+npm run unit
 
-[SSH INTO Container]
-docker exec -it platform-advertiser /bin/bash
+# run all tests
+npm test
+```
 
-[STOP/START Container]
-docker-compose stop
-docker-compose start
-
-[Stop All Service & Remove Containers]
-docker-compose  down

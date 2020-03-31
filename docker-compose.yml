@@ -1,8 +1,9 @@
-version: "3.7"
+version: "3"
 services:
   platform-advertiser:
     build: .
-    container_name: platform-advertiser    
+    container_name: platform-advertiser
+    command: http-server dist
     expose:
       - "80"
     environment:
