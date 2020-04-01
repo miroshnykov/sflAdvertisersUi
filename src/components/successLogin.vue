@@ -11,7 +11,7 @@
             let tokenDecode = Base64.decode(this.$route.params.token);
             let token = utf8.decode(tokenDecode);
             this.$cookies.set("accessToken",token);
-            this.$router.push("/segments")
+            this.$router.push("/main")
             location.reload()
         }
     };

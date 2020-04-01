@@ -16,7 +16,7 @@
         },
         methods: {
             signIn() {
-                window.location.href = process.env.OPTI_AI_PLATFORM_URL;
+                window.location.href = process.env.SFL_CORE_AUTH_URL;
             }
         }
     };

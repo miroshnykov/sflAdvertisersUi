@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'main',
   data () {
     return {
-      msg: 'Platform advertiser3'
+      msg: 'login success Main page'
     }
   }
 }

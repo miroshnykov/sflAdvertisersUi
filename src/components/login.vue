@@ -4,48 +4,12 @@
             <a href="" class="logo animated fadeIn"></a>
 
             <form ref="login_form" action class="flex column login_form">
-                <!-- <input
-                        ref="signInEmail"
-                        type="email"
-                        placeholder="your.name@website.com"
-                        class="user_email"
-                        :class="{'error_input': $v.email.$error}"
-                        @blur="$v.email.$touch()"
-                        v-model="email"
-                />
-                <div
-                        ref="errEmail"
-                        class="error"
-                        :class="{'error_email': $v.email.$error}"
-                >Please enter a valid email address.
-                </div>
-                <input
-                        ref="signInPassword"
-                        type="password"
-                        placeholder="Password"
-                        class="password"
-                        :class="{'error_input': $v.password.$error}"
-                        @blur="$v.password.$touch()"
-                        v-model="password"
-                />
-                <div
-                        ref="errPassword"
-                        class="error"
-                        :class="{'error_password': $v.password.$error}"
-                >{{errorMessage}}
-                </div>
-                <div class="flex jcsb rememberme">
-                    <label for="rememberme" class="flex">
-                        <input type="checkbox" name="rememberme" id="rememberme" checked/>
-                        <i></i>
-                        Remember Me
-                    </label>
-                </div>
-                <a class="sign_me_in" @click="loginIn">Sign in</a>
-                <p class="or">or</p> -->
+
                 <p class="text-center animated fadeIn delay-1s"><i class="fad fa-user-circle fa-5x"></i></p>
 
-                <a class="g-signin-button animated fadeInDown delay-1s" @click="redirectToGoogleSignIn"><img src="https://s3.amazonaws.com/affiliate.ad-center.com/logo-google-g.svg"> Sign in with Google </a>
+                <a class="g-signin-button animated fadeInDown delay-1s" @click="redirectToGoogleSignIn"><img
+                        src="https://s3.amazonaws.com/affiliate.ad-center.com/logo-google-g.svg"> Sign in with Google
+                </a>
             </form>
         </div>
     </div>
@@ -55,7 +19,7 @@
     // import {required, email, minLength} from 'vuelidate/lib/validators'
     // import loginApi from '../../api/login'
     // import {getCookie} from '../../helpers'
-    // import { mapGetters, mapState} from 'vuex'
+    import {mapGetters, mapState} from 'vuex'
 
     export default {
         data() {
@@ -65,35 +29,18 @@
                 errorMessage: 'Min length of password is 5'
             }
         },
-        // validations: {
-        //     email: {
-        //         required,
-        //         email
-        //     },
-        //     forgotEmail: {
-        //         required,
-        //         email
-        //     },
-        //     resendEmail: {
-        //         required,
-        //         email
-        //     },
-        //     password: {
-        //         minLength: minLength(5)
-        //     }
-        // },
-        // computed: {
-        //     ...mapGetters("googleAuth", ["getGoogleAuthUrlStore"]),
-        //     ...mapState('googleAuth', ["googleAuthUrl","verifyTokenEmail"]),
-        // },
+        computed: {
+            ...mapGetters("googleAuth", ["getGoogleAuthUrlStore"]),
+            ...mapState('googleAuth', ["googleAuthUrl", "verifyTokenEmail"]),
+        },
         async mounted() {
-            // if (this.verifyTokenEmail){
-            //     this.$router.push("segments")
-            // }
+            if (this.verifyTokenEmail) {
+                this.$router.push("/main")
+            }
         },
         methods: {
             redirectToGoogleSignIn() {
-                // window.location.href = this.googleAuthUrl
+                window.location.href = this.googleAuthUrl
             },
             // async loginIn() {
             //     const login = this.email
