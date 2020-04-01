@@ -17,7 +17,6 @@ export default {
     },
     actions: {
         async SaveGoogleAuthUrl({commit}) {
-            console.log(' before get login ')
             let data = await googleLogin.getLoginUrl()
             commit('SaveGoogleAuthUrl', data)
         },
