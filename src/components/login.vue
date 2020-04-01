@@ -35,7 +35,7 @@
         },
         async mounted() {
             if (this.verifyTokenEmail) {
-                this.$router.push("/main")
+                this.$router.push("/campaigns")
             }
         },
         methods: {
