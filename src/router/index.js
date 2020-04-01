@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '../components/login'
-import main from '../components/main'
+import campaigns from '../components/campaigns'
 import successLogin from '../components/successLogin'
 import errorLogin from '../components/errorLogin'
 
@@ -22,8 +22,8 @@ export default new Router({
             component: errorLogin
         },
         {
-            path: '/main',
-            component: main
+            path: '/campaigns',
+            component: campaigns
         }
     ]
 })

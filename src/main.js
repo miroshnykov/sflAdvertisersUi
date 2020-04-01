@@ -8,7 +8,12 @@ import store from './store'
 import VueCookies from 'vue-cookies'
 import './style/style.sass'
 import {getCookie} from './helpers'
+import {
+    ClientTable
+} from 'vue-tables-2'
+
 // Vue.config.productionTip = false
+Vue.use(ClientTable)
 Vue.use(VueRouter)
 Vue.use(VueCookies)
 import {mapState} from 'vuex'
@@ -24,8 +29,9 @@ new Vue({
         if (token) {
             await store.dispatch('googleAuth/VerifyTokenEmailSave')
 
+            await store.dispatch('campaigns/saveCampaignsStore')
             if (this.verifyTokenEmail) {
-                router.push('/main')
+                router.push('/campaigns')
             } else {
                 console.log(' *** verifyToken is not valid *** ')
                 router.push('/')
