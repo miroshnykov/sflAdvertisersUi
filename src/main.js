@@ -24,8 +24,9 @@ new Vue({
         if (token) {
             await store.dispatch('googleAuth/VerifyTokenEmailSave')
 
+            await store.dispatch('campaigns/saveCampaignsStore')
             if (this.verifyTokenEmail) {
-                router.push('/main')
+                router.push('/campaigns')
             } else {
                 console.log(' *** verifyToken is not valid *** ')
                 router.push('/')
