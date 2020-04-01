@@ -1,34 +1,82 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-  </div>
+    <div id="campaigns">
+        <h1>Manage Campaigns </h1>
+
+        <v-client-table :data="getCampaigns" :columns="columns" :options="options">
+
+            <div slot="child_row" slot-scope="props">
+                <div class="segment-child animated fadeIn">
+
+                </div>
+            </div>
+
+
+        </v-client-table>
+
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'main',
-  data () {
-    return {
-      msg: 'login success Main page'
-    }
-  }
-}
-</script>
+    import 'bootstrap/dist/css/bootstrap.css'
+    import {mapActions, mapState, mapGetters} from 'vuex'
+    import {formatData} from '../helpers'
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+    let tableColumnsLog = [
+        // 'id',
+        'name',
+        'budgetTotal',
+        'budgetDaily',
+        'cpc',
+        'user',
+        'landingPage',
+        'status'
+    ]
+    export default {
+        mounted() {
+            this.getCampaigns()
+        },
+        computed: {
+            ...mapState('campaigns', ['campaigns']),
+            ...mapGetters('campaigns', ['getCampaigns']),
+        },
+        methods: {
+            async getCampaigns() {
+
+                try {
+                    this.tableData = await this.campaigns
+
+                } catch (e) {
+                    console.log(e)
+                }
+
+            },
+        },
+        data() {
+            return {
+                segmentName: '',
+                isModalVisible: false,
+                eventData: [],
+                columns: tableColumnsLog,
+                tableData: [],
+                countOfRecords: 0,
+                options: {
+                    // columnsDropdown: true,
+                    headings: {
+
+                        // id: 'Id',
+                        name: 'name Id',
+                        budgetTotal: 'budget Total',
+                        budgetDaily: 'budget Daily',
+                        cpc: 'cpc',
+                        user: 'user',
+                        landingPage: 'landingPage',
+                        status: 'status'
+                    },
+                    sortable: tableColumnsLog,
+                    filterable: tableColumnsLog,
+                    highlightMatches: true,
+                },
+            }
+        }
+    }
+</script>

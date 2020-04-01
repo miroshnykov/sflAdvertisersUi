@@ -8,7 +8,12 @@ import store from './store'
 import VueCookies from 'vue-cookies'
 import './style/style.sass'
 import {getCookie} from './helpers'
+import {
+    ClientTable
+} from 'vue-tables-2'
+
 // Vue.config.productionTip = false
+Vue.use(ClientTable)
 Vue.use(VueRouter)
 Vue.use(VueCookies)
 import {mapState} from 'vuex'
