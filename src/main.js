@@ -3,14 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueRouter from 'vue-router'
+import store from './store'
 import './style/style.sass'
 
-Vue.config.productionTip = false
-
+// Vue.config.productionTip = false
+Vue.use(VueRouter)
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
-    components: {App},
-    template: '<App/>'
+    store,
+    render: h => h(App),
+    async created() {
+        await store.dispatch('googleAuth/SaveGoogleAuthUrl')
+        router.push('/')
+
+    },
 })

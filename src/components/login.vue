@@ -1,7 +1,7 @@
 <template>
     <div class="login_wrapper flex center v_center">
         <div class="wrap_for_form">
-            <a href="#" class="logo animated fadeIn"></a>
+            <a href="" class="logo animated fadeIn"></a>
 
             <form ref="login_form" action class="flex column login_form">
                 <!-- <input
