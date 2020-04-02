@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '../components/login'
 import campaigns from '../components/campaigns'
+import campaign from '../components/campaign'
 import successLogin from '../components/successLogin'
 import errorLogin from '../components/errorLogin'
 
@@ -24,6 +25,10 @@ export default new Router({
         {
             path: '/campaigns',
             component: campaigns
+        },
+        {
+            path: '/campaign/:id',
+            component: campaign
         }
     ]
 })

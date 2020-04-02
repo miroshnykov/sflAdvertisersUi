@@ -3,7 +3,7 @@
         <div class="header-container">
             <b-row class="text-center" align-v="center">
                 <b-col col lg="8">
-                    <a href="/segments" class="logo"></a>
+                    <a href="/" class="logo"></a>
                 </b-col>
                 <b-col col lg="4">
                     <img class="user-avatar" :src="getUrlAvatar()" />

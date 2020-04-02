@@ -8,7 +8,6 @@ export default {
     namespaced: true,
     mutations: {
         async saveUserStore(state, user) {
-            console.log(user)
             state.user = user
         }
     },
