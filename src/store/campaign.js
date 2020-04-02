@@ -10,6 +10,11 @@ export default {
         async saveCampaign(state, campaign) {
             state.campaign = campaign
         },
+        // async saveConditions(data) {
+        //     console.log(data)
+        //     debugger
+        //     // commit('saveConditions', state.campaign)
+        // },
 
     },
     actions: {
@@ -17,9 +22,10 @@ export default {
             commit('saveCampaign', await campaign.campaign(id))
         },
         async addCampaign({commit}, data) {
-            console.log('>>> addCampaign')
-            console.table(reFormatJSON(data))
             return await campaign.addCampaign(data)
+        },
+        async saveConditions({commit}) {
+            return await campaign.updateCampaign(this.state.campaign.campaign[0])
         },
     },
     getters: {

@@ -66,7 +66,43 @@ const addCampaign = async (data) => {
 
 }
 
+const updateCampaign = async (data) => {
+
+    const {id, name, budgetTotal, budgetDaily, cpc, landingPage} = data
+
+    try {
+        console.time(`updateCampaign`)
+        const res = await api.post(
+            '', {
+                query: `
+                    mutation{
+                        updateCampaign(
+                            id:${id},
+                            name:"${name}",
+                            budgetTotal:${budgetTotal || 0},
+                            budgetDaily:${budgetDaily || 0},
+                            cpc:${cpc || 0},
+                            landingPage:"${landingPage || ""}"
+                        ){
+                            id
+                        } 
+                }
+            `,
+            }
+        )
+
+        let response = res.data.data.updateCampaign
+        console.log('\ncampaign from DB response count:', response.length)
+        console.timeEnd(`campaign`)
+        return response
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
 export default {
     campaign,
-    addCampaign
+    addCampaign,
+    updateCampaign
 }
