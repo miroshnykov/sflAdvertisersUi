@@ -9,6 +9,7 @@ const campaigns = async () => {
                 query: `
                 {
                     campaigns{
+                        id
                         name
                         budgetTotal
                         budgetDaily

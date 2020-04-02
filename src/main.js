@@ -12,10 +12,17 @@ import {
     ClientTable
 } from 'vue-tables-2'
 
+import BootstrapVue from 'bootstrap-vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
+import 'vue-search-select/dist/VueSearchSelect.css'
+
 // Vue.config.productionTip = false
 Vue.use(ClientTable)
 Vue.use(VueRouter)
 Vue.use(VueCookies)
+Vue.use(VueSweetalert2)
+Vue.use(BootstrapVue)
 import {mapState} from 'vuex'
 /* eslint-disable no-new */
 new Vue({
@@ -29,8 +36,10 @@ new Vue({
         if (token) {
             await store.dispatch('googleAuth/VerifyTokenEmailSave')
 
-            await store.dispatch('campaigns/saveCampaignsStore')
+
             if (this.verifyTokenEmail) {
+                await store.dispatch('user/saveUserStore', this.verifyTokenEmail)
+                await store.dispatch('campaigns/saveCampaignsStore')
                 router.push('/campaigns')
             } else {
                 console.log(' *** verifyToken is not valid *** ')
