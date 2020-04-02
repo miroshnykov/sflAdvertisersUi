@@ -60,10 +60,10 @@
                     title: 'Add Campaign',
                     html:
                         `<label for="swal-input1"></label>
-                        <input id="swal-input1" class="swal2-input" placeholder="Segment Name" maxlength="25"
+                        <input id="swal-input1" class="swal2-input" placeholder="Campaign Name" maxlength="25"
                              onblur="
                                  if(this.value === ''){
-                                    alert('Enter segment name ')
+                                    alert('Enter campaign name ')
                                     document.querySelector('#swal-input1').style.background = '#f38282'
                                     document.querySelector('.swal2-confirm').style.display = 'none'
                                     return false
@@ -75,78 +75,7 @@
                         >
                         <div class="row segment-popup">
                         <div class="col-md-6">
-                        <label for="swal-input1">Quality Score<br><strong>(80 - 100)</strong></label>
-                        <input
-                            type="number" step="1" min="80" max="100"
-                            id="swal-input2"
-                            class="swal2-input"
-                            value="100"
-                            onkeypress="
-                                return (
-                                    event.charCode == 8
-                                    || event.charCode == 0
-                                    || event.charCode == 13
-                                ) ? null : event.charCode >= 48 && event.charCode <= 57"
-                            onpaste="return false"
-                            onkeyup="
-                                if(this.value === '' || parseInt(this.value)>100){
-                                    this.value = 100
-                                    return false
-                                }
-                            "
-                            onblur="
-                                 if(this.value === ''|| parseInt(this.value)<80 || parseInt(this.value)>100){
-                                    alert('range between 80 and 100 default 100')
-                                    document.querySelector('#swal-input2').style.background = '#f38282'
-                                    document.querySelector('.swal2-confirm').style.display = 'none'
-                                    return false
-                                } else {
-                                    document.querySelector('#swal-input2').style.background = 'white'
-                                    document.querySelector('.swal2-confirm').style.display = 'inline-block'
-                                }
-                            "
-                        >
-                        </div>
-
-                        <div class="col-md-6">
-                        <label for="swal-input3">Multiplier<br><strong>(0.5 - 1.5)</strong></label>
-                        <input type="number" step="0.1" min="0.5" max="1.5" id="swal-input3" class="swal3-input"
-                            value="1"
-                            onkeypress="
-                                return (
-                                    event.charCode == 8
-                                    || event.charCode == 0
-                                    || event.charCode == 13
-                                ) ? null : event.charCode >= 48 && event.charCode <= 57
-                            "
-                            onpaste="return false"
-                            onkeyup="
-                                if(
-                                    this.value === ''
-                                    || parseFloat(this.value)<0.5
-                                    || parseFloat(this.value)>1.5
-                                ){
-                                    this.value = 1
-                                    return false
-                                }
-                            "
-                            onblur="
-                                 if(this.value === ''
-                                    || parseFloat(this.value)>1.5
-                                 ){
-                                    alert('range between 0.5 and 1.5 default 1')
-                                    document.querySelector('#swal-input3').style.background = '#f38282'
-                                    document.querySelector('.swal2-confirm').style.display = 'none'
-                                    return false
-                                 } else {
-                                    document.querySelector('#swal-input3').style.background = 'white'
-                                    document.querySelector('.swal2-confirm').style.display = 'inline-block'
-                                 }
-                             "
-                        >
-                        </div>
-                        </div>
-`,
+                    `,
                     confirmButtonColor: '#2ED47A',
                     cancelButtonColor: '#E3EEF4',
                     showCancelButton: true,
@@ -157,27 +86,14 @@
                     `,
                     preConfirm: () => {
                         if (document.getElementById('swal-input1').value
-                            && document.getElementById('swal-input2').value
-                            && document.getElementById('swal-input3').value
                         ) {
-                            let sName = document.getElementById('swal-input1').value
-                            let duplicateName = this.getSegmentsStore.filter(item => (item.name === sName))
-                            if (duplicateName.length > 0) {
-                                this.$swal.fire({
-                                    title: 'Validation Error',
-                                    text: 'Name already exists',
-                                })
-                            }
-
                             return [
-                                document.getElementById('swal-input1').value,
-                                document.getElementById('swal-input2').value,
-                                document.getElementById('swal-input3').value
+                                document.getElementById('swal-input1').value
                             ]
                         } else {
                             this.$swal.fire({
                                 title: 'Validation Error',
-                                text: 'Please name your segment.',
+                                text: 'Please name your campaign.',
                             })
                             return
                         }
@@ -190,19 +106,14 @@
                     }
 
                     if (result.value[0]
-                        && result.value[1]
-                        && result.value[2]
                     ) {
-                        let segmentData = {}
-                        segmentData.name = result.value[0]
-                        segmentData.weight = result.value[1]
-                        segmentData.multiplier = result.value[2]
+                        let campaignData = {}
+                        campaignData.name = result.value[0]
                         let self = this
-                        self.segmentName = segmentData.name
-                        this.$store.dispatch('segment/createSegment', segmentData).then((res) => {
-                            let newSegmentId = res.data.data.createSegment.id
-                            self.$store.segmentName = self.segmentName
-                            self.$router.push(`/segment/${newSegmentId}`)
+                        self.campaignName = campaignData.name
+                        this.$store.dispatch('campaign/addCampaign', campaignData).then((res) => {
+                            let newCampaignId = res.id
+                            self.$router.push(`/campaign/${newCampaignId}`)
                         })
 
                     } else {
