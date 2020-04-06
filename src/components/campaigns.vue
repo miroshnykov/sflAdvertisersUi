@@ -33,6 +33,19 @@
             </div>
 
 
+            <div slot="actions" slot-scope="props">
+
+                <button
+                        class="btn btn-link"
+                        v-b-tooltip.hover.top="'Edit Campaign'"
+                        @click="editSegment(props.row)"
+                >
+                    <i class="fad fa-tasks"></i>
+                </button>
+
+
+            </div>
+
         </v-client-table>
 
     </div>
@@ -52,7 +65,8 @@
         'cpc',
         'user',
         'landingPage',
-        'status'
+        'status',
+        'actions'
     ]
     export default {
         // mounted() {
