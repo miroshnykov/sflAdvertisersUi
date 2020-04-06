@@ -12,7 +12,7 @@
             <div slot="name" slot-scope="{row, update, setEditing, isEditing, revertValue}">
 
               <span @click="editSegment(row)">
-                  <span class="segment-name" @click="editSegment(row)">{{row.name}}</span>
+                  <span class="segment-name" @click="edit(row)">{{row.name}}</span>
               </span>
 
               <button @click="setEditing(true)" v-if="!isEditing()"  class="btn btn-link" >
@@ -38,9 +38,17 @@
                 <button
                         class="btn btn-link"
                         v-b-tooltip.hover.top="'Edit Campaign'"
-                        @click="editSegment(props.row)"
+                        @click="edit(props.row)"
                 >
                     <i class="fad fa-tasks"></i>
+                </button>
+
+                <button
+                        class="btn btn-link"
+                        v-b-tooltip.hover.top="'Delete Campaign'"
+                        @click="del(props.row)"
+                >
+                    <i class="far fa-trash-alt"></i>
                 </button>
 
 
@@ -92,8 +100,11 @@
                     })
                 }
             },
-            editSegment(data) {
+            edit(data) {
                 this.$router.push(`/campaign/${data.id}`)
+            },
+            del(data) {
+                console.log('delete campaign ', data)
             },
             addCampaign() {
                 this.$swal.fire({
