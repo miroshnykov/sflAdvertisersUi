@@ -15,8 +15,8 @@
                   <span class="segment-name" @click="editSegment(row)">{{row.name}}</span>
               </span>
 
-              <button @click="setEditing(true)" v-if="!isEditing()"  class="btn btn-info btn-xs ">
-
+              <button @click="setEditing(true)" v-if="!isEditing()"  class="btn btn-link" >
+                  <i class="fad fa-pencil"></i>
               </button>
                     <span v-else>
                         <input type="text" v-model="row.name">
