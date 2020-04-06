@@ -1,4 +1,5 @@
 import campaign from '../api/campaign'
+import verifyLP from '../api/verifyLP'
 import {reFormatJSON} from '../helpers'
 
 export default {
@@ -29,6 +30,9 @@ export default {
         },
         async updCampaignName({commit},data) {
             return await campaign.updateCampaignName(data)
+        },
+        async validateLandingPage({commit},lp) {
+            return await verifyLP.verifyLP(lp)
         },
     },
     getters: {

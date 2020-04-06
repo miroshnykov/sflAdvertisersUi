@@ -38,8 +38,36 @@
                    @change="updateCampaignBudgetTotal($event)"
             >
             <br>
+            <br>
+            <label>Budget Total </label>
+            <br>
+            <input type="text"
+                   placeholder="budgetTotal"
+                   id="campaignCPC"
+                   class="condition__matches budgetTotal custom-input"
+                   :value="getCampaignCPC()"
+                   @change="updateCampaignCPC($event)"
+            >
+            <br>
+            <br>
+            <label>Landing page </label>
+            <br>
+            <input type="text"
+                   placeholder="budgetTotal"
+                   id="campaignLandingPage"
+                   class="condition__matches budgetTotal custom-input"
+                   :value="getCampaignLP()"
+                   @change="updateCampaignLP($event)"
+            >
+            <b-button variant="primary"
+                      @click="validateLP()"
+            >
+                <i class="fas "></i> validate
+
+            </b-button>
+            <br>
         </div>
-                <conditions :campaign="campaign"/>
+        <conditions :campaign="campaign"/>
     </div>
 </template>
 
@@ -69,15 +97,49 @@
             getCampaignBudgetTotal() {
                 return this.getCampaign.length > 0 && this.getCampaign[0].budgetTotal
             },
+            getCampaignCPC() {
+                return this.getCampaign.length > 0 && this.getCampaign[0].cpc
+            },
+            getCampaignLP() {
+                return this.getCampaign.length > 0 && this.getCampaign[0].landingPage
+            },
             updateCampaignName(event) {
                 this.campaign[0].name = event.target.value
             },
             updateCampaignBudgetDaily(event) {
-                console.log(event)
+                this.campaign[0].budgetDaily = event.target.value
             },
             updateCampaignBudgetTotal(event) {
-                console.log(event)
-            }
+                this.campaign[0].budgetTotal = event.target.value
+            },
+            updateCampaignCPC(event) {
+                this.campaign[0].cpc = event.target.value
+            },
+            updateCampaignLP(event) {
+                this.campaign[0].landingPage = event.target.value
+            },
+            async validateLP(event) {
+                let lp = document.querySelector(`#campaignLandingPage`)
+                debugger
+                let resStatus = await this.$store.dispatch('campaign/validateLandingPage', lp.value)
+                if (resStatus === 200) {
+                    this.$swal.fire({
+                        type: 'success',
+                        position: 'top-end',
+                        title: `Domain ${lp.value} is validated `,
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                } else {
+                    this.$swal.fire({
+                        title: 'Validation Error',
+                        text: `Please check domain name:${lp.value}`,
+                    })
+                }
+
+
+            },
+
         },
         data() {
             return {
