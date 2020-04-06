@@ -2,9 +2,8 @@
     <section class="segment-form__conditions">
         <div class="segment-buttons">
             <b-button  variant="primary" class="add-rule" @click="this.addFilter">
-                <i class="fas fa-plus" data-fa-transform="shrink-2"></i> Create Rule
+                <i class="fas fa-plus" data-fa-transform="shrink-2"></i> add line
             </b-button>
-
 
 <!--            <div class="create-rule">-->
 <!--                <section class="filter">-->
@@ -69,7 +68,17 @@
             },
             async saveConditions() {
                 // if (!this.validate()) return
-                await this.$store.dispatch('campaign/saveConditions',this)
+                let res = await this.$store.dispatch('campaign/saveConditions',this)
+
+                if (res.id){
+                    this.$swal.fire({
+                        type: 'success',
+                        position: 'top-end',
+                        title: 'Campaign data has been updated',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
             },
             ...mapMutations('campaign', ['addFilter'])
         },
