@@ -8,10 +8,22 @@
         </b-button>
 
         <v-client-table :data="getCampaigns" :columns="columns" :options="options">
-            <div slot="name" slot-scope="props">
-              <span @click="editSegment(props.row)">
-                  <span class="segment-name" @click="editSegment(props.row)">{{props.row.name}}</span>
+
+            <div slot="name" slot-scope="{row, update, setEditing, isEditing, revertValue}">
+
+              <span @click="editSegment(row)">
+                  <span class="segment-name" @click="editSegment(row)">{{row.name}}</span>
               </span>
+
+              <button @click="setEditing(true)" v-if="!isEditing()"  class="btn btn-info btn-xs ">
+
+              </button>
+                    <span v-else>
+                        <input type="text" v-model="row.name">
+                        <button type="button" class="btn btn-info btn-xs" @click="update(row.name);setEditing(false); uCampaignName(row)">Update</button>
+                        <button type="button" class="btn btn-default btn-xs" @click="revertValue(); setEditing(false)">Cancel</button>
+
+                    </span>
             </div>
 
             <div slot="child_row" slot-scope="props">
@@ -49,9 +61,23 @@
         components: {logo},
         computed: {
             ...mapState('campaigns', ['campaigns']),
-            ...mapGetters('campaigns', ['getCampaigns']),
+            ...mapGetters('campaigns', ['getCampaigns'])
         },
         methods: {
+            async uCampaignName(data){
+
+                let res = await this.$store.dispatch('campaign/updCampaignName',data)
+
+                if (res.id){
+                    this.$swal.fire({
+                        type: 'success',
+                        position: 'top-end',
+                        title: 'Campaign name has been updated',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            },
             editSegment(data) {
                 this.$router.push(`/campaign/${data.id}`)
             },
@@ -143,6 +169,7 @@
                 segmentName: '',
                 isModalVisible: false,
                 eventData: [],
+                editableColumns:['name','budgetDaily'],
                 columns: tableColumnsLog,
                 tableData: [],
                 countOfRecords: 0,
@@ -159,6 +186,7 @@
                         landingPage: 'landingPage',
                         status: 'status'
                     },
+                    editableColumns:['name'],
                     sortable: tableColumnsLog,
                     filterable: tableColumnsLog,
                     highlightMatches: true,
