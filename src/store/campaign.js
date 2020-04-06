@@ -27,6 +27,9 @@ export default {
         async saveConditions({commit}) {
             return await campaign.updateCampaign(this.state.campaign.campaign[0])
         },
+        async updCampaignName(data) {
+            return await campaign.updateCampaignName(data)
+        },
     },
     getters: {
         getCampaign: state => state.campaign,
