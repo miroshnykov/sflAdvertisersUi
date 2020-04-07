@@ -5,7 +5,8 @@
         <ul class="segment-info">
             <li>Campaign ID: <b>{{id}}</b></li>
         </ul>
-        <div class="condition-line">
+        <section class="filter">
+        <div class="campaign-line">
             <label>Campaign name</label>
             <br>
             <input type="text"
@@ -67,7 +68,9 @@
             </b-button>
             <br>
         </div>
+
         <targeting :targeting="targeting"/>
+        </section>
     </div>
 </template>
 
@@ -123,7 +126,6 @@
             },
             async validateLP(event) {
                 let lp = document.querySelector(`#campaignLandingPage`)
-                debugger
                 let resStatus = await this.$store.dispatch('campaign/validateLandingPage', lp.value)
                 if (resStatus === 200) {
                     this.$swal.fire({

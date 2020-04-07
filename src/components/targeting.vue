@@ -3,7 +3,7 @@
         <section class="filter">
             <h3 class="filter__title">Rule: <b></b></h3>
             <div class="filter__controls">
-                <b-button variant="primary" class="add-rule" @click="this.addFilter">
+                <b-button variant="primary" @click="this.addFilter">
                     <i class="fas fa-plus" data-fa-transform="shrink-2"></i> add line
                 </b-button>
 
@@ -12,12 +12,28 @@
                         <span
                                 class="condition__controls"
                         >
-                            <div class="condition-line">
 
+                            <div class="campaign-block">
+                                <select
+                                        class="condition__dimension-name condition__matches custom-select"
+                                        @change="handleFilterType($event, item)"
+                                        :ref="defineFilterType(item.position)"
+                                >
+
+                                  <!-- <option :value="null">-- Select Filter --</option> -->
+                                  <option
+                                          id="filterType"
+                                          v-for="{id, name} in getFilterList()"
+                                          :value="id"
+                                          :selected="id === item.filterTypeId"
+                                          :key="id"
+                                  >{{name}}
+                                  </option>
+
+                                </select>
                             </div>
 
-
-                            <div class="condition-line">
+                            <div class="campaign-block">
 
                                 <model-select
                                         :options="getCountriesModify()"
@@ -30,7 +46,7 @@
 
                             </div>
 
-                            <div class="condition-line">
+                            <div class="campaign-block">
                                 <input type="text"
                                        placeholder="platform"
                                        class="condition__matches custom-input"
@@ -38,6 +54,26 @@
                                 >
                                 <label
                                         for="label-platform">platform</label>
+                            </div>
+
+                            <div class="campaign-block">
+                                <input type="text"
+                                       placeholder="sourceType"
+                                       class="condition__matches custom-input"
+                                       :value="item.sourceType"
+                                >
+                                <label
+                                        for="label-platform">sourceType</label>
+                            </div>
+
+                            <div class="campaign-block">
+                                <input type="text"
+                                       placeholder="sourceType"
+                                       class="condition__matches custom-input"
+                                       :value="item.cpc"
+                                >
+                                <label
+                                        for="label-cpc">cpc</label>
                             </div>
 
 
@@ -52,7 +88,7 @@
                                   </button>
                             </div>
 
-                            <div class="_or"><span>or</span></div>
+                            <div class="_or"><span></span></div>
 
                         </span>
 
@@ -98,11 +134,24 @@
         //     this.loadingDone()
         // },
         methods: {
+            defineFilterType(id) {
+                return `filtertype-${id}`
+            },
+            handleFilterType(event, item) {
+                let matchTypeRef = `matchtype-${item.position}`
+                item.filterTypeId = Number(event.target.value)
+                // item.matchTypeId = this.$refs[matchTypeRef] && Number(this.$refs[matchTypeRef][0].value)
+            },
+            getFilterList() {
+                return [
+                    {id: 0, name: 'Include'},
+                    {id: 1, name: 'Exclude'}
+                ]
+            },
             handleChangeCountry(event, item) {
                 console.log('handleChangeCountry')
             },
             getCountriesModify() {
-                debugger
                 return this.getCountries.map(item => {
                     item.value = item.code
                     item.text = item.name + ' (' + item.code + ') '
@@ -146,6 +195,16 @@
 <style lang="scss">
     .space {
         margin: 10px;
+    }
+
+    .campaign-block {
+        float: left;
+        margin-right: 10px;
+    }
+    .filter__controls {
+        display: grid;
+        // margin-bottom: 2rem;
+        justify-content: space-between;
     }
 
     .condition-group {
