@@ -11,7 +11,7 @@
 
             <div slot="name" slot-scope="{row, update, setEditing, isEditing, revertValue}">
 
-              <span @click="editSegment(row)">
+              <span @click="edit(row)">
                   <span class="segment-name" @click="edit(row)">{{row.name}}</span>
               </span>
 

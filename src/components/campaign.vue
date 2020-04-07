@@ -67,25 +67,28 @@
             </b-button>
             <br>
         </div>
-        <conditions :campaign="campaign"/>
+        <targeting :targeting="targeting"/>
     </div>
 </template>
 
 <script>
-    import conditions from './conditions.vue'
+    import targeting from './targeting.vue'
     import {mapState, mapGetters} from 'vuex'
     import logo from './logo.vue'
 
     export default {
         name: 'edit-campaign',
-        components: {conditions, logo},
+        components: {targeting, logo},
         computed: {
             ...mapState('campaign', ['campaign']),
+            ...mapState('targeting', ['targeting']),
             ...mapGetters("campaign", ["getCampaign"]),
+            ...mapGetters("targeting", ["getTargeting"]),
         },
         segmentFilter: [],
         async mounted() {
             await this.$store.dispatch('campaign/saveCampaignsStore', this.id)
+            await this.$store.dispatch('targeting/saveTargetingStore', this.id)
         },
         methods: {
             getCampaignName() {
