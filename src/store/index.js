@@ -5,7 +5,9 @@ Vue.use(Vuex)
 import googleAuth from './googleAuth'
 import campaigns from './campaigns'
 import campaign from './campaign'
+import targeting from './targeting'
 import user from './user'
+import countries from './countries'
 
 export default new Vuex.Store({
     state: {
@@ -16,6 +18,8 @@ export default new Vuex.Store({
         googleAuth,
         campaigns,
         campaign,
-        user
+        targeting,
+        user,
+        countries
     }
 })

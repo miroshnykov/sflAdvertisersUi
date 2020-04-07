@@ -40,6 +40,7 @@ new Vue({
             if (this.verifyTokenEmail) {
                 await store.dispatch('user/saveUserStore', this.verifyTokenEmail)
                 await store.dispatch('campaigns/saveCampaignsStore')
+                await store.dispatch('countries/saveCountriesStore')
                 router.push('/campaigns')
             } else {
                 console.log(' *** verifyToken is not valid *** ')
