@@ -19,7 +19,6 @@ export default {
     },
     actions: {
         async saveTargetingStore({commit}, id) {
-            debugger
             commit('saveTargeting', await targeting.targeting(id))
         }
 

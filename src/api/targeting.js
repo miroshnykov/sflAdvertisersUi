@@ -11,7 +11,7 @@ const targeting = async (campaignId) => {
                   targeting(campaignId:${campaignId}){
                         name
                         sourceType
-                        matchTypeId
+                        filterTypeId
                         campaignId
                         cpc
                         geo
