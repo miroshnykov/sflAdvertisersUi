@@ -6,8 +6,11 @@ const emptyTargeting = {
     user: '',
     cpc: 0.0,
     filterTypeId: 0,
-    sourceType: '',
-    platform: '',
+    platformAndroid:0,
+    platformIos:0,
+    platformWindows:0,
+    sourceTypeSweepstakes:0,
+    sourceTypeVod:0,
     position: 0,
     geo: ''
 }

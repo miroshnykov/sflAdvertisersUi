@@ -51,21 +51,64 @@
                             </div>
 
                             <div class="campaign-block">
-                                <input type="text"
-                                       placeholder="platform"
-                                       class="condition__matches custom-input"
-                                       :value="item.platform"
-                                >
+
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                  <label class="btn btn-secondary" :class="checkPlatformAndroid(item)">
+                                    <input
+                                            type="checkbox"
+                                            :checked="item.platformAndroid"
+                                            autocomplete="off"
+                                            @change="changePlatformAndroid(item)"
+                                    > Android
+                                  </label>
+
+                                  <label class="btn btn-secondary" :class="checkPlatformIos(item)">
+                                    <input
+                                            type="checkbox"
+                                            :checked="item.platformIos"
+                                            autocomplete="off"
+                                            @change="changePlatformIos(item)"
+                                    > IOS
+                                  </label>
+
+                                  <label class="btn btn-secondary" :class="checkPlatformWindows(item)">
+                                    <input
+                                            type="checkbox"
+                                            :checked="item.platformWindows"
+                                            autocomplete="off"
+                                            @change="changePlatformWindows(item)"
+                                    > Windows
+                                  </label>
+                                </div>
                                 <label
                                         for="label-platform">platform</label>
                             </div>
 
+
+
                             <div class="campaign-block">
-                                <input type="text"
-                                       placeholder="sourceType"
-                                       class="condition__matches custom-input"
-                                       :value="item.sourceType"
-                                >
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                  <label class="btn btn-secondary" :class="checkSourceTypeSweepstakes(item)">
+                                    <input
+                                            type="checkbox"
+                                            :checked="item.sourceTypeSweepstakes"
+                                            autocomplete="off"
+                                            @change="changeSourceTypeSweepstakes(item)"
+                                    > Sweepstakes
+                                  </label>
+
+                                  <label class="btn btn-secondary" :class="checkSourceTypeVod(item)">
+                                    <input
+                                            type="checkbox"
+                                            :checked="item.sourceTypeVod"
+                                            autocomplete="off"
+                                            @change="changeSourceTypeVod(item)"
+
+                                    > VOD
+                                  </label>
+
+                                </div>
+
                                 <label
                                         for="label-platform">sourceType</label>
                             </div>
@@ -141,6 +184,36 @@
         //     this.loadingDone()
         // },
         methods: {
+            changePlatformAndroid(item) {
+                item.platformAndroid === 0 ? item.platformAndroid = 1 : item.platformAndroid = 0
+            },
+            changePlatformIos(item) {
+                item.platformIos === 0 ? item.platformIos = 1 : item.platformIos = 0
+            },
+            changePlatformWindows(item) {
+                item.platformWindows === 0 ? item.platformWindows = 1 : item.platformWindows = 0
+            },
+            changeSourceTypeSweepstakes(item) {
+                item.sourceTypeSweepstakes === 0 ? item.sourceTypeSweepstakes = 1 : item.sourceTypeSweepstakes = 0
+            },
+            changeSourceTypeVod(item) {
+                item.sourceTypeVod === 0 ? item.sourceTypeVod = 1 : item.sourceTypeVod = 0
+            },
+            checkPlatformAndroid(item) {
+                return item.platformAndroid === 0 && 'active' || ''
+            },
+            checkPlatformIos(item) {
+                return item.platformIos === 0 && 'active' || ''
+            },
+            checkPlatformWindows(item) {
+                return item.platformWindows === 0 && 'active' || ''
+            },
+            checkSourceTypeSweepstakes(item) {
+                return item.sourceTypeSweepstakes === 0 && 'active' || ''
+            },
+            checkSourceTypeVod(item) {
+                return item.sourceTypeVod === 0 && 'active' || ''
+            },
             defineCountryId(id) {
                 return `country-${id}`
             },
@@ -258,6 +331,13 @@
 </script>
 
 <style lang="scss">
+
+    .btn-group, .btn-group-vertical {
+        position: relative;
+        /*display: inline-block;*/
+        vertical-align: middle;
+    }
+
     .space {
         margin: 10px;
     }

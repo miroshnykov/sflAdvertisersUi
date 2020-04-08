@@ -10,13 +10,16 @@ const targeting = async (campaignId) => {
                 {
                   targeting(campaignId:${campaignId}){
                         name
-                        sourceType
                         filterTypeId
                         campaignId
                         cpc
                         geo
                         position
-                        platform
+                        platformAndroid 
+                        platformIos
+                        platformWindows
+                        sourceTypeSweepstakes
+                        sourceTypeVod                        
                         user   
                     
                   } 
@@ -37,9 +40,19 @@ const targeting = async (campaignId) => {
 
 const add = async (data) => {
 
-    let {campaignId, filterTypeId, position, geo, cpc, platform, sourceType} = data
-    platform = platform || '0/0/0'
-    sourceType = sourceType || '0/0'
+    let {
+        campaignId,
+        filterTypeId,
+        position,
+        geo,
+        cpc,
+        platformAndroid,
+        platformIos,
+        platformWindows,
+        sourceTypeSweepstakes,
+        sourceTypeVod
+    } = data
+
     try {
         const res = await api.post(
             '', {
@@ -51,8 +64,11 @@ const add = async (data) => {
                             position: ${position}
                             geo: "${geo}"
                             cpc: ${cpc}
-                            platform: "${platform}"
-                            sourceType: "${sourceType}"
+                            platformAndroid: ${platformAndroid}
+                            platformIos: ${platformIos}
+                            platformWindows: ${platformWindows}
+                            sourceTypeSweepstakes: ${sourceTypeSweepstakes}
+                            sourceTypeVod: ${sourceTypeVod}                             
                       ) {
                             id
                       }
