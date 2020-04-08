@@ -3,15 +3,13 @@
         <section class="filter">
             <h3 class="filter__title">Rule: <b></b></h3>
             <div class="filter__controls">
-                <b-button variant="primary" @click="this.addFilter">
-                    <i class="fas fa-plus" data-fa-transform="shrink-2"></i> add line
+                <b-button variant="secondary" @click="addTargeting">
+                    <i class="fas fa-history"></i> add line
                 </b-button>
 
                 <template v-for="item in this.targeting">
 
-                        <span
-                                class="condition__controls"
-                        >
+                        <span class="condition__controls">
 
                             <div class="campaign-block">
                                 <select
@@ -37,7 +35,7 @@
 
                                 <model-select
                                         :options="getCountriesModify()"
-                                        @input="handleChangeCountry($event, item)"
+                                        @input="changeCountry($event, item)"
                                         class="condition__country condition__matches custom-select "
                                         :value="item.geo"
                                 >
@@ -68,8 +66,9 @@
 
                             <div class="campaign-block">
                                 <input type="text"
-                                       placeholder="sourceType"
+                                       placeholder="cpc"
                                        class="condition__matches custom-input"
+                                       @change="changeCpc($event, item)"
                                        :value="item.cpc"
                                 >
                                 <label
@@ -81,6 +80,7 @@
                                   <button
                                           type="button"
                                           class="remove_condition"
+                                          @click="rmTargeting(item)"
                                           variant="danger"
                                           v-b-tooltip.hover.top="'Delete '"
                                   >
@@ -124,6 +124,7 @@
             ...mapState('targeting', ['targeting']),
             ...mapGetters('targeting', ['getTargeting']),
             ...mapGetters('countries', ['getCountries']),
+            // ...mapMutations("targeting", ["removeTargeting"])
         },
         data() {
             return {
@@ -134,6 +135,12 @@
         //     this.loadingDone()
         // },
         methods: {
+            async rmTargeting(item) {
+                await this.$store.dispatch('targeting/rmTargetingItem', item.position)
+            },
+            async addTargeting() {
+                await this.$store.dispatch('targeting/newTargetingStore', this.$store.state.targeting.targeting)
+            },
             defineFilterType(id) {
                 return `filtertype-${id}`
             },
@@ -148,8 +155,11 @@
                     {id: 1, name: 'Exclude'}
                 ]
             },
-            handleChangeCountry(event, item) {
-                console.log('handleChangeCountry')
+            changeCountry(event, item) {
+                item.geo = event
+            },
+            changeCpc(event, item) {
+                item.cpc = event.target.value
             },
             getCountriesModify() {
                 return this.getCountries.map(item => {
@@ -174,13 +184,14 @@
             },
             async saveConditions() {
                 // if (!this.validate()) return
-                let res = await this.$store.dispatch('campaign/saveConditions', this)
+                let saveConditionsResponse = await this.$store.dispatch('campaign/saveConditions', this)
+                let saveTargetingDbResponse = await this.$store.dispatch('targeting/saveTargetingDb', this)
 
-                if (res.id) {
+                if (saveConditionsResponse.id && saveTargetingDbResponse) {
                     this.$swal.fire({
                         type: 'success',
                         position: 'top-end',
-                        title: 'Campaign data has been updated',
+                        title: 'Campaign targeting has been saved',
                         showConfirmButton: false,
                         timer: 1000
                     })
@@ -201,6 +212,7 @@
         float: left;
         margin-right: 10px;
     }
+
     .filter__controls {
         display: grid;
         // margin-bottom: 2rem;
