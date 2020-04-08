@@ -9,7 +9,11 @@
 
                 <template v-for="item in this.targeting">
 
-                        <span class="condition__controls">
+                        <span
+                                :id="defineConditionId(item.position)"
+                                :ref="defineConditionId(item.position)"
+                                class="condition__controls"
+                        >
 
                             <div class="campaign-block">
                                 <select
@@ -35,6 +39,8 @@
 
                                 <model-select
                                         :options="getCountriesModify()"
+                                        :id="defineCountryId(item.position)"
+                                        :ref="defineCountryId(item.position)"
                                         @input="changeCountry($event, item)"
                                         class="condition__country condition__matches custom-select "
                                         :value="item.geo"
@@ -135,11 +141,17 @@
         //     this.loadingDone()
         // },
         methods: {
+            defineCountryId(id) {
+                return `country-${id}`
+            },
+            defineConditionId(id) {
+                return `condition-${id}`
+            },
             async rmTargeting(item) {
                 await this.$store.dispatch('targeting/rmTargetingItem', item.position)
             },
             async addTargeting() {
-                await this.$store.dispatch('targeting/newTargetingStore', this.$store.state.targeting.targeting)
+                await this.$store.dispatch('targeting/newTargetingStore')
             },
             defineFilterType(id) {
                 return `filtertype-${id}`
@@ -157,6 +169,7 @@
             },
             changeCountry(event, item) {
                 item.geo = event
+                this.validateItem(item)
             },
             changeCpc(event, item) {
                 item.cpc = event.target.value
@@ -182,8 +195,49 @@
                 this.$router.push(`/`)
                 location.reload()
             },
+            validateItem(item) {
+                if (item.geo !== '') {
+                    document.querySelector(`#condition-${item.position}`).classList.remove('error')
+                }
+
+            },
+            validate() {
+                let checkTargeting = this.getTargeting
+                let checkEmptyValue = checkTargeting.filter(item => {
+                    if (item.geo === ''
+                    ) {
+                        return item
+                    }
+                })
+                console.log(' >>> validate checkEmptyValue:')
+                console.table(reFormatJSON(checkEmptyValue))
+
+                checkEmptyValue.forEach(item => {
+                    let myCondition = `condition-${item.position}`
+                    console.log(' >>> validate checkEmptyValue item')
+                    console.table(reFormatJSON(item))
+                    // if (self.$children[item.position].$refs[myCondition]){
+                    //     self.$children[item.position].$refs[myCondition][0].style.background = 'red'
+                    // }
+                    if (document.querySelector(`#condition-${item.position}`)) {
+                        document.querySelector(`#condition-${item.position}`).classList.add('error')
+                    }
+                    // this.$children.$refs(myCountry).style.background = 'red'
+                })
+                if (checkEmptyValue.length > 0) {
+                    // alert(`Missing data `)
+                    this.$swal.fire({
+                        type: 'error',
+                        title: 'Missing Data',
+                        text: 'Some fields were not selected, please try again.',
+                        footer: ''
+                    })
+                    return
+                }
+                return true
+            },
             async saveConditions() {
-                // if (!this.validate()) return
+                if (!this.validate()) return
                 let saveConditionsResponse = await this.$store.dispatch('campaign/saveConditions', this)
                 let saveTargetingDbResponse = await this.$store.dispatch('targeting/saveTargetingDb', this)
 

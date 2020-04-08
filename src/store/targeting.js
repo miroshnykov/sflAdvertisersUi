@@ -65,9 +65,8 @@ export default {
             targetingData.campaignId = id
             commit('saveTargeting', targetingData)
         },
-        async newTargetingStore({commit}, data) {
-            // console.log(' email',this.getters['googleAuth/getVerifyTokenEmail'])
-            commit('addTargeting', data)
+        async newTargetingStore({commit}) {
+            commit('addTargeting', this.state.targeting)
         },
         async saveTargetingDb({commit}, data) {
 
