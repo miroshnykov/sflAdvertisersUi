@@ -35,6 +35,70 @@ const targeting = async (campaignId) => {
 
 }
 
+const add = async (data) => {
+
+    let {campaignId, filterTypeId, position, geo, cpc, platform, sourceType} = data
+    platform = platform || '0/0/0'
+    sourceType = sourceType || '0/0'
+    try {
+        const res = await api.post(
+            '', {
+                query: `
+                    mutation{
+                      addTargeting(
+                            campaignId: ${campaignId}
+                            filterTypeId:${filterTypeId}
+                            position: ${position}
+                            geo: "${geo}"
+                            cpc: ${cpc}
+                            platform: "${platform}"
+                            sourceType: "${sourceType}"
+                      ) {
+                            id
+                      }
+                    }
+            `,
+            }
+        )
+
+        let response = res.data.data.addTargeting
+        console.log('\nadd targeting res:', response)
+        return response
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
+const del = async (campaignId) => {
+
+    try {
+        const res = await api.post(
+            '', {
+                query: `
+                    mutation{
+                        deleteTargeting(
+                            campaignId: ${campaignId}
+                        ) {
+                            id
+                            affectedRows
+                        }
+                    }
+            `,
+            }
+        )
+
+        let response = res.data.data.deleteTargeting
+        console.log('\ndelete targeting res:', response)
+        return response
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
 export default {
-    targeting
+    targeting,
+    add,
+    del
 }

@@ -76,7 +76,7 @@
 
 <script>
     import targeting from './targeting.vue'
-    import {mapState, mapGetters} from 'vuex'
+    import {mapState, mapGetters, mapMutations} from 'vuex'
     import logo from './logo.vue'
 
     export default {
@@ -87,6 +87,7 @@
             ...mapState('targeting', ['targeting']),
             ...mapGetters("campaign", ["getCampaign"]),
             ...mapGetters("targeting", ["getTargeting"]),
+            // ...mapMutations("targeting", ["addTargeting"])
         },
         segmentFilter: [],
         async mounted() {
