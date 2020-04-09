@@ -15,12 +15,13 @@
                   <span class="segment-name" @click="edit(row)">{{row.name}}</span>
               </span>
 
-              <button @click="setEditing(true)" v-if="!isEditing()"  class="btn btn-link" >
-                  <i class="fad fa-pencil"></i>
-              </button>
-                    <span v-else>
+                <button @click="setEditing(true)" v-if="!isEditing()" class="btn btn-link">
+                    <i class="fad fa-pencil"></i>
+                </button>
+                <span v-else>
                         <input type="text" v-model="row.name">
-                        <button type="button" class="btn btn-info btn-xs" @click="update(row.name);setEditing(false); uCampaignName(row)">Update</button>
+                        <button type="button" class="btn btn-info btn-xs"
+                                @click="update(row.name);setEditing(false); uCampaignName(row)">Update</button>
                         <button type="button" class="btn btn-default btn-xs" @click="revertValue(); setEditing(false)">Cancel</button>
 
                     </span>
@@ -46,7 +47,7 @@
                 <button
                         class="btn btn-link"
                         v-b-tooltip.hover.top="'Delete Campaign'"
-                        @click="del(props.row)"
+                        @click="del(props.row.id)"
                 >
                     <i class="far fa-trash-alt"></i>
                 </button>
@@ -86,11 +87,11 @@
             ...mapGetters('campaigns', ['getCampaigns'])
         },
         methods: {
-            async uCampaignName(data){
+            async uCampaignName(data) {
 
-                let res = await this.$store.dispatch('campaign/updCampaignName',data)
+                let res = await this.$store.dispatch('campaign/updCampaignName', data)
 
-                if (res.id){
+                if (res.id) {
                     this.$swal.fire({
                         type: 'success',
                         position: 'top-end',
@@ -103,8 +104,39 @@
             edit(data) {
                 this.$router.push(`/campaign/${data.id}`)
             },
-            del(data) {
-                console.log('delete campaign ', data)
+            async del(id) {
+
+                this.$swal.fire({
+                    type: 'warning',
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    showCancelButton: true,
+                    confirmButtonColor: '#FE5D65',
+                    cancelButtonColor: '#ACC3CF',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        let self = this
+                        this.$store.dispatch('campaigns/delCampaign', id).then((res) => {
+
+                            if (res.id) {
+                                self.$swal.fire({
+                                    type: 'success',
+                                    position: 'top-end',
+                                    title: 'Campaign has been deleted',
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                                location.reload()
+                            } else {
+                                self.$swal.fire({
+                                    title: 'Error on backend ',
+                                    text: 'Campaign has been not deleted.',
+                                })
+                            }
+                        })
+                    }
+                })
             },
             addCampaign() {
                 this.$swal.fire({
@@ -194,7 +226,7 @@
                 segmentName: '',
                 isModalVisible: false,
                 eventData: [],
-                editableColumns:['name','budgetDaily'],
+                editableColumns: ['name', 'budgetDaily'],
                 columns: tableColumnsLog,
                 tableData: [],
                 countOfRecords: 0,
@@ -211,7 +243,7 @@
                         landingPage: 'landingPage',
                         status: 'status'
                     },
-                    editableColumns:['name'],
+                    editableColumns: ['name'],
                     sortable: tableColumnsLog,
                     filterable: tableColumnsLog,
                     highlightMatches: true,

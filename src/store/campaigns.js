@@ -16,6 +16,9 @@ export default {
         async saveCampaignsStore({commit}, id) {
             commit('saveCampaigns', await campaigns.campaigns())
         },
+        async delCampaign({commit}, id) {
+            return await campaigns.del(id)
+        },
     },
     getters: {
         getCampaigns: state => state.campaigns,

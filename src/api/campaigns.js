@@ -33,6 +33,35 @@ const campaigns = async () => {
 
 }
 
+const del = async (id) => {
+
+    try {
+        const res = await api.post(
+            '', {
+                query: `
+                    mutation{
+                        deleteCampaign(
+                            id: ${id}
+                        ) {
+                            id
+                            affectedRows
+                        }
+                    }
+            `,
+            }
+        )
+
+        let response = res.data.data.deleteCampaign
+        console.log('\ndelete campaign res:', response)
+        return response
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
+
 export default {
-    campaigns
+    campaigns,
+    del
 }
