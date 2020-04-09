@@ -90,7 +90,7 @@
             width: 120px
             height: 39px
             margin: 20px 0px
-            background: url('../assets/logo-optiai.svg')
+            background: url('../assets/logo.svg')
             background-size: cover
             transition: all 0.5s ease
 

@@ -53,30 +53,30 @@
                             <div class="campaign-block">
 
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                  <label class="btn btn-secondary" :class="checkPlatformAndroid(item)">
+                                  <label class="btn btn-secondary-" :class="addClassActive(item.platformAndroid)">
                                     <input
                                             type="checkbox"
                                             :checked="item.platformAndroid"
                                             autocomplete="off"
-                                            @change="changePlatformAndroid(item)"
+                                            @change="updateValue(item,`platformAndroid`)"
                                     > Android
                                   </label>
 
-                                  <label class="btn btn-secondary" :class="checkPlatformIos(item)">
+                                  <label class="btn btn-secondary-" :class="addClassActive(item.platformIos)">
                                     <input
                                             type="checkbox"
                                             :checked="item.platformIos"
                                             autocomplete="off"
-                                            @change="changePlatformIos(item)"
+                                            @change="updateValue(item,`platformIos`)"
                                     > IOS
                                   </label>
 
-                                  <label class="btn btn-secondary" :class="checkPlatformWindows(item)">
+                                  <label class="btn btn-secondary-" :class="addClassActive(item.platformWindows)">
                                     <input
                                             type="checkbox"
                                             :checked="item.platformWindows"
                                             autocomplete="off"
-                                            @change="changePlatformWindows(item)"
+                                            @change="updateValue(item,`platformWindows`)"
                                     > Windows
                                   </label>
                                 </div>
@@ -88,21 +88,21 @@
 
                             <div class="campaign-block">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                  <label class="btn btn-secondary" :class="checkSourceTypeSweepstakes(item)">
+                                  <label class="btn btn-secondary-" :class="addClassActive(item.sourceTypeSweepstakes)">
                                     <input
                                             type="checkbox"
                                             :checked="item.sourceTypeSweepstakes"
                                             autocomplete="off"
-                                            @change="changeSourceTypeSweepstakes(item)"
+                                            @change="updateValue(item,`sourceTypeSweepstakes`)"
                                     > Sweepstakes
                                   </label>
 
-                                  <label class="btn btn-secondary" :class="checkSourceTypeVod(item)">
+                                  <label class="btn btn-secondary-" :class="addClassActive(item.sourceTypeVod)">
                                     <input
                                             type="checkbox"
                                             :checked="item.sourceTypeVod"
                                             autocomplete="off"
-                                            @change="changeSourceTypeVod(item)"
+                                            @change="updateValue(item,`sourceTypeVod`)"
 
                                     > VOD
                                   </label>
@@ -184,35 +184,11 @@
         //     this.loadingDone()
         // },
         methods: {
-            changePlatformAndroid(item) {
-                item.platformAndroid === 0 ? item.platformAndroid = 1 : item.platformAndroid = 0
+            updateValue(item, field) {
+                item[field] === 0 ? item[field] = 1 : item[field] = 0
             },
-            changePlatformIos(item) {
-                item.platformIos === 0 ? item.platformIos = 1 : item.platformIos = 0
-            },
-            changePlatformWindows(item) {
-                item.platformWindows === 0 ? item.platformWindows = 1 : item.platformWindows = 0
-            },
-            changeSourceTypeSweepstakes(item) {
-                item.sourceTypeSweepstakes === 0 ? item.sourceTypeSweepstakes = 1 : item.sourceTypeSweepstakes = 0
-            },
-            changeSourceTypeVod(item) {
-                item.sourceTypeVod === 0 ? item.sourceTypeVod = 1 : item.sourceTypeVod = 0
-            },
-            checkPlatformAndroid(item) {
-                return item.platformAndroid === 0 && 'active' || ''
-            },
-            checkPlatformIos(item) {
-                return item.platformIos === 0 && 'active' || ''
-            },
-            checkPlatformWindows(item) {
-                return item.platformWindows === 0 && 'active' || ''
-            },
-            checkSourceTypeSweepstakes(item) {
-                return item.sourceTypeSweepstakes === 0 && 'active' || ''
-            },
-            checkSourceTypeVod(item) {
-                return item.sourceTypeVod === 0 && 'active' || ''
+            addClassActive(value) {
+                return value === 0 && 'active' || ''
             },
             defineCountryId(id) {
                 return `country-${id}`
@@ -246,6 +222,7 @@
             },
             changeCpc(event, item) {
                 item.cpc = event.target.value
+                this.validateItem(item)
             },
             getCountriesModify() {
                 return this.getCountries.map(item => {
@@ -269,15 +246,17 @@
                 location.reload()
             },
             validateItem(item) {
-                if (item.geo !== '') {
+                if (item.geo !== '' || Number(item.cpc) !== 0) {
                     document.querySelector(`#condition-${item.position}`).classList.remove('error')
                 }
 
             },
             validate() {
                 let checkTargeting = this.getTargeting
+
                 let checkEmptyValue = checkTargeting.filter(item => {
                     if (item.geo === ''
+                        || Number(item.cpc) === 0
                     ) {
                         return item
                     }
@@ -331,6 +310,22 @@
 </script>
 
 <style lang="scss">
+
+    .btn-secondary- {
+        color: #fff;
+        border-color: #545050;
+    }
+
+    .btn-secondary-:hover {
+        color: #fff;
+        border-color: #e1e1e1;
+    }
+
+    .btn-secondary-:not(:disabled):not(.disabled):active, .btn-secondary-:not(:disabled):not(.disabled).active, .show > .btn-secondary-.dropdown-toggle {
+        color: #fff;
+        background-color: #545b62;
+        border-color: #4e555b;
+    }
 
     .btn-group, .btn-group-vertical {
         position: relative;
