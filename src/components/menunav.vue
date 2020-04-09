@@ -20,9 +20,6 @@
 </script>
 
 <style lang="sass">
-#campaigns
-    margin-top: 40px
-
 .menu-nav
     background: #3A3852
     height: 100%
