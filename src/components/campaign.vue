@@ -6,70 +6,70 @@
             <li>Campaign ID: <b>{{id}}</b></li>
         </ul>
         <section class="filter">
-        <div class="campaign-line">
-            <label>Campaign name</label>
-            <br>
-            <input type="text"
-                   placeholder="campaign"
-                   id="campaignName"
-                   class="condition__matches campaign custom-input"
-                   :value="getCampaignName()"
-                   @change="updateCampaignName($event)"
-            >
-            <br>
-            <br>
-            <label>Budget Daily </label>
-            <br>
-            <input type="text"
-                   placeholder="budgetDaily"
-                   id="campaignBudgetDaily"
-                   class="condition__matches budgetDaily custom-input"
-                   :value="getCampaignBudgetDaily()"
-                   @change="updateCampaignBudgetDaily($event)"
-            >
-            <br>
-            <br>
-            <label>Budget Total </label>
-            <br>
-            <input type="text"
-                   placeholder="budgetTotal"
-                   id="campaignBudgetTotal"
-                   class="condition__matches budgetTotal custom-input"
-                   :value="getCampaignBudgetTotal()"
-                   @change="updateCampaignBudgetTotal($event)"
-            >
-            <br>
-            <br>
-            <label>Budget Total </label>
-            <br>
-            <input type="text"
-                   placeholder="budgetTotal"
-                   id="campaignCPC"
-                   class="condition__matches budgetTotal custom-input"
-                   :value="getCampaignCPC()"
-                   @change="updateCampaignCPC($event)"
-            >
-            <br>
-            <br>
-            <label>Landing page </label>
-            <br>
-            <input type="text"
-                   placeholder="budgetTotal"
-                   id="campaignLandingPage"
-                   class="condition__matches budgetTotal custom-input"
-                   :value="getCampaignLP()"
-                   @change="updateCampaignLP($event)"
-            >
-            <b-button variant="primary"
-                      @click="validateLP()"
-            >
-                <i class="fas "></i> validate
+            <div class="campaign-line">
+                <label>Campaign name</label>
+                <br>
+                <input type="text"
+                       placeholder="campaign name"
+                       :id="getId(`name`)"
+                       class="condition__matches campaign custom-input"
+                       :value="getFieldName(`name`)"
+                       @change="updateField($event,`name`)"
+                >
+                <br>
+                <br>
+                <label>Budget Daily </label>
+                <br>
+                <input type="text"
+                       placeholder="budgetDaily"
+                       :id="getId(`budgetDaily`)"
+                       class="condition__matches budgetDaily custom-input"
+                       :value="getFieldName(`budgetDaily`)"
+                       @change="updateField($event,`budgetDaily`)"
+                >
+                <br>
+                <br>
+                <label>Budget Total </label>
+                <br>
+                <input type="text"
+                       placeholder="budgetTotal"
+                       :id="getId(`budgetTotal`)"
+                       class="condition__matches budgetTotal custom-input"
+                       :value="getFieldName(`budgetTotal`)"
+                       @change="updateField($event,`budgetTotal`)"
+                >
+                <br>
+                <br>
+                <label>CPC </label>
+                <br>
+                <input type="text"
+                       placeholder="campaignCPC"
+                       :id="getId(`cpc`)"
+                       class="condition__matches budgetTotal custom-input"
+                       :value="getFieldName(`cpc`)"
+                       @change="updateField($event,`cpc`)"
+                >
+                <br>
+                <br>
+                <label>Landing page </label>
+                <br>
+                <input type="text"
+                       placeholder="campaignLandingPage"
+                       :id="getId(`lp`)"
+                       class="condition__matches budgetTotal custom-input"
+                       :value="getFieldName(`landingPage`)"
+                       @change="updateField($event,`landingPage`)"
+                >
+                <b-button variant="primary"
+                          @click="validateLP()"
+                >
+                    <i class="fas "></i> validate
 
-            </b-button>
-            <br>
-        </div>
+                </b-button>
+                <br>
+            </div>
 
-        <targeting :targeting="targeting"/>
+            <targeting :targeting="targeting"/>
         </section>
     </div>
 </template>
@@ -95,35 +95,19 @@
             await this.$store.dispatch('targeting/saveTargetingStore', this.id)
         },
         methods: {
-            getCampaignName() {
-                return this.getCampaign.length > 0 && this.getCampaign[0].name
+            getId(value) {
+                return `${value}-${this.id}`
             },
-            getCampaignBudgetDaily() {
-                return this.getCampaign.length > 0 && this.getCampaign[0].budgetDaily
+            getFieldName(field) {
+                return this.getCampaign.length > 0 && this.getCampaign[0][field]
             },
-            getCampaignBudgetTotal() {
-                return this.getCampaign.length > 0 && this.getCampaign[0].budgetTotal
-            },
-            getCampaignCPC() {
-                return this.getCampaign.length > 0 && this.getCampaign[0].cpc
-            },
-            getCampaignLP() {
-                return this.getCampaign.length > 0 && this.getCampaign[0].landingPage
-            },
-            updateCampaignName(event) {
-                this.campaign[0].name = event.target.value
-            },
-            updateCampaignBudgetDaily(event) {
-                this.campaign[0].budgetDaily = event.target.value
-            },
-            updateCampaignBudgetTotal(event) {
-                this.campaign[0].budgetTotal = event.target.value
-            },
-            updateCampaignCPC(event) {
-                this.campaign[0].cpc = event.target.value
-            },
-            updateCampaignLP(event) {
-                this.campaign[0].landingPage = event.target.value
+            updateField(event, field) {
+                if (Number(event.target.value) === 0) {
+                    document.querySelector(`#${field}-${this.id}`).classList.add('error')
+                } else {
+                    document.querySelector(`#${field}-${this.id}`).classList.remove('error')
+                }
+                this.campaign[0][field] = event.target.value
             },
             async validateLP(event) {
                 let lp = document.querySelector(`#campaignLandingPage`)

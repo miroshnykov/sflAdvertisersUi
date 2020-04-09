@@ -171,6 +171,7 @@
         name: 'conditions',
         computed: {
             ...mapState('targeting', ['targeting']),
+            ...mapState('campaign', ['campaign']),
             ...mapGetters('targeting', ['getTargeting']),
             ...mapGetters('countries', ['getCountries']),
             // ...mapMutations("targeting", ["removeTargeting"])
@@ -252,7 +253,27 @@
 
             },
             validate() {
-                let checkTargeting = this.getTargeting
+                let checkTargeting = this.targeting
+                let checkCampaign = this.campaign
+
+                let emptyKey = []
+                checkCampaign.forEach(item => {
+                    let keys = Object.keys(item)
+                    keys.forEach(key => {
+                        if (Number(item[key]) === 0) {
+                            emptyKey.push(key)
+                        }
+                    })
+                })
+
+                if (emptyKey.length > 0) {
+                    emptyKey.forEach(key => {
+                        if (document.querySelector(`#${key}-${checkTargeting.campaignId}`)) {
+                            document.querySelector(`#${key}-${checkTargeting.campaignId}`).classList.add('error')
+                        }
+                    })
+                    return
+                }
 
                 let checkEmptyValue = checkTargeting.filter(item => {
                     if (item.geo === ''
