@@ -1,10 +1,11 @@
 <template>
     <div id="campaigns">
+        <menunav></menunav>
         <logo></logo>
-        <h1>Manage Campaigns </h1>
+        <h1>Manage Campaigns</h1>
 
         <b-button variant="primary" class="margin-left-10" @click="this.addCampaign">
-            <i class="fas fa-plus" data-fa-transform="shrink-2"></i> New Campaign
+            <i class="fas fa-plus" data-fa-transform="shrink-2"></i> Create Campaign
         </b-button>
 
         <v-client-table :data="getCampaigns" :columns="columns" :options="options">
@@ -63,6 +64,7 @@
     import 'bootstrap/dist/css/bootstrap.css'
     import {mapActions, mapState, mapGetters} from 'vuex'
     import logo from './logo.vue'
+    import menunav from './menunav.vue'
     import {formatData} from '../helpers'
 
     let tableColumnsLog = [
@@ -80,7 +82,7 @@
         // mounted() {
         //     this.getCampaigns()
         // },
-        components: {logo},
+        components: {logo, menunav},
         computed: {
             ...mapState('campaigns', ['campaigns']),
             ...mapGetters('campaigns', ['getCampaigns'])
