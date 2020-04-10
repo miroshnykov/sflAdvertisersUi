@@ -26,6 +26,8 @@ export default {
             return await campaign.addCampaign(data)
         },
         async saveConditions({commit}) {
+            console.log(`before save campaign`)
+            console.table(reFormatJSON(this.state.campaign.campaign[0]))
             return await campaign.updateCampaign(this.state.campaign.campaign[0])
         },
         async updCampaignName({commit},data) {
