@@ -114,7 +114,7 @@
                             </div>
 
                             <div class="campaign-block">
-                                <input type="text"
+                                <input type="number"
                                        placeholder="cpc"
                                        class="condition__matches custom-input"
                                        @change="changeCpc($event, item)"
@@ -268,9 +268,8 @@
 
                 if (emptyKey.length > 0) {
                     emptyKey.forEach(key => {
-                        if (document.querySelector(`#${key}-${checkTargeting.campaignId}`)) {
-                            document.querySelector(`#${key}-${checkTargeting.campaignId}`).classList.add('error')
-                        }
+                        let el = document.querySelector(`#${key}-${this.targeting.campaignId}`)
+                        el && el.classList.add('error')
                     })
                     return
                 }
