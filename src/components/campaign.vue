@@ -55,7 +55,7 @@
                 <br>
                 <input type="text"
                        placeholder="campaignLandingPage"
-                       :id="getId(`lp`)"
+                       :id="getId(`landingPage`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`landingPage`)"
                        @change="updateField($event,`landingPage`)"
@@ -102,10 +102,11 @@
                 return this.getCampaign.length > 0 && this.getCampaign[0][field]
             },
             updateField(event, field) {
+                let el = document.querySelector(`#${field}-${this.id}`)
                 if (Number(event.target.value) === 0) {
-                    document.querySelector(`#${field}-${this.id}`).classList.add('error')
+                    el && el.classList.add('error')
                 } else {
-                    document.querySelector(`#${field}-${this.id}`).classList.remove('error')
+                    el && el.classList.remove('error')
                 }
                 this.campaign[0][field] = event.target.value
             },
