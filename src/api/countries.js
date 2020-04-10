@@ -17,7 +17,7 @@ const countries = async () => {
         )
 
         let response = res.data.data.countries
-        // console.log(' countries from DB   response count:', response.length)
+        console.log(`\ncountries from DB  response count:${response.length}` )
         return response
     } catch (e) {
         console.log(e)

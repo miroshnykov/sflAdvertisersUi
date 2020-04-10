@@ -3,7 +3,6 @@ import {api} from './request'
 const targeting = async (campaignId) => {
 
     try {
-        console.time(`targeting`)
         const res = await api.post(
             '', {
                 query: `
@@ -29,8 +28,7 @@ const targeting = async (campaignId) => {
         )
 
         let response = res.data.data.targeting
-        console.log('\ntargeting from DB response count:', response.length)
-        console.timeEnd(`targeting`)
+        console.log('targeting from DB response count:', response.length)
         return response
     } catch (e) {
         console.log(e)
