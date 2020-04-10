@@ -20,7 +20,8 @@
                 <br>
                 <label>Budget Daily </label>
                 <br>
-                <input type="text"
+                <input type="number"
+                       step=10
                        placeholder="budgetDaily"
                        :id="getId(`budgetDaily`)"
                        class="condition__matches budgetDaily custom-input"
@@ -31,7 +32,8 @@
                 <br>
                 <label>Budget Total </label>
                 <br>
-                <input type="text"
+                <input type="number"
+                       step=10
                        placeholder="budgetTotal"
                        :id="getId(`budgetTotal`)"
                        class="condition__matches budgetTotal custom-input"
@@ -42,7 +44,8 @@
                 <br>
                 <label>CPC </label>
                 <br>
-                <input type="text"
+                <input type="number"
+                       step=0.1
                        placeholder="campaignCPC"
                        :id="getId(`cpc`)"
                        class="condition__matches budgetTotal custom-input"
