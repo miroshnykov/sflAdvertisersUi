@@ -41,7 +41,7 @@ const del = async (id) => {
                 query: `
                     mutation{
                         deleteCampaign(
-                            id: ${id}
+                            campaignId: ${id}
                         ) {
                             id
                             affectedRows
