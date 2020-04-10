@@ -25,7 +25,7 @@ h1::-moz-selection
   background: rgba(255, 255, 255, 0.3) !important
 
 body
-  background: eee
+  background: #F7F8FC
   // background-image: -webkit-gradient(linear, right top, left top, from(#3a3852), to(#5c6489))
   // background-image: linear-gradient(to left, #3a3852, #5c6489)
 
@@ -73,13 +73,13 @@ a, button, span
 
 /* Headers */
 h1, .h1
-  font-size: 2.5rem
-  font-weight: 800
-  color: #fff
+  font-size: 24px
+  font-weight: 700
+  color: #3A3852
   text-align: left
-  background: linear-gradient(to right, #28cde1 0%, #5883e2 100%)
-  -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
+  // background: linear-gradient(to right, #28cde1 0%, #5883e2 100%)
+  // -webkit-background-clip: text
+  // -webkit-text-fill-color: transparent
   margin-bottom: 20px
 
 // h2, .h2
@@ -94,11 +94,13 @@ h1, .h1
 
 /* Containers */
 .container, .container-lg, .container-md, .container-sm, .container-xl
-  max-width: 1200px
+  max-width: 1400px
+  // margin-left: 300px
 
-#segments, #edit-segment, #optiSalesArchive
-  margin-top: 100px
-  margin-bottom: 50px
+#campaigns
+  margin-top: 40px
+  margin-bottom: 40px
+  margin-left: 50px
 
 /* Segment */
 #segments
@@ -124,23 +126,23 @@ h1, .h1
 
 .VueTables__search-field input
   background: transparent
-  border-bottom: 2px solid rgba(255, 255, 255, 0.5)
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5)
 
   &::placeholder
-    color: rgba(255, 255, 255, 0.5)
+    color: rgba(0, 0, 0, 0.5)
 
 .VueTables__search-field label
   display: none
 
 .VueTables__search-field input[type="text"]:focus
-  background: rgba(255, 255, 255, 0)
-  border-color: rgba(255, 255, 255, 1)
+  background: rgba(0, 0, 0, 0)
+  border-color: rgba(0, 0, 0, 1)
   box-shadow: none
 
 .VueTables__search-field input[type="text"]
   position: relative
   color: #fff
-  border-color: rgba(255, 255, 255, 0.2)
+  border-color: rgba(0, 0, 0, 0.2)
 
 .VueTables__search-field::before
   content: "\F002"
@@ -150,7 +152,7 @@ h1, .h1
   right: 15px
   top: 10px
   float: right
-  color: rgba(255, 255, 255, 0.3)
+  color: rgba(0, 0, 0, 0.3)
 
 span.VueTables__highlight b, span.segment-name.VueTables__highlight b
   color: #31cae0 !important
@@ -186,7 +188,7 @@ button.btn
     margin: 0 auto
     color: #fff
     font-size: 12px
-    border-radius: 4px
+    border-radius: 7px
     display: block
     text-align: center
     float: right
@@ -205,7 +207,7 @@ button.btn
     margin: 0 auto
     color: #fff
     font-size: 12px
-    border-radius: 4px
+    border-radius: 7px
     background: #5c6489
     display: block
     text-align: center
@@ -363,7 +365,7 @@ table
 .table
   th, td
     color: #3a3852
-    font-size: 13px
+    font-size: 14px
     font-weight: 500
     padding: 1.5rem 0.5rem
     vertical-align: middle
@@ -390,9 +392,9 @@ tr:nth-child(odd), .table-striped tbody tr:nth-of-type(odd)
   background: rgba(255, 255, 255, 0.95)
 
 span.VueTables__heading
-  font-size: 0.75rem
+  font-size: 0.9rem
   font-weight: 700
-  letter-spacing: 1px
+  letter-spacing: 0.5px
   transition: all 0.3s ease
 
 // th#VueTables_th--name, th#VueTables_th--weight, th#VueTables_th--countConditions, th#VueTables_th--multiplier, th#VueTables_th--salesStats, th#VueTables_th--userName
@@ -410,10 +412,10 @@ span.VueTables__heading
     border-bottom-width: 3px
     line-height: 1.5
     font-weight: 700
-    text-transform: uppercase
-    color: #fff
-    background: #3A3852
-    border-bottom: 3px solid #36B8E1
+    text-transform: capitalize
+    color: #7F98A5
+    background: #fff
+    border-bottom: 3px solid #E3EEF4
 
 tr
   margin: 0

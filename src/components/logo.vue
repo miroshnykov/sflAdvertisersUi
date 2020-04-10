@@ -3,7 +3,6 @@
         <div class="header-container">
             <b-row class="text-center" align-v="center">
                 <b-col col lg="8">
-                    <a href="/" class="logo"></a>
                 </b-col>
                 <b-col col lg="4">
                     <img class="user-avatar" :src="getUrlAvatar()" />
@@ -69,26 +68,28 @@
 
 <style lang="sass">
     .header
-        background: #3A3852
+        background: transparent
+        // background: #fff
         height: 80px
         width: 100%
         position: absolute
         left: 0
         top: 0
+        z-index: 98
+        margin-top: 20px
 
         .header-container
             width: 100%
-            padding-right: 15px
+            padding-right: 30px
             padding-left: 15px
             margin-right: auto
             margin-left: auto
-            max-width: 1200px
             margin: auto
 
         .logo
             display: block
-            width: 120px
-            height: 39px
+            width: 183px
+            height: 32px
             margin: 20px 0px
             background: url('../assets/logo.svg')
             background-size: cover
@@ -116,7 +117,7 @@
                 transition: all 0.5s ease
 
                 span
-                    color: #fff
+                    color: #3A3852
                     font-size: 12px
                     font-weight: 700
                     letter-spacing: 0.5px
