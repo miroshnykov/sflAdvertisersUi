@@ -10,7 +10,7 @@
                 <template v-for="item in getTargeting">
 
                         <span
-                                :id="getId(`condition`,item.position)"
+                                :id="setElIdByPosition(`condition`,item.position)"
                                 class="condition__controls"
                         >
 
@@ -18,7 +18,7 @@
                                 <select
                                         class="condition__dimension-name condition__matches custom-select"
                                         @change="changeFilterType($event, item)"
-                                        :id="getId(`filtertype`,item.position)"
+                                        :id="setElIdByPosition(`filtertype`,item.position)"
                                 >
 
                                   <!-- <option :value="null">-- Select Filter --</option> -->
@@ -38,7 +38,7 @@
 
                                 <model-select
                                         :options="getCountriesModify()"
-                                        :id="getId(`country`,item.position)"
+                                        :id="setElIdByPosition(`country`,item.position)"
                                         @input="changeCountry($event, item)"
                                         class="condition__country condition__matches custom-select "
                                         :value="item.geo"
@@ -186,7 +186,7 @@
             addClassActive(value) {
                 return value === 0 && 'active' || ''
             },
-            getId(value, position) {
+            setElIdByPosition(value, position) {
                 return `${value}-${position}`
             },
             async rmTargeting(item) {
