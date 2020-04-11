@@ -302,7 +302,7 @@
             },
             async saveConditions() {
                 if (!this.validate()) return
-                let saveConditionsResponse = await this.$store.dispatch('campaign/saveConditions', this)
+                let saveConditionsResponse = await this.$store.dispatch('campaign/saveConditionsAction')
                 let saveTargetingDbResponse = await this.$store.dispatch('targeting/saveTargetingDb', this)
 
                 if (saveConditionsResponse.id && saveTargetingDbResponse) {

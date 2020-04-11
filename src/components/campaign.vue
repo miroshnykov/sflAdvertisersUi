@@ -102,15 +102,18 @@
             getFieldName(field) {
                 return this.getCampaign.length > 0 && this.getCampaign[0][field]
             },
-            updateField(event, field) {
+            async updateField(event, field) {
                 let el = document.querySelector(`#${field}-${this.id}`)
                 if (Number(event.target.value) === 0) {
                     el && el.classList.add('error')
                 } else {
                     el && el.classList.remove('error')
                 }
-                // TODO do it use mutations
-                this.campaign[0][field] = event.target.value
+                let updateFieldData = {}
+                updateFieldData.value = event.target.value
+                updateFieldData.field = field
+                await this.$store.dispatch('campaign/updateFieldAction', updateFieldData)
+                // this.campaign[0][field] = event.target.value
             },
             async validateLP(event) {
                 let lp = document.querySelector(`#campaignLandingPage`)
