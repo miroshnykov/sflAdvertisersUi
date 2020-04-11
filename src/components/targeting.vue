@@ -39,7 +39,7 @@
                                 <model-select
                                         :options="getCountriesModify()"
                                         :id="setElIdByPosition(`country`,item.position)"
-                                        @input="changeCountry($event, item)"
+                                        @input="changeInput($event, item, `geo`)"
                                         class="condition__country condition__matches custom-select "
                                         :value="item.geo"
                                 >
@@ -114,8 +114,9 @@
                             <div class="campaign-block">
                                 <input type="number"
                                        placeholder="cpc"
+                                       :id="setElIdByPosition(`cpc`,item.position)"
                                        class="condition__matches custom-input"
-                                       @change="changeCpc($event, item)"
+                                       @change="changeInput($event.target.value, item, `cpc`)"
                                        :value="item.cpc"
                                 >
                                 <label
@@ -166,7 +167,7 @@
     export default {
         name: 'targeting',
         computed: {
-            ...mapGetters('targeting', ['getTargeting','getCampaignId']),
+            ...mapGetters('targeting', ['getTargeting', 'getCampaignId']),
             ...mapGetters('campaign', ['getCampaign']),
             ...mapGetters('countries', ['getCountries']),
             // ...mapMutations("targeting", ["removeTargeting"])
@@ -180,8 +181,10 @@
         //     this.loadingDone()
         // },
         methods: {
-            updateValue(item, field) {
-                item[field] === 0 ? item[field] = 1 : item[field] = 0
+            async updateValue(item, field) {
+                item.field = field
+                item.fieldValue = item[field] === 0 ? item[field] = 1 : item[field] = 0
+                await this.$store.dispatch('targeting/saveTargetingItemAction', item)
             },
             addClassActive(value) {
                 return value === 0 && 'active' || ''
@@ -204,13 +207,14 @@
                     {id: 1, name: 'Exclude'}
                 ]
             },
-            changeCountry(event, item) {
-                item.geo = event
-                this.validateItem(item)
-            },
-            changeCpc(event, item) {
-                item.cpc = event.target.value
-                this.validateItem(item)
+            async changeInput(value, item, field) {
+
+                if (!this.validateItem(value, item, field)) return
+
+                item.field = field
+                item.fieldValue = value
+                await this.$store.dispatch('targeting/saveTargetingItemAction', item)
+
             },
             getCountriesModify() {
                 return this.getCountries.map(item => {
@@ -227,17 +231,25 @@
             // },
             mainPage() {
                 this.$router.push('/campaigns')
+                location.reload()
             },
             loginOut() {
                 deleteCookie('accessToken')
                 this.$router.push(`/`)
                 location.reload()
             },
-            validateItem(item) {
-                if (item.geo !== '' || Number(item.cpc) !== 0) {
-                    document.querySelector(`#condition-${item.position}`).classList.remove('error')
+            validateItem(value, item, field) {
+                let el = document.querySelector(`#${field}-${item.position}`)
+                let elCondition = document.querySelector(`#condition-${item.position}`)
+                if (Number(value) === 0) {
+                    el && el.classList.add('error')
+                    elCondition && elCondition.classList.add('errorCondition')
+                    return
+                } else {
+                    el && el.classList.remove('error')
+                    elCondition && elCondition.classList.remove('errorCondition')
                 }
-
+                return true
             },
             validate() {
                 let checkTargeting = this.getTargeting
@@ -275,7 +287,7 @@
                 checkEmptyValue.forEach(item => {
 
                     let el = document.querySelector(`#condition-${item.position}`)
-                    el && el.classList.add('error')
+                    el && el.classList.add('errorCondition')
                 })
                 if (checkEmptyValue.length > 0) {
                     this.$swal.fire({

@@ -40,6 +40,9 @@ export default {
             state.targeting = targeting
             state.campaignId = targeting.campaignId
         },
+        async saveTargetingItem(state, item) {
+            item[item.field] = item.fieldValue
+        },
         removeTargetingItem(state) {
             const {targeting, rmPosition} = state
 
@@ -61,6 +64,9 @@ export default {
 
     },
     actions: {
+        async saveTargetingItemAction({commit}, item) {
+            commit('saveTargetingItem', item)
+        },
         async saveTargetingStore({commit}, id) {
             let targetingData = await targeting.targeting(id)
             targetingData.campaignId = id
