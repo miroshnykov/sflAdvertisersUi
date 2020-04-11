@@ -6,11 +6,11 @@ const emptyTargeting = {
     user: '',
     cpc: 0.0,
     filterTypeId: 0,
-    platformAndroid:0,
-    platformIos:0,
-    platformWindows:0,
-    sourceTypeSweepstakes:0,
-    sourceTypeVod:0,
+    platformAndroid: 0,
+    platformIos: 0,
+    platformWindows: 0,
+    sourceTypeSweepstakes: 0,
+    sourceTypeVod: 0,
     position: 0,
     geo: ''
 }
@@ -28,8 +28,6 @@ export default {
         targeting: [],
         campaignId: 0,
     },
-    ...mapState('googleAuth', ['verifyTokenEmail']),
-    ...mapGetters('googleAuth', ['getVerifyTokenEmail']),
     namespaced: true,
     mutations: {
         addTargeting(state) {
@@ -41,6 +39,9 @@ export default {
         async saveTargeting(state, targeting) {
             state.targeting = targeting
             state.campaignId = targeting.campaignId
+        },
+        async saveTargetingItem(state, item) {
+            item[item.field] = item.fieldValue
         },
         removeTargetingItem(state) {
             const {targeting, rmPosition} = state
@@ -63,6 +64,9 @@ export default {
 
     },
     actions: {
+        async saveTargetingItemAction({commit}, item) {
+            commit('saveTargetingItem', item)
+        },
         async saveTargetingStore({commit}, id) {
             let targetingData = await targeting.targeting(id)
             targetingData.campaignId = id
@@ -121,6 +125,7 @@ export default {
     },
     getters: {
         getTargeting: state => state.targeting,
+        getCampaignId: state => state.campaignId
     },
 
 };

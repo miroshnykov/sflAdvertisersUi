@@ -7,19 +7,18 @@
                     <i class="fas fa-history"></i> add line
                 </b-button>
 
-                <template v-for="item in this.targeting">
+                <template v-for="item in getTargeting">
 
                         <span
-                                :id="defineConditionId(item.position)"
-                                :ref="defineConditionId(item.position)"
+                                :id="setElIdByPosition(`condition`,item.position)"
                                 class="condition__controls"
                         >
 
                             <div class="campaign-block">
                                 <select
                                         class="condition__dimension-name condition__matches custom-select"
-                                        @change="handleFilterType($event, item)"
-                                        :ref="defineFilterType(item.position)"
+                                        @change="changeFilterType($event, item)"
+                                        :id="setElIdByPosition(`filtertype`,item.position)"
                                 >
 
                                   <!-- <option :value="null">-- Select Filter --</option> -->
@@ -39,9 +38,8 @@
 
                                 <model-select
                                         :options="getCountriesModify()"
-                                        :id="defineCountryId(item.position)"
-                                        :ref="defineCountryId(item.position)"
-                                        @input="changeCountry($event, item)"
+                                        :id="setElIdByPosition(`country`,item.position)"
+                                        @input="changeInput($event, item, `geo`)"
                                         class="condition__country condition__matches custom-select "
                                         :value="item.geo"
                                 >
@@ -116,8 +114,9 @@
                             <div class="campaign-block">
                                 <input type="number"
                                        placeholder="cpc"
+                                       :id="setElIdByPosition(`cpc`,item.position)"
                                        class="condition__matches custom-input"
-                                       @change="changeCpc($event, item)"
+                                       @change="changeInput($event.target.value, item, `cpc`)"
                                        :value="item.cpc"
                                 >
                                 <label
@@ -160,19 +159,16 @@
 </template>
 
 <script>
-    import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
-    // import {duplicate} from '../../helpers'
+    import {mapGetters, mapMutations} from 'vuex'
     import {deleteCookie, reFormatJSON} from '../helpers'
     import {ModelSelect} from 'vue-search-select'
 
-    // import ConditionFilter from './conditionFilter'
 
     export default {
-        name: 'conditions',
+        name: 'targeting',
         computed: {
-            ...mapState('targeting', ['targeting']),
-            ...mapState('campaign', ['campaign']),
-            ...mapGetters('targeting', ['getTargeting']),
+            ...mapGetters('targeting', ['getTargeting', 'getCampaignId']),
+            ...mapGetters('campaign', ['getCampaign']),
             ...mapGetters('countries', ['getCountries']),
             // ...mapMutations("targeting", ["removeTargeting"])
         },
@@ -185,17 +181,16 @@
         //     this.loadingDone()
         // },
         methods: {
-            updateValue(item, field) {
-                item[field] === 0 ? item[field] = 1 : item[field] = 0
+            async updateValue(item, field) {
+                item.field = field
+                item.fieldValue = item[field] === 0 ? item[field] = 1 : item[field] = 0
+                await this.$store.dispatch('targeting/saveTargetingItemAction', item)
             },
             addClassActive(value) {
                 return value === 0 && 'active' || ''
             },
-            defineCountryId(id) {
-                return `country-${id}`
-            },
-            defineConditionId(id) {
-                return `condition-${id}`
+            setElIdByPosition(value, position) {
+                return `${value}-${position}`
             },
             async rmTargeting(item) {
                 await this.$store.dispatch('targeting/rmTargetingItem', item.position)
@@ -203,13 +198,8 @@
             async addTargeting() {
                 await this.$store.dispatch('targeting/newTargetingStore')
             },
-            defineFilterType(id) {
-                return `filtertype-${id}`
-            },
-            handleFilterType(event, item) {
-                let matchTypeRef = `matchtype-${item.position}`
+            changeFilterType(event, item) {
                 item.filterTypeId = Number(event.target.value)
-                // item.matchTypeId = this.$refs[matchTypeRef] && Number(this.$refs[matchTypeRef][0].value)
             },
             getFilterList() {
                 return [
@@ -217,13 +207,14 @@
                     {id: 1, name: 'Exclude'}
                 ]
             },
-            changeCountry(event, item) {
-                item.geo = event
-                this.validateItem(item)
-            },
-            changeCpc(event, item) {
-                item.cpc = event.target.value
-                this.validateItem(item)
+            async changeInput(value, item, field) {
+
+                if (!this.validateItem(value, item, field)) return
+
+                item.field = field
+                item.fieldValue = value
+                await this.$store.dispatch('targeting/saveTargetingItemAction', item)
+
             },
             getCountriesModify() {
                 return this.getCountries.map(item => {
@@ -240,21 +231,30 @@
             // },
             mainPage() {
                 this.$router.push('/campaigns')
+                location.reload()
             },
             loginOut() {
                 deleteCookie('accessToken')
                 this.$router.push(`/`)
                 location.reload()
             },
-            validateItem(item) {
-                if (item.geo !== '' || Number(item.cpc) !== 0) {
-                    document.querySelector(`#condition-${item.position}`).classList.remove('error')
+            validateItem(value, item, field) {
+                let el = document.querySelector(`#${field}-${item.position}`)
+                let elCondition = document.querySelector(`#condition-${item.position}`)
+                if (Number(value) === 0) {
+                    el && el.classList.add('error')
+                    elCondition && elCondition.classList.add('errorCondition')
+                    return
+                } else {
+                    el && el.classList.remove('error')
+                    elCondition && elCondition.classList.remove('errorCondition')
                 }
-
+                return true
             },
             validate() {
-                let checkTargeting = this.targeting
-                let checkCampaign = this.campaign
+                let checkTargeting = this.getTargeting
+                let campaignId = this.getCampaignId
+                let checkCampaign = this.getCampaign
 
                 let emptyKey = []
                 checkCampaign.forEach(item => {
@@ -268,7 +268,7 @@
 
                 if (emptyKey.length > 0) {
                     emptyKey.forEach(key => {
-                        let el = document.querySelector(`#${key}-${this.targeting.campaignId}`)
+                        let el = document.querySelector(`#${key}-${campaignId}`)
                         el && el.classList.add('error')
                     })
                     return
@@ -285,19 +285,11 @@
                 console.table(reFormatJSON(checkEmptyValue))
 
                 checkEmptyValue.forEach(item => {
-                    let myCondition = `condition-${item.position}`
-                    console.log(' >>> validate checkEmptyValue item')
-                    console.table(reFormatJSON(item))
-                    // if (self.$children[item.position].$refs[myCondition]){
-                    //     self.$children[item.position].$refs[myCondition][0].style.background = 'red'
-                    // }
-                    if (document.querySelector(`#condition-${item.position}`)) {
-                        document.querySelector(`#condition-${item.position}`).classList.add('error')
-                    }
-                    // this.$children.$refs(myCountry).style.background = 'red'
+
+                    let el = document.querySelector(`#condition-${item.position}`)
+                    el && el.classList.add('errorCondition')
                 })
                 if (checkEmptyValue.length > 0) {
-                    // alert(`Missing data `)
                     this.$swal.fire({
                         type: 'error',
                         title: 'Missing Data',
@@ -323,7 +315,7 @@
                     })
                 }
             },
-            ...mapMutations('campaign', ['addFilter'])
+            // ...mapMutations('campaign', ['addFilter'])
         },
         components: {ModelSelect},
     }

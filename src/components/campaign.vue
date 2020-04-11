@@ -11,7 +11,7 @@
                 <br>
                 <input type="text"
                        placeholder="campaign name"
-                       :id="getId(`name`)"
+                       :id="setElId(`name`)"
                        class="condition__matches campaign custom-input"
                        :value="getFieldName(`name`)"
                        @change="updateField($event,`name`)"
@@ -23,7 +23,7 @@
                 <input type="number"
                        step=10
                        placeholder="budgetDaily"
-                       :id="getId(`budgetDaily`)"
+                       :id="setElId(`budgetDaily`)"
                        class="condition__matches budgetDaily custom-input"
                        :value="getFieldName(`budgetDaily`)"
                        @change="updateField($event,`budgetDaily`)"
@@ -35,7 +35,7 @@
                 <input type="number"
                        step=10
                        placeholder="budgetTotal"
-                       :id="getId(`budgetTotal`)"
+                       :id="setElId(`budgetTotal`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`budgetTotal`)"
                        @change="updateField($event,`budgetTotal`)"
@@ -47,7 +47,7 @@
                 <input type="number"
                        step=0.1
                        placeholder="campaignCPC"
-                       :id="getId(`cpc`)"
+                       :id="setElId(`cpc`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`cpc`)"
                        @change="updateField($event,`cpc`)"
@@ -58,7 +58,7 @@
                 <br>
                 <input type="text"
                        placeholder="campaignLandingPage"
-                       :id="getId(`landingPage`)"
+                       :id="setElId(`landingPage`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`landingPage`)"
                        @change="updateField($event,`landingPage`)"
@@ -72,7 +72,7 @@
                 <br>
             </div>
 
-            <targeting :targeting="targeting"/>
+            <targeting/>
         </section>
     </div>
 </template>
@@ -87,18 +87,16 @@
         components: {targeting, logo},
         computed: {
             ...mapState('campaign', ['campaign']),
-            ...mapState('targeting', ['targeting']),
+            // ...mapState('targeting', ['targeting']),
             ...mapGetters("campaign", ["getCampaign"]),
-            ...mapGetters("targeting", ["getTargeting"]),
             // ...mapMutations("targeting", ["addTargeting"])
         },
-        segmentFilter: [],
         async mounted() {
             await this.$store.dispatch('campaign/saveCampaignsStore', this.id)
             await this.$store.dispatch('targeting/saveTargetingStore', this.id)
         },
         methods: {
-            getId(value) {
+            setElId(value) {
                 return `${value}-${this.id}`
             },
             getFieldName(field) {
@@ -111,6 +109,7 @@
                 } else {
                     el && el.classList.remove('error')
                 }
+                // TODO do it use mutations
                 this.campaign[0][field] = event.target.value
             },
             async validateLP(event) {
