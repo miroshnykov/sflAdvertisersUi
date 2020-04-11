@@ -72,7 +72,7 @@
                 <br>
             </div>
 
-            <targeting :targeting="targeting"/>
+            <targeting/>
         </section>
     </div>
 </template>
@@ -87,12 +87,10 @@
         components: {targeting, logo},
         computed: {
             ...mapState('campaign', ['campaign']),
-            ...mapState('targeting', ['targeting']),
+            // ...mapState('targeting', ['targeting']),
             ...mapGetters("campaign", ["getCampaign"]),
-            ...mapGetters("targeting", ["getTargeting"]),
             // ...mapMutations("targeting", ["addTargeting"])
         },
-        segmentFilter: [],
         async mounted() {
             await this.$store.dispatch('campaign/saveCampaignsStore', this.id)
             await this.$store.dispatch('targeting/saveTargetingStore', this.id)
@@ -111,6 +109,7 @@
                 } else {
                     el && el.classList.remove('error')
                 }
+                // TODO do it use mutations
                 this.campaign[0][field] = event.target.value
             },
             async validateLP(event) {

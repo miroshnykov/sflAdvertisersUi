@@ -7,19 +7,18 @@
                     <i class="fas fa-history"></i> add line
                 </b-button>
 
-                <template v-for="item in this.targeting">
+                <template v-for="item in getTargeting">
 
                         <span
-                                :id="defineConditionId(item.position)"
-                                :ref="defineConditionId(item.position)"
+                                :id="getId(`condition`,item.position)"
                                 class="condition__controls"
                         >
 
                             <div class="campaign-block">
                                 <select
                                         class="condition__dimension-name condition__matches custom-select"
-                                        @change="handleFilterType($event, item)"
-                                        :ref="defineFilterType(item.position)"
+                                        @change="changeFilterType($event, item)"
+                                        :id="getId(`filtertype`,item.position)"
                                 >
 
                                   <!-- <option :value="null">-- Select Filter --</option> -->
@@ -39,8 +38,7 @@
 
                                 <model-select
                                         :options="getCountriesModify()"
-                                        :id="defineCountryId(item.position)"
-                                        :ref="defineCountryId(item.position)"
+                                        :id="getId(`country`,item.position)"
                                         @input="changeCountry($event, item)"
                                         class="condition__country condition__matches custom-select "
                                         :value="item.geo"
@@ -160,19 +158,16 @@
 </template>
 
 <script>
-    import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
-    // import {duplicate} from '../../helpers'
+    import {mapGetters, mapMutations} from 'vuex'
     import {deleteCookie, reFormatJSON} from '../helpers'
     import {ModelSelect} from 'vue-search-select'
 
-    // import ConditionFilter from './conditionFilter'
 
     export default {
-        name: 'conditions',
+        name: 'targeting',
         computed: {
-            ...mapState('targeting', ['targeting']),
-            ...mapState('campaign', ['campaign']),
-            ...mapGetters('targeting', ['getTargeting']),
+            ...mapGetters('targeting', ['getTargeting','getCampaignId']),
+            ...mapGetters('campaign', ['getCampaign']),
             ...mapGetters('countries', ['getCountries']),
             // ...mapMutations("targeting", ["removeTargeting"])
         },
@@ -191,11 +186,8 @@
             addClassActive(value) {
                 return value === 0 && 'active' || ''
             },
-            defineCountryId(id) {
-                return `country-${id}`
-            },
-            defineConditionId(id) {
-                return `condition-${id}`
+            getId(value, position) {
+                return `${value}-${position}`
             },
             async rmTargeting(item) {
                 await this.$store.dispatch('targeting/rmTargetingItem', item.position)
@@ -203,13 +195,8 @@
             async addTargeting() {
                 await this.$store.dispatch('targeting/newTargetingStore')
             },
-            defineFilterType(id) {
-                return `filtertype-${id}`
-            },
-            handleFilterType(event, item) {
-                let matchTypeRef = `matchtype-${item.position}`
+            changeFilterType(event, item) {
                 item.filterTypeId = Number(event.target.value)
-                // item.matchTypeId = this.$refs[matchTypeRef] && Number(this.$refs[matchTypeRef][0].value)
             },
             getFilterList() {
                 return [
@@ -253,8 +240,9 @@
 
             },
             validate() {
-                let checkTargeting = this.targeting
-                let checkCampaign = this.campaign
+                let checkTargeting = this.getTargeting
+                let campaignId = this.getCampaignId
+                let checkCampaign = this.getCampaign
 
                 let emptyKey = []
                 checkCampaign.forEach(item => {
@@ -268,7 +256,7 @@
 
                 if (emptyKey.length > 0) {
                     emptyKey.forEach(key => {
-                        let el = document.querySelector(`#${key}-${this.targeting.campaignId}`)
+                        let el = document.querySelector(`#${key}-${campaignId}`)
                         el && el.classList.add('error')
                     })
                     return
@@ -285,19 +273,11 @@
                 console.table(reFormatJSON(checkEmptyValue))
 
                 checkEmptyValue.forEach(item => {
-                    let myCondition = `condition-${item.position}`
-                    console.log(' >>> validate checkEmptyValue item')
-                    console.table(reFormatJSON(item))
-                    // if (self.$children[item.position].$refs[myCondition]){
-                    //     self.$children[item.position].$refs[myCondition][0].style.background = 'red'
-                    // }
-                    if (document.querySelector(`#condition-${item.position}`)) {
-                        document.querySelector(`#condition-${item.position}`).classList.add('error')
-                    }
-                    // this.$children.$refs(myCountry).style.background = 'red'
+
+                    let el = document.querySelector(`#condition-${item.position}`)
+                    el && el.classList.add('error')
                 })
                 if (checkEmptyValue.length > 0) {
-                    // alert(`Missing data `)
                     this.$swal.fire({
                         type: 'error',
                         title: 'Missing Data',
@@ -323,7 +303,7 @@
                     })
                 }
             },
-            ...mapMutations('campaign', ['addFilter'])
+            // ...mapMutations('campaign', ['addFilter'])
         },
         components: {ModelSelect},
     }
