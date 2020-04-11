@@ -11,10 +11,29 @@ export default {
         async saveCampaign(state, campaign) {
             state.campaign = campaign
         },
-        // async saveConditions(data) {
-        //     console.log(data)
+        updateField(state, data) {
+            state.campaign[0][data.field] = data.value
+        },
+        // async saveConditions(state, data) {
         //     debugger
-        //     // commit('saveConditions', state.campaign)
+        //     console.log(state)
+        //     console.log(data)
+        //     console.log(`before save campaign`)
+        //     console.table(reFormatJSON(state.campaign.campaign[0]))
+        //
+        //     let response =  await campaign.updateCampaign(state.campaign.campaign[0])
+        //     debugger
+        //     if (response.id){
+        //         data.$swal.fire({
+        //             type: 'success',
+        //             position: 'top-end',
+        //             title: 'Campaign data has been saved',
+        //             showConfirmButton: false,
+        //             timer: 1000
+        //         })
+        //     }
+        //     return response
+        //     commit('saveConditions', state.campaign)
         // },
 
     },
@@ -22,18 +41,21 @@ export default {
         async saveCampaignsStore({commit}, id) {
             commit('saveCampaign', await campaign.campaign(id))
         },
+        updateFieldAction({commit}, data) {
+            commit('updateField', data)
+        },
         async addCampaign({commit}, data) {
             return await campaign.addCampaign(data)
         },
-        async saveConditions({commit}) {
+        async saveConditionsAction({commit}) {
             console.log(`before save campaign`)
             console.table(reFormatJSON(this.state.campaign.campaign[0]))
             return await campaign.updateCampaign(this.state.campaign.campaign[0])
         },
-        async updCampaignName({commit},data) {
+        async updCampaignName({commit}, data) {
             return await campaign.updateCampaignName(data)
         },
-        async validateLandingPage({commit},lp) {
+        async validateLandingPage({commit}, lp) {
             return await verifyLP.verifyLP(lp)
         },
     },
