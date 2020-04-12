@@ -14,7 +14,7 @@
                        :id="setElId(`name`)"
                        class="condition__matches campaign custom-input"
                        :value="getFieldName(`name`)"
-                       @change="updateField($event,`name`)"
+                       @change="changeField($event,`name`)"
                 >
                 <br>
                 <br>
@@ -26,7 +26,7 @@
                        :id="setElId(`budgetDaily`)"
                        class="condition__matches budgetDaily custom-input"
                        :value="getFieldName(`budgetDaily`)"
-                       @change="updateField($event,`budgetDaily`)"
+                       @change="changeField($event,`budgetDaily`)"
                 >
                 <br>
                 <br>
@@ -38,7 +38,7 @@
                        :id="setElId(`budgetTotal`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`budgetTotal`)"
-                       @change="updateField($event,`budgetTotal`)"
+                       @change="changeField($event,`budgetTotal`)"
                 >
                 <br>
                 <br>
@@ -50,7 +50,7 @@
                        :id="setElId(`cpc`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`cpc`)"
-                       @change="updateField($event,`cpc`)"
+                       @change="changeField($event,`cpc`)"
                 >
                 <br>
                 <br>
@@ -61,7 +61,7 @@
                        :id="setElId(`landingPage`)"
                        class="condition__matches budgetTotal custom-input"
                        :value="getFieldName(`landingPage`)"
-                       @change="updateField($event,`landingPage`)"
+                       @change="changeField($event,`landingPage`)"
                 >
                 <b-button variant="primary"
                           @click="validateLP()"
@@ -79,7 +79,7 @@
 
 <script>
     import targeting from './targeting.vue'
-    import {mapState, mapGetters, mapMutations} from 'vuex'
+    import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
     import logo from './logo.vue'
 
     export default {
@@ -92,17 +92,20 @@
             // ...mapMutations("targeting", ["addTargeting"])
         },
         async mounted() {
-            await this.$store.dispatch('campaign/saveCampaignsStore', this.id)
-            await this.$store.dispatch('targeting/saveTargetingStore', this.id)
+            await this.saveCampaignsStore(this.id)
+            await this.saveTargetingStore(this.id)
         },
         methods: {
+            ...mapActions("campaign", ["saveCampaignsStore"]),
+            ...mapActions("targeting", ["saveTargetingStore"]),
+            ...mapMutations("campaign", ["updateField"]),
             setElId(value) {
                 return `${value}-${this.id}`
             },
             getFieldName(field) {
                 return this.getCampaign.length > 0 && this.getCampaign[0][field]
             },
-            async updateField(event, field) {
+            async changeField(event, field) {
                 let el = document.querySelector(`#${field}-${this.id}`)
                 if (Number(event.target.value) === 0) {
                     el && el.classList.add('error')
@@ -112,10 +115,9 @@
                 let updateFieldData = {}
                 updateFieldData.value = event.target.value
                 updateFieldData.field = field
-                await this.$store.dispatch('campaign/updateFieldAction', updateFieldData)
-                // this.campaign[0][field] = event.target.value
+                this.updateField(updateFieldData)
             },
-            async validateLP(event) {
+            async validateLP() {
                 let lp = document.querySelector(`#campaignLandingPage`)
                 let resStatus = await this.$store.dispatch('campaign/validateLandingPage', lp.value)
                 if (resStatus === 200) {

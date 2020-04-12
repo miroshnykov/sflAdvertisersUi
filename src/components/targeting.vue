@@ -128,7 +128,7 @@
                                   <button
                                           type="button"
                                           class="remove_condition"
-                                          @click="rmTargeting(item)"
+                                          @click="removeTargetingItem(item.position)"
                                           variant="danger"
                                           v-b-tooltip.hover.top="'Delete '"
                                   >
@@ -181,22 +181,17 @@
         //     this.loadingDone()
         // },
         methods: {
+            ...mapMutations('targeting', ['addTargeting', 'saveTargetingItem', 'removeTargetingItem']),
             async updateValue(item, field) {
                 item.field = field
                 item.fieldValue = item[field] === 0 ? item[field] = 1 : item[field] = 0
-                await this.$store.dispatch('targeting/saveTargetingItemAction', item)
+                this.saveTargetingItem(item)
             },
             addClassActive(value) {
                 return value === 0 && 'active' || ''
             },
             setElIdByPosition(value, position) {
                 return `${value}-${position}`
-            },
-            async rmTargeting(item) {
-                await this.$store.dispatch('targeting/rmTargetingItem', item.position)
-            },
-            async addTargeting() {
-                await this.$store.dispatch('targeting/newTargetingStore')
             },
             changeFilterType(event, item) {
                 item.filterTypeId = Number(event.target.value)
@@ -207,13 +202,13 @@
                     {id: 1, name: 'Exclude'}
                 ]
             },
-            async changeInput(value, item, field) {
+            changeInput(value, item, field) {
 
                 if (!this.validateItem(value, item, field)) return
 
                 item.field = field
                 item.fieldValue = value
-                await this.$store.dispatch('targeting/saveTargetingItemAction', item)
+                this.saveTargetingItem(item)
 
             },
             getCountriesModify() {
@@ -315,7 +310,6 @@
                     })
                 }
             },
-            // ...mapMutations('campaign', ['addFilter'])
         },
         components: {ModelSelect},
     }
