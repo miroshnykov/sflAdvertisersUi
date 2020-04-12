@@ -54,7 +54,6 @@
                                   <label class="btn btn-secondary-" :class="addClassActive(item.platformAndroid)">
                                     <input
                                             type="checkbox"
-                                            :checked="item.platformAndroid"
                                             autocomplete="off"
                                             @change="updateValue(item,`platformAndroid`)"
                                     > Android
@@ -63,7 +62,6 @@
                                   <label class="btn btn-secondary-" :class="addClassActive(item.platformIos)">
                                     <input
                                             type="checkbox"
-                                            :checked="item.platformIos"
                                             autocomplete="off"
                                             @change="updateValue(item,`platformIos`)"
                                     > IOS
@@ -72,7 +70,6 @@
                                   <label class="btn btn-secondary-" :class="addClassActive(item.platformWindows)">
                                     <input
                                             type="checkbox"
-                                            :checked="item.platformWindows"
                                             autocomplete="off"
                                             @change="updateValue(item,`platformWindows`)"
                                     > Windows
@@ -89,7 +86,6 @@
                                   <label class="btn btn-secondary-" :class="addClassActive(item.sourceTypeSweepstakes)">
                                     <input
                                             type="checkbox"
-                                            :checked="item.sourceTypeSweepstakes"
                                             autocomplete="off"
                                             @change="updateValue(item,`sourceTypeSweepstakes`)"
                                     > Sweepstakes
@@ -98,7 +94,6 @@
                                   <label class="btn btn-secondary-" :class="addClassActive(item.sourceTypeVod)">
                                     <input
                                             type="checkbox"
-                                            :checked="item.sourceTypeVod"
                                             autocomplete="off"
                                             @change="updateValue(item,`sourceTypeVod`)"
 
@@ -184,11 +179,11 @@
             ...mapMutations('targeting', ['addTargeting', 'saveTargetingItem', 'removeTargetingItem']),
             async updateValue(item, field) {
                 item.field = field
-                item.fieldValue = item[field] === 0 ? item[field] = 1 : item[field] = 0
+                item.fieldValue = !item[field]
                 this.saveTargetingItem(item)
             },
             addClassActive(value) {
-                return value === 0 && 'active' || ''
+                return value && 'active' || ''
             },
             setElIdByPosition(value, position) {
                 return `${value}-${position}`
