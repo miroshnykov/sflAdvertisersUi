@@ -41,9 +41,6 @@ export default {
         async saveCampaignsStore({commit}, id) {
             commit('saveCampaign', await campaign.campaign(id))
         },
-        updateFieldAction({commit}, data) {
-            commit('updateField', data)
-        },
         async addCampaign({commit}, data) {
             return await campaign.addCampaign(data)
         },

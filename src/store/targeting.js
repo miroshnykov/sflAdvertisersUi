@@ -40,13 +40,13 @@ export default {
             state.targeting = targeting
             state.campaignId = targeting.campaignId
         },
-        async saveTargetingItem(state, item) {
+        saveTargetingItem(state, item) {
             item[item.field] = item.fieldValue
         },
-        removeTargetingItem(state) {
-            const {targeting, rmPosition} = state
+        removeTargetingItem(state, position) {
+            const {targeting} = state
 
-            let targetingFilter = targeting.filter(({position}) => position !== rmPosition)
+            let targetingFilter = targeting.filter(({position}) => position !== position)
             let positionNew = 0
             targetingFilter.forEach(item => {
                 item.position = positionNew
@@ -64,16 +64,10 @@ export default {
 
     },
     actions: {
-        async saveTargetingItemAction({commit}, item) {
-            commit('saveTargetingItem', item)
-        },
         async saveTargetingStore({commit}, id) {
             let targetingData = await targeting.targeting(id)
             targetingData.campaignId = id
             commit('saveTargeting', targetingData)
-        },
-        async newTargetingStore({commit}) {
-            commit('addTargeting', this.state.targeting)
         },
         async saveTargetingDb({commit}, data) {
 
@@ -116,12 +110,8 @@ export default {
             //     timer: 1000
             // })
             return true
-        },
-        async rmTargetingItem({commit}, rmPosition) {
-            let targetingData = this.state.targeting
-            targetingData.rmPosition = rmPosition
-            commit('removeTargetingItem', targetingData)
-        },
+        }
+
     },
     getters: {
         getTargeting: state => state.targeting,
