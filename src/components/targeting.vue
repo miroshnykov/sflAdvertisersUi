@@ -179,7 +179,7 @@
             ...mapMutations('targeting', ['addTargeting', 'saveTargetingItem', 'removeTargetingItem']),
             async updateValue(item, field) {
                 item.field = field
-                item.fieldValue = item[field] === 0 ? item[field] = 1 : item[field] = 0
+                item.fieldValue = !item[field]
                 this.saveTargetingItem(item)
             },
             addClassActive(value) {
