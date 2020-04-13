@@ -34,7 +34,15 @@ const campaign = async (id) => {
 
 const addCampaign = async (data) => {
 
-    const {name, budgetTotal, budgetDaily, cpc, landingPage, landingPageValid} = data
+    const {
+        name,
+        budgetTotal,
+        budgetDaily,
+        cpc,
+        landingPage,
+        landingPageValid
+    } = data
+
     try {
         const res = await api.post(
             '', {
@@ -66,7 +74,16 @@ const addCampaign = async (data) => {
 
 const updateCampaign = async (data) => {
 
-    const {id, name, budgetTotal, budgetDaily, cpc, landingPage, landingPageValid} = data
+    const {
+        id,
+        name,
+        budgetTotal,
+        budgetDaily,
+        cpc,
+        landingPage,
+        landingPageValid,
+        status
+    } = data
 
     try {
         const res = await api.post(
@@ -78,6 +95,7 @@ const updateCampaign = async (data) => {
                             name:"${name}",
                             budgetTotal:${budgetTotal || 0},
                             budgetDaily:${budgetDaily || 0},
+                            status: "${status}",
                             cpc:${cpc || 0},
                             landingPage:"${landingPage || ""}"
                             landingPageValid:${landingPageValid}

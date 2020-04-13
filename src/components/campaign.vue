@@ -17,6 +17,26 @@
                        @change="changeField($event,`name`)"
                 >
                 <br>
+
+                <div class="campaign-block">
+                    <select
+                            class="custom-select-status"
+                            @change="changeField($event, `status`)"
+                            :id="setElId(`status`)"
+                    >
+
+                        <option
+                                id="filterType"
+                                v-for="{id, name} in getStatusList()"
+                                :value="name"
+                                :selected="name === getFieldName(`status`)"
+                                :key="name"
+                        >{{name}}
+                        </option>
+
+                    </select>
+                </div>
+
                 <br>
                 <label>Budget Daily </label>
                 <br>
@@ -112,6 +132,12 @@
             },
             getFieldName(field) {
                 return this.getCampaign.length > 0 && this.getCampaign[0][field]
+            },
+            getStatusList() {
+                return [
+                    {id: 0, name: 'active'},
+                    {id: 1, name: 'inactive'}
+                ]
             },
             async changeField(event, field) {
                 let el = document.querySelector(`#${field}-${this.id}`)
