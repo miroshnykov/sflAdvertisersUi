@@ -43,10 +43,10 @@ export default {
         saveTargetingItem(state, item) {
             item[item.field] = item.fieldValue
         },
-        removeTargetingItem(state, position) {
+        removeTargetingItem(state, rmPosition) {
             const {targeting} = state
 
-            let targetingFilter = targeting.filter(({position}) => position !== position)
+            let targetingFilter = targeting.filter(({position}) => position !== rmPosition)
             let positionNew = 0
             targetingFilter.forEach(item => {
                 item.position = positionNew
@@ -74,7 +74,33 @@ export default {
             let state = this.state.targeting
 
             try {
-                await targeting.del(state.campaignId)
+                let response = await targeting.del(state.campaignId, true)
+                if (!response.id) {
+                    throw new Error('delete targeting backend error')
+                }
+
+                for (const item of state.targeting) {
+                    item.campaignId = state.campaignId
+                    console.table('before createTargeting ')
+                    console.table(reFormatJSON(item))
+                    try {
+                        let res = await targeting.add(item)
+                        if (!res.id) {
+                            throw new Error('add targeting backend error')
+                        }
+                    } catch (err) {
+                        await targeting.restoreSoftDelete(state.campaignId)
+                        console.log('err', err)
+                        data.$swal.fire({
+                            type: 'error',
+                            title: 'error in createTargeting()',
+                            text: `Something went wrong!${JSON.stringify(err)}`,
+                            footer: 'Errors '
+                        })
+                        return
+                    }
+                }
+
             } catch (e) {
                 console.log('err', e)
                 data.$swal.fire({
@@ -85,23 +111,8 @@ export default {
                 })
                 return
             }
-            for (const item of state.targeting) {
-                item.campaignId = state.campaignId
-                console.table('before createTargeting ')
-                console.table(reFormatJSON(item))
-                try {
-                    await targeting.add(item)
-                } catch (e) {
-                    console.log('err', e)
-                    data.$swal.fire({
-                        type: 'error',
-                        title: 'error in createTargetting()',
-                        text: 'Something went wrong!',
-                        footer: 'Errors '
-                    })
-                    return
-                }
-            }
+
+            await targeting.del(state.campaignId)
             // data.$swal.fire({
             //     type: 'success',
             //     position: 'top-end',

@@ -84,7 +84,7 @@ const add = async (data) => {
 
 }
 
-const del = async (campaignId) => {
+const del = async (campaignId, softDelete = false) => {
 
     try {
         const res = await api.post(
@@ -93,6 +93,7 @@ const del = async (campaignId) => {
                     mutation{
                         deleteTargeting(
                             campaignId: ${campaignId}
+                            softDelete: ${softDelete}
                         ) {
                             id
                             affectedRows
@@ -111,8 +112,37 @@ const del = async (campaignId) => {
 
 }
 
+const restoreSoftDelete = async (campaignId) => {
+
+    try {
+        const res = await api.post(
+            '', {
+                query: `
+                    mutation{
+                        restoreSoftDelete(
+                            campaignId: ${campaignId}
+                        ) {
+                            id
+                            affectedRows
+                        }
+                    }
+            `,
+            }
+        )
+
+        let response = res.data.data.restoreSoftDelete
+        console.log('\nrestoreSoftDelete targeting res:', response)
+        return response
+    } catch (e) {
+        console.log(e)
+    }
+
+}
+
+
 export default {
     targeting,
     add,
-    del
+    del,
+    restoreSoftDelete
 }
