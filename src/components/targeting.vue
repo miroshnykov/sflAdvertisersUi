@@ -250,6 +250,7 @@
                 checkCampaign.forEach(item => {
                     let keys = Object.keys(item)
                     keys.forEach(key => {
+                        if (key === 'landingPageValid') return
                         if (Number(item[key]) === 0) {
                             emptyKey.push(key)
                         }
