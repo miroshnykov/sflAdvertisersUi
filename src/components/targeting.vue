@@ -111,7 +111,7 @@
                                        placeholder="cpc"
                                        :id="setElIdByPosition(`cpc`,item.position)"
                                        class="condition__matches custom-input"
-                                       @change="changeInput($event.target.value, item, `cpc`)"
+                                       @change="changeInput(Number($event.target.value), item, `cpc`)"
                                        :value="item.cpc"
                                 >
                                 <label
