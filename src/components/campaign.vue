@@ -118,7 +118,7 @@
                 this.updateField(updateFieldData)
             },
             async validateLP() {
-                let lp = document.querySelector(`#campaignLandingPage`)
+                let lp = document.querySelector(`#landingPage-${this.id}`)
                 let resStatus = await this.$store.dispatch('campaign/validateLandingPage', lp.value)
                 if (resStatus === 200) {
                     this.$swal.fire({
