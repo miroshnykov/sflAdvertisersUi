@@ -262,6 +262,10 @@
                         let el = document.querySelector(`#${key}-${campaignId}`)
                         el && el.classList.add('error')
                     })
+                    this.$swal.fire({
+                        title: 'Validation Error',
+                        text: `Please check field:${JSON.stringify(emptyKey)}`,
+                    })
                     return
                 }
 
