@@ -250,6 +250,7 @@
                 checkCampaign.forEach(item => {
                     let keys = Object.keys(item)
                     keys.forEach(key => {
+                        if (key === 'landingPageValid') return
                         if (Number(item[key]) === 0) {
                             emptyKey.push(key)
                         }
@@ -260,6 +261,10 @@
                     emptyKey.forEach(key => {
                         let el = document.querySelector(`#${key}-${campaignId}`)
                         el && el.classList.add('error')
+                    })
+                    this.$swal.fire({
+                        title: 'Validation Error',
+                        text: `Please check field:${JSON.stringify(emptyKey)}`,
                     })
                     return
                 }

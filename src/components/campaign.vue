@@ -59,10 +59,18 @@
                 <input type="text"
                        placeholder="campaignLandingPage"
                        :id="setElId(`landingPage`)"
-                       class="condition__matches budgetTotal custom-input"
+                       class="condition__matches landingPage custom-input"
                        :value="getFieldName(`landingPage`)"
                        @change="changeField($event,`landingPage`)"
                 >
+                <b-form-checkbox
+                        class="validateLandingPage" size="lg"
+                        :id="setElId(`landingPageValid`)"
+                        disabled
+                        readonly
+                        :checked="getFieldName(`landingPageValid`)"
+                ></b-form-checkbox>
+
                 <b-button variant="primary"
                           @click="validateLP()"
                 >
@@ -116,11 +124,25 @@
                 updateFieldData.value = event.target.value
                 updateFieldData.field = field
                 this.updateField(updateFieldData)
+                if (field === 'landingPage') {
+                    this.updateField({
+                        field: `landingPageValid`,
+                        value: false
+                    })
+                }
             },
             async validateLP() {
                 let lp = document.querySelector(`#landingPage-${this.id}`)
                 let resStatus = await this.$store.dispatch('campaign/validateLandingPage', lp.value)
+                let el = document.querySelector(`#landingPageValid-${this.id}`)
                 if (resStatus === 200) {
+
+                    el ? el.checked = true : ''
+
+                    let updateFieldData = {}
+                    updateFieldData.value = true
+                    updateFieldData.field = `landingPageValid`
+                    this.updateField(updateFieldData)
                     this.$swal.fire({
                         type: 'success',
                         position: 'top-end',
@@ -129,6 +151,12 @@
                         timer: 1000
                     })
                 } else {
+                    el ? el.checked = false : ''
+
+                    let updateFieldData = {}
+                    updateFieldData.value = false
+                    updateFieldData.field = `landingPageValid`
+                    this.updateField(updateFieldData)
                     this.$swal.fire({
                         title: 'Validation Error',
                         text: `Please check domain name:${lp.value}`,
@@ -148,6 +176,10 @@
 </script>
 
 <style lang="scss">
+    .landingPage, .validateLandingPage {
+        float: left;
+    }
+
     .custom-select:hover, .custom-select:focus,
     .custom-input:hover, .custom-input:focus,
     .ui.search.selection.dropdown > input.search:hover, .ui.search.selection.dropdown > input.search:focus {
