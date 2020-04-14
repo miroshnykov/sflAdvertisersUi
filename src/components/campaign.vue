@@ -1,12 +1,16 @@
 <template>
     <div id="edit-segment">
+        <menunav></menunav>
         <logo></logo>
-        <h1>Rules &amp; Conditions</h1>
-        <ul class="segment-info">
-            <li>Campaign ID: <b>{{id}}</b></li>
-        </ul>
+        <h1>Edit Campaign</h1>
         <section class="filter">
             <div class="condition__controls">
+                <label>Campaign ID</label>
+                <input type="text"
+                       class="condition__matches campaign custom-input"
+                       :value="getId(`id`)"
+                       disabled
+                >
 
                 <label>Campaign name</label>
                 <input type="text"
@@ -108,10 +112,11 @@
     import targeting from './targeting.vue'
     import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
     import logo from './logo.vue'
+    import menunav from './menunav.vue'
 
     export default {
         name: 'edit-campaign',
-        components: {targeting, logo},
+        components: {targeting, logo, menunav},
         computed: {
             ...mapState('campaign', ['campaign']),
             // ...mapState('targeting', ['targeting']),
@@ -126,6 +131,9 @@
             ...mapActions("campaign", ["saveCampaignsStore"]),
             ...mapActions("targeting", ["saveTargetingStore"]),
             ...mapMutations("campaign", ["updateField"]),
+            getId(value) {
+                return `${this.id}`
+            },
             setElId(value) {
                 return `${value}-${this.id}`
             },
@@ -199,37 +207,3 @@
         }
     };
 </script>
-
-<style lang="scss">
-    .landingPage, .validateLandingPage {
-        float: left;
-    }
-
-    .custom-select:hover, .custom-select:focus,
-    .custom-input:hover, .custom-input:focus,
-    .ui.search.selection.dropdown > input.search:hover, .ui.search.selection.dropdown > input.search:focus {
-        border-color: #36B8E1 !important;
-        box-shadow: 0 0 5px #36B8E1 !important;
-        cursor: pointer !important;
-    }
-
-    .custom-input::placeholder {
-        color: #ACC3CF;
-    }
-
-    .custom-input {
-        position: relative;
-        width: auto;
-        color: #555;
-        max-width: 280px;
-        border-radius: 4px;
-        padding: 5px 10px;
-        height: calc(1.5em + 0.75rem + 2px);
-        text-align: left;
-        border: 0;
-    }
-
-    .custom-input::placeholder {
-        color: #ACC3CF;
-    }
-</style>

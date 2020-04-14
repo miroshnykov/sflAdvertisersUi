@@ -25,7 +25,7 @@
     height: 100%
     width: 255px
     padding: 30px
-    position: absolute
+    position: fixed
     left: 0
     top: 0
     z-index: 99

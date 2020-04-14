@@ -96,12 +96,15 @@
         background-image: -webkit-gradient(linear, right top, left top, from(#67E6F5), to(#2294D0))
         background-image: linear-gradient(to left, #67E6F5, #2294D0)
         padding: 50px
+
+        .container
+            margin-left: auto !important
     
         .container-fluid
             background: #fff
             border-radius: 20px
             padding: 20px
-            height: 900px !important
+            // height: 800px !important
 
         .g-signin-button
             display: inline-block
