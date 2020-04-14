@@ -6,9 +6,9 @@
             <li>Campaign ID: <b>{{id}}</b></li>
         </ul>
         <section class="filter">
-            <div class="campaign-line">
+            <div class="condition__controls">
+
                 <label>Campaign name</label>
-                <br>
                 <input type="text"
                        placeholder="campaign name"
                        :id="setElId(`name`)"
@@ -16,30 +16,34 @@
                        :value="getFieldName(`name`)"
                        @change="changeField($event,`name`)"
                 >
-                <br>
+            </div>
 
-                <div class="campaign-block">
-                    <select
-                            class="custom-select-status"
-                            @change="changeField($event, `status`)"
-                            :id="setElId(`status`)"
-                    >
+            <div class="condition__controls">
+                <label>Status</label>
+                <select
+                        class="custom-select"
+                        @change="changeField($event, `status`)"
+                        :id="setElId(`status`)"
+                >
 
-                        <option
-                                id="filterType"
-                                v-for="{id, name} in getStatusList()"
-                                :value="name"
-                                :selected="name === getFieldName(`status`)"
-                                :key="name"
-                        >{{name}}
-                        </option>
+                    <option
+                            id="filterType"
+                            v-for="{id, name} in getStatusList()"
+                            :value="name"
+                            :selected="name === getFieldName(`status`)"
+                            :key="name"
+                    >{{name}}
+                    </option>
 
-                    </select>
-                </div>
+                </select>
+            </div>
 
-                <br>
+
+        </section>
+
+        <section class="filter">
+            <div class="condition__controls">
                 <label>Budget Daily </label>
-                <br>
                 <input type="number"
                        step=10
                        placeholder="budgetDaily"
@@ -48,10 +52,7 @@
                        :value="getFieldName(`budgetDaily`)"
                        @change="changeField($event,`budgetDaily`)"
                 >
-                <br>
-                <br>
                 <label>Budget Total </label>
-                <br>
                 <input type="number"
                        step=10
                        placeholder="budgetTotal"
@@ -60,10 +61,7 @@
                        :value="getFieldName(`budgetTotal`)"
                        @change="changeField($event,`budgetTotal`)"
                 >
-                <br>
-                <br>
                 <label>CPC </label>
-                <br>
                 <input type="number"
                        step=0.1
                        placeholder="campaignCPC"
@@ -72,10 +70,7 @@
                        :value="getFieldName(`cpc`)"
                        @change="changeField($event,`cpc`)"
                 >
-                <br>
-                <br>
                 <label>Landing page </label>
-                <br>
                 <input type="text"
                        placeholder="campaignLandingPage"
                        :id="setElId(`landingPage`)"
@@ -100,8 +95,12 @@
                 <br>
             </div>
 
+        </section>
+
+        <section class="filter">
             <targeting/>
         </section>
+
     </div>
 </template>
 
