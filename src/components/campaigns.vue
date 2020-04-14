@@ -28,6 +28,15 @@
                     </span>
             </div>
 
+            <div slot="landingPage" slot-scope="props">
+              <span>
+                  <span class="landing-page-name">{{props.row.landingPage}}</span>
+              </span>
+                <button class="btn btn-link" @click="copyText(props.row.landingPage)">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+
             <div slot="child_row" slot-scope="props">
                 <div class="segment-child animated fadeIn">
 
@@ -74,7 +83,7 @@
         'budgetTotal',
         'budgetDaily',
         'cpc',
-        'user',
+        'userName',
         'landingPage',
         'status',
         'actions'
@@ -89,6 +98,21 @@
             ...mapGetters('campaigns', ['getCampaigns'])
         },
         methods: {
+            async copyText(landingPage) {
+
+                try {
+                    await navigator.clipboard.writeText(landingPage);
+                    this.$swal.fire({
+                        type: 'success',
+                        position: 'top-end',
+                        title: `Copied the text: \n ${landingPage} \n   to clipboard `,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+            },
             async uCampaignName(data) {
 
                 let res = await this.$store.dispatch('campaign/updCampaignName', data)

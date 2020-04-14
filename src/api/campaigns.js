@@ -12,6 +12,9 @@ const campaigns = async () => {
                         name
                         budgetTotal
                         budgetDaily
+                        userEmail
+                        userName
+                        name
                         cpc
                         user
                         landingPage
