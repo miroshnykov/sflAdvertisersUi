@@ -17,7 +17,7 @@
               </span>
 
                 <button @click="setEditing(true)" v-if="!isEditing()" class="btn btn-link">
-                    <i class="fad fa-pencil"></i>
+                    <i class="far fa-pencil"></i>
                 </button>
                 <span v-else>
                         <input type="text" v-model="row.name">
@@ -32,8 +32,8 @@
               <span>
                   <span class="landing-page-name">{{props.row.landingPage}}</span>
               </span>
-                <button class="btn btn-link" @click="copyText(props.row.landingPage)">
-                    <i class="fas fa-copy"></i>
+                <button class="btn btn-link" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="'Copy URL to Clipboard'">
+                    <i class="far fa-copy"></i>
                 </button>
             </div>
 
@@ -51,7 +51,7 @@
                         v-b-tooltip.hover.top="'Edit Campaign'"
                         @click="edit(props.row)"
                 >
-                    <i class="fad fa-tasks"></i>
+                    <i class="fas fa-pencil"></i>
                 </button>
 
                 <button
@@ -59,7 +59,7 @@
                         v-b-tooltip.hover.top="'Delete Campaign'"
                         @click="del(props.row.id)"
                 >
-                    <i class="far fa-trash-alt"></i>
+                    <i class="fas fa-trash-alt"></i>
                 </button>
 
 
@@ -105,7 +105,7 @@
                     this.$swal.fire({
                         type: 'success',
                         position: 'top-end',
-                        title: `Copied the text: \n ${landingPage} \n   to clipboard `,
+                        title: `Copied URL: \n ${landingPage} \n   to clipboard `,
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -259,15 +259,14 @@
                 options: {
                     // columnsDropdown: true,
                     headings: {
-
-                        id: 'Id',
-                        name: 'name Id',
-                        budgetTotal: 'budget Total',
-                        budgetDaily: 'budget Daily',
-                        cpc: 'cpc',
-                        user: 'user',
-                        landingPage: 'landingPage',
-                        status: 'status'
+                        id: 'ID',
+                        name: 'Campaign Name',
+                        userName: 'Creator',
+                        budgetDaily: 'Daily Budget',
+                        budgetTotal: 'Total Budget',
+                        cpc: 'Max. CPC',
+                        landingPage: 'Landing Page URL',
+                        status: 'Status'
                     },
                     editableColumns: ['name'],
                     sortable: tableColumnsLog,

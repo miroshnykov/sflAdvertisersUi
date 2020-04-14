@@ -4,7 +4,7 @@
             <h3 class="filter__title">Rule: <b></b></h3>
             <div class="filter__controls">
                 <b-button variant="secondary" @click="addTargeting">
-                    <i class="fas fa-history"></i> add line
+                    <i class="fas fa-plus"></i> Add Line
                 </b-button>
 
                 <template v-for="item in getTargeting">
@@ -318,17 +318,17 @@
 <style lang="scss">
 
     .btn-secondary- {
-        color: #fff;
+        color: inherit;
         border-color: #545050;
     }
 
     .btn-secondary-:hover {
-        color: #fff;
+        color: #555;
         border-color: #e1e1e1;
     }
 
     .btn-secondary-:not(:disabled):not(.disabled):active, .btn-secondary-:not(:disabled):not(.disabled).active, .show > .btn-secondary-.dropdown-toggle {
-        color: #fff;
+        color: #555;
         background-color: #545b62;
         border-color: #4e555b;
     }
@@ -432,7 +432,7 @@
     }
 
     .condition__matches {
-        text-align: right;
+        // text-align: right;
         margin-right: 1px;
     }
 
@@ -457,14 +457,6 @@
         background-repeat: no-repeat;
         background-position-x: 99%;
         background-position-y: 7px;
-    }
-
-    .custom-select:hover, .custom-select:focus,
-    .custom-input:hover, .custom-input:focus,
-    .ui.search.selection.dropdown > input.search:hover, .ui.search.selection.dropdown > input.search:focus {
-        border-color: #36B8E1 !important;
-        box-shadow: 0 0 5px #36B8E1 !important;
-        cursor: pointer !important;
     }
 
     .custom-select:disabled:hover {
@@ -500,22 +492,6 @@
         float: right;
         margin-top: -2px;
         margin-right: -20px;
-    }
-
-    .custom-input {
-        position: relative;
-        width: auto;
-        color: #555;
-        max-width: 280px;
-        border-radius: 4px;
-        padding: 5px 10px;
-        height: calc(1.5em + 0.75rem + 2px);
-        text-align: left;
-        border: 0;
-    }
-
-    .custom-input::placeholder {
-        color: #ACC3CF;
     }
 
     select.add-condition.custom-select {
