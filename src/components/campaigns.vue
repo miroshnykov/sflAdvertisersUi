@@ -16,20 +16,19 @@
                   <span class="segment-name" @click="edit(row)">{{row.name}}</span>
               </span>
 
-                <button @click="setEditing(true)" v-if="!isEditing()" class="btn btn-link">
+                <button @click="setEditing(true)" v-if="!isEditing()" class="btn btn-link" v-b-tooltip.hover.right="'Quick edit'">
                     <i class="far fa-pencil"></i>
                 </button>
                 <span v-else>
-                        <input type="text" v-model="row.name">
-                        <button type="button" class="btn btn-info btn-xs"
-                                @click="update(row.name);setEditing(false); uCampaignName(row)">Update</button>
-                        <button type="button" class="btn btn-default btn-xs" @click="revertValue(); setEditing(false)">Cancel</button>
-
+                        <input type="text" v-model="row.name" class="quickedit">
+                        <button type="button" class="btn btn-info btn-xs quickedit-update"
+                                @click="update(row.name);setEditing(false); uCampaignName(row)"><i class="fas fa-check"></i></button>
+                        <button type="button" class="btn btn-default btn-xs quickedit-cancel" @click="revertValue(); setEditing(false)"><i class="fas fa-ban"></i></button>
                     </span>
             </div>
 
             <div slot="landingPage" slot-scope="props">
-              <span>
+              <span class="landing-page-box">
                   <span class="landing-page-name">{{props.row.landingPage}}</span>
               </span>
                 <button class="btn btn-link" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="'Copy URL to Clipboard'">

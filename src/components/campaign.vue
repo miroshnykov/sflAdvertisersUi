@@ -2,7 +2,9 @@
     <div id="edit-segment">
         <menunav></menunav>
         <logo></logo>
+
         <h1>Edit Campaign</h1>
+
         <section class="filter">
             <div class="condition__controls">
                 <label>Campaign ID</label>
@@ -11,7 +13,9 @@
                        :value="getId(`id`)"
                        disabled
                 >
-
+            </div>
+            
+            <div class="condition__controls">
                 <label>Campaign name</label>
                 <input type="text"
                        placeholder="campaign name"
@@ -41,9 +45,11 @@
 
                 </select>
             </div>
-
-
         </section>
+
+        <hr>
+
+        <h2>Advertising Budget</h2>
 
         <section class="filter">
             <div class="condition__controls">
@@ -101,6 +107,10 @@
 
         </section>
 
+        <hr>
+
+        <h2>Targeting</h2>
+
         <section class="filter">
             <targeting/>
         </section>
@@ -142,8 +152,8 @@
             },
             getStatusList() {
                 return [
-                    {id: 0, name: 'active'},
-                    {id: 1, name: 'inactive'}
+                    {id: 0, name: 'Active'},
+                    {id: 1, name: 'Inactive'}
                 ]
             },
             async changeField(event, field) {
