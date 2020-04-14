@@ -5,28 +5,39 @@
                 <b-col col lg="8">
                 </b-col>
                 <b-col col lg="4">
-                    <img class="user-avatar" :src="getUrlAvatar()" />
-                    <b-nav>
-                        <b-nav-item-dropdown
-                                id="my-nav-dropdown"
-                                toggle-class="nav-link-custom"
-                                right
-                        >
-                            <template v-slot:button-content>
-                                <span class="username">{{getUserName()}}</span>
-                            </template>
-                            <b-dropdown-item>
-                                You are currently signed in as<br>
-                                <strong>{{getUserEmail()}}</strong>
-                            </b-dropdown-item>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item>
-                                <router-link class="sign-out" exact to="/logout">
-                                    <span @click="loginOut">Sign Out <i class="fad fa-sign-out"></i></span>
-                                </router-link>
-                            </b-dropdown-item>
-                        </b-nav-item-dropdown>
-                    </b-nav>
+                    <b-row align-v="center">
+                        <b-col cols="8">
+                            <div class="header-icons">
+                                <span class="search"><i class="fas fa-search"></i></span>
+                                <span class="notification"><i class="fas fa-bell"></i></span>
+                            </div>
+                        </b-col>
+
+                        <b-col cols="4">
+                        <img class="user-avatar" :src="getUrlAvatar()" />
+                            <b-nav>
+                                <b-nav-item-dropdown
+                                        id="my-nav-dropdown"
+                                        toggle-class="nav-link-custom"
+                                        right
+                                >
+                                    <template v-slot:button-content>
+                                        <span class="username">{{getUserName()}}</span>
+                                    </template>
+                                    <b-dropdown-item>
+                                        You are currently signed in as<br>
+                                        <strong>{{getUserEmail()}}</strong>
+                                    </b-dropdown-item>
+                                    <b-dropdown-divider></b-dropdown-divider>
+                                    <b-dropdown-item>
+                                        <router-link class="sign-out" exact to="/logout">
+                                            <span @click="loginOut">Sign Out <i class="fad fa-sign-out"></i></span>
+                                        </router-link>
+                                    </b-dropdown-item>
+                                </b-nav-item-dropdown>
+                            </b-nav>
+                        </b-col>
+                    </b-row>
                 </b-col>
             </b-row>
         </div>
@@ -104,6 +115,18 @@
             width: 2.5em
             height: 2.5em
             margin-left: 10px
+
+        .header-icons
+            color: #ACC3CF
+            float: right
+
+            span
+                margin-left: 10px
+                cursor: pointer
+
+                &:hover
+                    color: #7F98A5
+            
 
         .nav
             display: block
