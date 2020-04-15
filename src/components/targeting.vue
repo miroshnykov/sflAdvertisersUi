@@ -403,7 +403,7 @@
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
         border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-        min-width: 990px;
+        // min-width: 990px;
     }
 
     .condition__controls:last-child {
@@ -440,12 +440,16 @@
     .custom-select {
         text-align: left;
         position: relative;
-        width: auto;
-        min-width: 50px;
-        max-width: 280px;
-        border-radius: 4px;
-        color: #555;
-        border: 1px solid transparent;
+        // width: auto;
+        // min-width: 50px;
+        // max-width: 280px;
+        width: 100%;
+        height: 45px;
+        border-radius: 7px;
+        color: #7F98A5;
+        font-size: 16px;
+        font-weight: 600;
+        border: 2px solid #e3eef4;
         -webkit-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
@@ -453,10 +457,10 @@
         transition: all 0.3s ease;
         -webkit-appearance: none;
         -moz-appearance: none;
-        background: url("data:image/svg+xml;utf8,<svg fill='grey' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") #fff;
+        background: url("data:image/svg+xml;utf8,<svg fill='grey' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") #fff;
         background-repeat: no-repeat;
         background-position-x: 99%;
-        background-position-y: 7px;
+        background-position-y: 10px;
     }
 
     .custom-select:disabled:hover {
