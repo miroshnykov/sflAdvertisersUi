@@ -38,7 +38,7 @@
                             id="filterType"
                             v-for="{id, name} in getStatusList()"
                             :value="name"
-                            :selected="name === getFieldName(`status`)"
+                            :selected="name.toLowerCase() === getFieldName(`status`)"
                             :key="name"
                     >{{name}}
                     </option>
@@ -164,7 +164,7 @@
                     el && el.classList.remove('error')
                 }
                 let updateFieldData = {}
-                updateFieldData.value = event.target.value
+                updateFieldData.value = event.target.value.toLowerCase()
                 updateFieldData.field = field
                 this.updateField(updateFieldData)
                 if (field === 'landingPage') {
