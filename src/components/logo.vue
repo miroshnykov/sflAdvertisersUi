@@ -132,8 +132,13 @@
             display: block
             margin-top: 3px
             text-align: right
+            
 
         .nav-item
+            li
+                .nav-item a svg
+                    margin-right: 10px
+
             .dropdown-toggle
                 white-space: nowrap
                 padding: 0
