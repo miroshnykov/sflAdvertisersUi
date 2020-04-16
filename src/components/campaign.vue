@@ -4,116 +4,246 @@
         <logo></logo>
 
         <h1>Edit Campaign</h1>
+        <b-row class="text-center">
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>ID</label>
+                    <input type="text"
+                        class="condition__matches campaign custom-input"
+                        :value="getId(`id`)"
+                        disabled
+                    >
+                </div>
+            </b-col>
+            <b-col cols="6">
+                <div class="condition__controls">
+                    <label>Campaign name</label>
+                    <input type="text"
+                        placeholder="campaign name"
+                        :id="setElId(`name`)"
+                        class="condition__matches campaign custom-input"
+                        :value="getFieldName(`name`)"
+                        @change="changeField($event,`name`)"
+                    >
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>Status</label>
+                    <select
+                            class="custom-select"
+                            @change="changeField($event, `status`)"
+                            :id="setElId(`status`)"
+                    >
+                        <option
+                                id="filterType"
+                                v-for="{id, name} in getStatusList()"
+                                :value="name"
+                                :selected="name.toLowerCase() === getFieldName(`status`)"
+                                :key="name"
+                        >{{name}}
+                        </option>
+                    </select>
+                </div>
+            </b-col>
+        </b-row>
 
-        <section class="filter">
-            <div class="condition__controls">
-                <label>Campaign ID</label>
-                <input type="text"
-                       class="condition__matches campaign custom-input"
-                       :value="getId(`id`)"
-                       disabled
-                >
-            </div>
-            
-            <div class="condition__controls">
-                <label>Campaign name</label>
-                <input type="text"
-                       placeholder="campaign name"
-                       :id="setElId(`name`)"
-                       class="condition__matches campaign custom-input"
-                       :value="getFieldName(`name`)"
-                       @change="changeField($event,`name`)"
-                >
-            </div>
+            <!-- <section class="filter">
 
-            <div class="condition__controls">
-                <label>Status</label>
-                <select
-                        class="custom-select"
-                        @change="changeField($event, `status`)"
-                        :id="setElId(`status`)"
-                >
+                <div class="condition__controls">
+                    <label>Campaign ID</label>
+                    <input type="text"
+                        class="condition__matches campaign custom-input"
+                        :value="getId(`id`)"
+                        disabled
+                    >
+                </div>
+                
+                <div class="condition__controls">
+                    <label>Campaign name</label>
+                    <input type="text"
+                        placeholder="campaign name"
+                        :id="setElId(`name`)"
+                        class="condition__matches campaign custom-input"
+                        :value="getFieldName(`name`)"
+                        @change="changeField($event,`name`)"
+                    >
+                </div>
 
-                    <option
-                            id="filterType"
-                            v-for="{id, name} in getStatusList()"
-                            :value="name"
-                            :selected="name.toLowerCase() === getFieldName(`status`)"
-                            :key="name"
-                    >{{name}}
-                    </option>
+                <div class="condition__controls">
+                    <label>Status</label>
+                    <select
+                            class="custom-select"
+                            @change="changeField($event, `status`)"
+                            :id="setElId(`status`)"
+                    >
 
-                </select>
-            </div>
-        </section>
+                        <option
+                                id="filterType"
+                                v-for="{id, name} in getStatusList()"
+                                :value="name"
+                                :selected="name.toLowerCase() === getFieldName(`status`)"
+                                :key="name"
+                        >{{name}}
+                        </option>
+
+                    </select>
+                </div>
+            </section> -->
 
         <hr>
-
         <h2>Advertising Budget</h2>
 
-        <section class="filter">
-            <div class="condition__controls">
-                <label>Budget Daily </label>
-                <input type="number"
-                       step=10
-                       placeholder="budgetDaily"
-                       :id="setElId(`budgetDaily`)"
-                       class="condition__matches budgetDaily custom-input"
-                       :value="getFieldName(`budgetDaily`)"
-                       @change="changeField($event,`budgetDaily`)"
-                >
-                <label>Budget Total </label>
-                <input type="number"
-                       step=10
-                       placeholder="budgetTotal"
-                       :id="setElId(`budgetTotal`)"
-                       class="condition__matches budgetTotal custom-input"
-                       :value="getFieldName(`budgetTotal`)"
-                       @change="changeField($event,`budgetTotal`)"
-                >
-                <label>CPC </label>
-                <input type="number"
-                       step=0.1
-                       placeholder="campaignCPC"
-                       :id="setElId(`cpc`)"
-                       class="condition__matches budgetTotal custom-input"
-                       :value="getFieldName(`cpc`)"
-                       @change="changeField($event,`cpc`)"
-                >
-                <label>Landing page </label>
-                <input type="text"
-                       placeholder="campaignLandingPage"
-                       :id="setElId(`landingPage`)"
-                       class="condition__matches landingPage custom-input"
-                       :value="getFieldName(`landingPage`)"
-                       @change="changeField($event,`landingPage`)"
-                >
-                <b-form-checkbox
-                        class="validateLandingPage" size="lg"
-                        :id="setElId(`landingPageValid`)"
-                        disabled
-                        readonly
-                        :checked="getFieldName(`landingPageValid`)"
-                ></b-form-checkbox>
+        <b-row class="text-center">
+            <b-col cols="4">
+                <div class="condition__controls">
+                    <label>Total Budget (Campaign)</label>
+                    <input type="number"
+                        step=10
+                        placeholder="budgetTotal"
+                        :id="setElId(`budgetTotal`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`budgetTotal`)"
+                        @change="changeField($event,`budgetTotal`)"
+                    >
+                    <b-form-text id="password-help-block">
+                    Spent: $1,418.00
+                    <!-- TODO: Add Spent value -->
+                    </b-form-text>
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>Daily Budget</label>
+                    <input type="number"
+                        step=10
+                        placeholder="budgetDaily"
+                        :id="setElId(`budgetDaily`)"
+                        class="condition__matches budgetDaily custom-input"
+                        :value="getFieldName(`budgetDaily`)"
+                        @change="changeField($event,`budgetDaily`)"
+                    >
+                    <b-form-text id="password-help-block">
+                    Spent: $624.50
+                    <!-- TODO: Add Spent value -->
+                    </b-form-text>
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>Max. CPC</label>
+                    <input type="number"
+                        step=0.1
+                        placeholder="campaignCPC"
+                        :id="setElId(`cpc`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`cpc`)"
+                        @change="changeField($event,`cpc`)"
+                    >
+                </div>
+            </b-col>
+        </b-row>
 
-                <b-button variant="primary"
-                          @click="validateLP()"
-                >
-                    <i class="fas "></i> validate
+        <b-row class="text-center">
+            <b-col cols="8">
+                <div class="condition__controls">
+                    <label>Landing page </label>
+                    <input type="text"
+                        placeholder="campaignLandingPage"
+                        :id="setElId(`landingPage`)"
+                        class="condition__matches landingPage custom-input"
+                        :value="getFieldName(`landingPage`)"
+                        @change="changeField($event,`landingPage`)"
+                    >
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>&nbsp;</label>
+                    <b-button class="btn-validate" variant="primary"
+                            @click="validateLP()"
+                    >
+                        Validate
+                    </b-button>
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>&nbsp;</label>
+                    <b-form-checkbox
+                                class="validateLandingPage" size="lg"
+                                :id="setElId(`landingPageValid`)"
+                                disabled
+                                readonly
+                                :checked="getFieldName(`landingPageValid`)"
+                    ></b-form-checkbox>
+                </div>
+            </b-col>
+        </b-row>
 
-                </b-button>
-                <br>
-            </div>
+            <!-- <section class="filter">
+                <div class="condition__controls">
+                    <label>Budget Daily </label>
+                    <input type="number"
+                        step=10
+                        placeholder="budgetDaily"
+                        :id="setElId(`budgetDaily`)"
+                        class="condition__matches budgetDaily custom-input"
+                        :value="getFieldName(`budgetDaily`)"
+                        @change="changeField($event,`budgetDaily`)"
+                    >
+                    <label>Budget Total </label>
+                    <input type="number"
+                        step=10
+                        placeholder="budgetTotal"
+                        :id="setElId(`budgetTotal`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`budgetTotal`)"
+                        @change="changeField($event,`budgetTotal`)"
+                    >
+                    <label>CPC </label>
+                    <input type="number"
+                        step=0.1
+                        placeholder="campaignCPC"
+                        :id="setElId(`cpc`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`cpc`)"
+                        @change="changeField($event,`cpc`)"
+                    >
+                    <label>Landing page </label>
+                    <input type="text"
+                        placeholder="campaignLandingPage"
+                        :id="setElId(`landingPage`)"
+                        class="condition__matches landingPage custom-input"
+                        :value="getFieldName(`landingPage`)"
+                        @change="changeField($event,`landingPage`)"
+                    >
+                    <b-form-checkbox
+                            class="validateLandingPage" size="lg"
+                            :id="setElId(`landingPageValid`)"
+                            disabled
+                            readonly
+                            :checked="getFieldName(`landingPageValid`)"
+                    ></b-form-checkbox>
 
-        </section>
+                    <b-button variant="primary"
+                            @click="validateLP()"
+                    >
+                        <i class="fas "></i> validate
 
-        <hr>
+                    </b-button>
+                    <br>
+                </div>
 
-        <h2>Targeting</h2>
+            </section> -->
 
-        <section class="filter">
-            <targeting/>
-        </section>
+            <hr>
+            <h2>Targeting</h2>
+
+            <section class="filter">
+                <targeting/>
+            </section>
+
 
     </div>
 </template>
@@ -217,3 +347,8 @@
         }
     };
 </script>
+
+<style lang="sass">
+.container
+  margin-left: 300px
+</style>
