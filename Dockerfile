@@ -10,9 +10,13 @@ RUN curl --silent --location https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install --yes nodejs
 
 WORKDIR /home/app
+
+ENV SFL_CORE_URL=http://sfl-core-condition:4001/graphql
+ENV SFL_PLATFORM_ADV_URL=http://sfl-platform-advertiser:8080/
+ENV SFL_CORE_AUTH_URL=http://sfl-core-condition:4001
+
 COPY . .
 RUN npm install
 RUN npm run build
 EXPOSE 80
 CMD [ "node", "server.js" ]
-
