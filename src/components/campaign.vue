@@ -1,7 +1,7 @@
 <template>
     <div id="edit-segment">
         <menunav></menunav>
-        <logo></logo>
+        <topbar></topbar>
 
         <h1>Edit Campaign</h1>
         <b-row class="text-center">
@@ -17,9 +17,9 @@
             </b-col>
             <b-col cols="6">
                 <div class="condition__controls">
-                    <label>Campaign name</label>
+                    <label>Campaign Name</label>
                     <input type="text"
-                        placeholder="campaign name"
+                        placeholder="My Campaign"
                         :id="setElId(`name`)"
                         class="condition__matches campaign custom-input"
                         :value="getFieldName(`name`)"
@@ -131,7 +131,7 @@
             </b-col>
             <b-col cols="2">
                 <div class="condition__controls">
-                    <label>Max. CPC</label>
+                    <label>Max. CPC (cost per click)</label>
                     <input type="number"
                         step=0.1
                         placeholder="campaignCPC"
@@ -147,9 +147,9 @@
         <b-row class="text-center">
             <b-col cols="8">
                 <div class="condition__controls">
-                    <label>Landing page </label>
+                    <label>Landing Page URL </label>
                     <input type="text"
-                        placeholder="campaignLandingPage"
+                        placeholder="https://domain.com"
                         :id="setElId(`landingPage`)"
                         class="condition__matches landingPage custom-input"
                         :value="getFieldName(`landingPage`)"
@@ -240,9 +240,7 @@
             <hr>
             <h2>Targeting</h2>
 
-            <section class="filter">
-                <targeting/>
-            </section>
+            <targeting></targeting>
 
 
     </div>
@@ -251,12 +249,12 @@
 <script>
     import targeting from './targeting.vue'
     import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
-    import logo from './logo.vue'
+    import topbar from './topbar.vue'
     import menunav from './menunav.vue'
 
     export default {
         name: 'edit-campaign',
-        components: {targeting, logo, menunav},
+        components: {targeting, topbar, menunav},
         computed: {
             ...mapState('campaign', ['campaign']),
             // ...mapState('targeting', ['targeting']),

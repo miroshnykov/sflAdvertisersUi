@@ -32,6 +32,11 @@ a
 a, button, span
   transition: all 0.5s ease
 
+hr
+  border: 1.5px solid #E3EEF4
+  margin-top: 40px
+  margin-bottom: 40px
+
 .theme-adcenter
   --fa-primary-color: #fff
   --fa-primary-opacity: 1
@@ -192,6 +197,23 @@ button.quickedit-cancel
 
 .custom-input::placeholder
   color: #ACC3CF
+
+.text-muted
+  color: #ACC3CF !important
+  font-weight: 500
+  font-size: 14px
+  letter-spacing: 0.3px
+
+/* TARGETING */
+button.btn.btn-add-line.btn-secondary
+  background: #36B8E1
+  width: 85px
+  font-size: 10px
+  letter-spacing: 1px
+  height: 25px
+  padding: 0px
+  border-radius: 4px
+  float: right
 
 /* SEARCH BAR */
 .form-control
@@ -431,10 +453,6 @@ button.btn
     color: #fe5d65
     background: transparent
 
-button.remove_condition
-  margin-left: 10px
-  font-size: 12px
-
 /* Dropdown Button */
 .dropdown-toggle
   white-space: nowrap
@@ -516,6 +534,28 @@ tr
   color: #fff
   border-color: #58da94
   background-color: #58da94
+
+.custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before
+  background-color: transparent
+  border: 0px solid transparent
+
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before
+  background-color: rgba(255, 255, 255, 0)
+
+.custom-checkbox.b-custom-control-lg .custom-control-label::after, .input-group-lg .custom-checkbox .custom-control-label::after
+  top: 0rem
+  left: -2rem
+  width: 1.25rem
+  height: 1.25rem
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after
+  font-family: "Font Awesome 5 Free"
+  font-size: 16px
+  font-weight: 900
+  color: #2ED47A
+  content: "\f00c"
+  position: relative
+  background: none !important
 
 /* Segment Child Table */
 .VueTables__child-row-toggler
@@ -626,8 +666,8 @@ tr
     color: #36b8e1
 
 section.filter
-  background: rgba(255, 255, 255, 0.1)
-  margin: 20px 0px
+  // background: rgba(255, 255, 255, 0.1)
+  // margin: 20px 0px
   box-shadow: none
 
 ul.segment-info
@@ -738,9 +778,17 @@ button.swal2-confirm.swal2-styled
     background-size: 300%
 
 /* Condition Filter */
+.condition-button-delete
+  position: relative
+  top: 10px
+  left: 5px
+  display: inline-block
+
 button.remove_condition
+  margin-left: 10px
+  font-size: 16px
   background: transparent
-  color: #fff
+  color: #ACC3CF
   border: 0
   transition: all 0.3s ease
 
@@ -808,8 +856,8 @@ button.add-condition.condition-active
     border-color: transparent
 
 .page-item.active .page-link
-  color: #4B506D
-  background-color: #36B8E1
+  color: #36B8E1
+  background-color: transparent
   border-color: transparent
   border-radius: 50px
   width: 32px
@@ -824,7 +872,7 @@ button.add-condition.condition-active
   display: none
 
 .form-inline label
-  color: #fff
+  color: transparent
   font-size: 10px
   font-weight: 500
   letter-spacing: 1px
@@ -834,8 +882,8 @@ button.add-condition.condition-active
 .VueTables__limit-field
   position: relative
   bottom: 0
-  left: 225px
-  margin-top: -80px
+  left: 0
+  margin-top: -15px
 
   select
     min-width: 70px !important
@@ -911,12 +959,6 @@ button.btn.btn-secondary.dropdown-toggle
     letter-spacing: 1px
     font-size: 10px
 
-.condition-button-delete
-  margin-top: 50px
-  position: relative
-  top: -45px
-  display: inline-block
-
 .condition-button-or
   margin-top: 50px
   position: relative
@@ -971,8 +1013,8 @@ button.btn.btn-secondary.dropdown-toggle
     color: rgba(255, 255, 255, 0.3)
 
   section.filter
-    background: rgba(255, 255, 255, 0.05)
-    margin: 20px 0px
+    // background: rgba(255, 255, 255, 0.05)
+    // margin: 20px 0px
     box-shadow: none
     padding: 30px
     min-height: 186px
