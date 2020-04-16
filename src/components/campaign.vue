@@ -91,11 +91,97 @@
                 </div>
             </section> -->
 
-            <hr>
+        <hr>
+        <h2>Advertising Budget</h2>
 
-            <h2>Advertising Budget</h2>
+        <b-row class="text-center">
+            <b-col cols="4">
+                <div class="condition__controls">
+                    <label>Total Budget (Campaign)</label>
+                    <input type="number"
+                        step=10
+                        placeholder="budgetTotal"
+                        :id="setElId(`budgetTotal`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`budgetTotal`)"
+                        @change="changeField($event,`budgetTotal`)"
+                    >
+                    <b-form-text id="password-help-block">
+                    Spent: $1,418.00
+                    <!-- TODO: Add Spent value -->
+                    </b-form-text>
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>Daily Budget</label>
+                    <input type="number"
+                        step=10
+                        placeholder="budgetDaily"
+                        :id="setElId(`budgetDaily`)"
+                        class="condition__matches budgetDaily custom-input"
+                        :value="getFieldName(`budgetDaily`)"
+                        @change="changeField($event,`budgetDaily`)"
+                    >
+                    <b-form-text id="password-help-block">
+                    Spent: $624.50
+                    <!-- TODO: Add Spent value -->
+                    </b-form-text>
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>Max. CPC</label>
+                    <input type="number"
+                        step=0.1
+                        placeholder="campaignCPC"
+                        :id="setElId(`cpc`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`cpc`)"
+                        @change="changeField($event,`cpc`)"
+                    >
+                </div>
+            </b-col>
+        </b-row>
 
-            <section class="filter">
+        <b-row class="text-center">
+            <b-col cols="8">
+                <div class="condition__controls">
+                    <label>Landing page </label>
+                    <input type="text"
+                        placeholder="campaignLandingPage"
+                        :id="setElId(`landingPage`)"
+                        class="condition__matches landingPage custom-input"
+                        :value="getFieldName(`landingPage`)"
+                        @change="changeField($event,`landingPage`)"
+                    >
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>&nbsp;</label>
+                    <b-button class="btn-validate" variant="primary"
+                            @click="validateLP()"
+                    >
+                        Validate
+                    </b-button>
+                </div>
+            </b-col>
+            <b-col cols="2">
+                <div class="condition__controls">
+                    <label>&nbsp;</label>
+                    <b-form-checkbox
+                                class="validateLandingPage" size="lg"
+                                :id="setElId(`landingPageValid`)"
+                                disabled
+                                readonly
+                                :checked="getFieldName(`landingPageValid`)"
+                    ></b-form-checkbox>
+                </div>
+            </b-col>
+        </b-row>
+
+            <!-- <section class="filter">
                 <div class="condition__controls">
                     <label>Budget Daily </label>
                     <input type="number"
@@ -149,10 +235,9 @@
                     <br>
                 </div>
 
-            </section>
+            </section> -->
 
             <hr>
-
             <h2>Targeting</h2>
 
             <section class="filter">
