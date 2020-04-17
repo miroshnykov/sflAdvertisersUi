@@ -1,9 +1,10 @@
 <template>
     <transition name="expand-down">
-        <section class="filter">
-            <h3 class="filter__title">Rule: <b></b></h3>
+
+            <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
             <div class="filter__controls">
-                <b-button variant="secondary" @click="addTargeting">
+
+                <b-button variant="secondary" class="btn-add-line" @click="addTargeting" style="float:right">
                     <i class="fas fa-plus"></i> Add Line
                 </b-button>
 
@@ -14,14 +15,16 @@
                                 class="condition__controls"
                         >
 
+                    <b-row align-v="center">
+                        <b-col cols="2">
                             <div class="campaign-block">
+                                <label for="label-country">&nbsp;</label>
                                 <select
                                         class="condition__dimension-name condition__matches custom-select"
                                         @change="changeFilterType($event, item)"
                                         :id="setElIdByPosition(`filtertype`,item.position)"
                                 >
 
-                                  <!-- <option :value="null">-- Select Filter --</option> -->
                                   <option
                                           id="filterType"
                                           v-for="{id, name} in getFilterList()"
@@ -33,9 +36,10 @@
 
                                 </select>
                             </div>
-
+                        </b-col>
+                        <b-col cols="2">
                             <div class="campaign-block">
-
+                                <label for="label-country">Country/GEO</label>
                                 <model-select
                                         :options="getCountriesModify()"
                                         :id="setElIdByPosition(`country`,item.position)"
@@ -44,12 +48,11 @@
                                         :value="item.geo"
                                 >
                                 </model-select>
-                                <label for="label-country">Country</label>
-
                             </div>
-
+                        </b-col>
+                        <b-col cols="3">
                             <div class="campaign-block">
-
+                                <label for="label-platform">Platform</label>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                   <label class="btn btn-secondary-" :class="addClassActive(item.platformAndroid)">
                                     <input
@@ -75,13 +78,11 @@
                                     > Windows
                                   </label>
                                 </div>
-                                <label
-                                        for="label-platform">platform</label>
                             </div>
-
-
-
+                        </b-col>
+                        <b-col cols="2">
                             <div class="campaign-block">
+                                <label for="label-platform">Source Type</label>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                   <label class="btn btn-secondary-" :class="addClassActive(item.sourceTypeSweepstakes)">
                                     <input
@@ -99,13 +100,11 @@
 
                                     > VOD
                                   </label>
-
                                 </div>
-
-                                <label
-                                        for="label-platform">sourceType</label>
                             </div>
-
+                        </b-col>
+                        <b-col cols="2">
+                            <label for="label-cpc">Max. CPC</label>
                             <div class="campaign-block">
                                 <input type="number"
                                        placeholder="cpc"
@@ -113,31 +112,28 @@
                                        class="condition__matches custom-input"
                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
                                        :value="item.cpc"
+                                       style="width:50%;float:left"
                                 >
-                                <label
-                                        for="label-cpc">cpc</label>
                             </div>
-
-
                             <div class="condition-button-delete">
                                   <button
                                           type="button"
                                           class="remove_condition"
                                           @click="removeTargetingItem(item.position)"
                                           variant="danger"
-                                          v-b-tooltip.hover.top="'Delete '"
+                                          v-b-tooltip.hover.top="'Delete'"
                                   >
                                     <i class="fas fa-times"></i>
                                   </button>
                             </div>
+                        </b-col>
+                    </b-row>
 
-                            <div class="_or"><span></span></div>
+                            <!-- <div class="_or"><span></span></div> -->
 
                         </span>
 
-
                 </template>
-
 
                 <span class="space"></span>
                 <b-button class="btn-back" variant="light" @click="this.mainPage"
@@ -149,7 +145,6 @@
                 </b-button>
             </div>
 
-        </section>
     </transition>
 </template>
 
@@ -318,19 +313,21 @@
 <style lang="scss">
 
     .btn-secondary- {
-        color: inherit;
-        border-color: #545050;
+        color: #ACC3CF;
+        background-color: #fff;
+        border: 2px solid #E3EEF4;
     }
 
     .btn-secondary-:hover {
-        color: #555;
-        border-color: #e1e1e1;
+        color: #ACC3CF;
+        background-color: #fff;
+        border: 2px solid #E3EEF4;
     }
 
     .btn-secondary-:not(:disabled):not(.disabled):active, .btn-secondary-:not(:disabled):not(.disabled).active, .show > .btn-secondary-.dropdown-toggle {
-        color: #555;
-        background-color: #545b62;
-        border-color: #4e555b;
+        color: #fff;
+        background-color: #36B8E1;
+        border: 2px solid #36B8E1;
     }
 
     .btn-group, .btn-group-vertical {
@@ -344,14 +341,14 @@
     }
 
     .campaign-block {
-        float: left;
-        margin-right: 10px;
+        // float: left;
+        // margin-right: 10px;
     }
 
     .filter__controls {
-        display: grid;
+        // display: grid;
         // margin-bottom: 2rem;
-        justify-content: space-between;
+        // justify-content: space-between;
     }
 
     .condition-group {
@@ -377,8 +374,8 @@
         border: none;
         margin-top: 1rem;
         padding: 1rem;
-        min-width: 920px;
-        border-radius: 10px;
+        // min-width: 920px;
+        // border-radius: 10px;
         // overflow: hidden;
     }
 
@@ -386,7 +383,7 @@
         left: 50%;
         margin: 5px 0px;
         position: absolute;
-        color: rgba(255, 255, 255, 0.5);
+        color: #7F98A5;
         font-size: 14px;
         letter-spacing: 1px;
         font-weight: 500;
@@ -479,7 +476,7 @@
     }
 
     .ui.search.selection.dropdown > input.search, .ui.search.selection.dropdown > span.sizer {
-        line-height: 1.21428571em;
+        line-height: 2.2em;
         padding: .5em 2.1em .5em 1em;
     }
 
@@ -494,7 +491,7 @@
         font-size: 16px;
         color: lightgrey;
         float: right;
-        margin-top: -2px;
+        margin-top: 0px;
         margin-right: -20px;
     }
 

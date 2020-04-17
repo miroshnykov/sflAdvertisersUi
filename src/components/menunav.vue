@@ -1,7 +1,7 @@
 <template>
     <div class="menu-nav">
     <b-nav vertical class="w-25">
-        <a href="/" class="logo"></a>
+        <a href="#" class="logo"></a>
         <b-nav-item disabled><i class="fas fa-chart-pie"></i> Overview</b-nav-item>
         <b-nav-item active><i class="fas fa-ticket"></i> Campaigns</b-nav-item>
     </b-nav>
