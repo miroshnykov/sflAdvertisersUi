@@ -11,26 +11,38 @@
                     <div class="wrap_for_form">
                         <form ref="login_form" action class="flex column login_form">
                             <a class="g-signin-button" @click="redirectToGoogleSignIn"><img
-                                    src="https://s3.amazonaws.com/affiliate.ad-center.com/logo-google-g.svg"> Sign in with Google
+                                    src="https://s3.amazonaws.com/affiliate.ad-center.com/logo-google-g.svg"> Sign in
+                                with Google
                             </a>
 
                             <p class="or">or</p>
 
+                            <h2>Sign in</h2>
                             <input
                                     ref="signInEmail"
                                     type="email"
-                                    placeholder="your.name@website.com"
+                                    placeholder="Email*"
                                     class="user_email"
                                     v-model="email"
-                            />
+                            >
+                            <div
+                                    ref="errEmail"
+                                    class="error"
+                            >Please enter your email address
+                            </div>
                             <input
                                     ref="signInPassword"
                                     type="password"
-                                    placeholder="Password"
+                                    placeholder="Password*"
                                     class="password"
                                     v-model="password"
-                            />
-                            <a class="sign_me_in">Sign in</a>
+                            >
+                            <div
+                                    ref="errPassword"
+                                    class="error"
+                            >{{errorMessage}}
+                            </div>
+                            <a class="sign_me_in" @click="loginIn">Sign in</a>
                         </form>
                     </div>
                 </div>
@@ -41,10 +53,10 @@
 
 <script>
     // import {required, email, minLength} from 'vuelidate/lib/validators'
-    // import loginApi from '../../api/login'
+    import loginApi from '../api/login'
     // import {getCookie} from '../../helpers'
     import {mapGetters, mapState} from 'vuex'
-    import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+    import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
     import 'bootstrap/dist/css/bootstrap.css'
     import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -69,26 +81,24 @@
             redirectToGoogleSignIn() {
                 window.location.href = this.googleAuthUrl
             },
-            // async loginIn() {
-            //     const login = this.email
-            //     const password = this.password
-            //     let loginRes = await loginApi.login(login, password)
-            //     console.log(`>> TOKEN:${loginRes.accessToken}`)
-            //     if (loginRes.accessToken) {
-            //         this.$router.push("segments")
-            //         this.$store.state.firstName = ''
-            //         this.$store.state.lastName = ''
-            //         this.$cookies.set("accessToken", loginRes.accessToken)
-            //         this.$cookies.set("refreshToken", "refreshToken")
-            //
-            //         // setTimeout(() => { }, 2000)
-            //         location.reload()
-            //     } else {
-            //         this.$refs.signInPassword.classList.add('error_input')
-            //         this.$refs.errPassword.classList.add('error_email')
-            //         this.errorMessage = 'Email or password is invalid.'
-            //     }
-            // }
+            async loginIn() {
+                const login = this.email
+                const password = this.password
+                let loginRes = await loginApi.login(login, password)
+                console.log(`>> TOKEN:${loginRes.accessToken}`)
+                if (loginRes.accessToken) {
+                    this.$router.push('/campaigns')
+                    this.$cookies.set("accessToken", loginRes.accessToken)
+                    this.$cookies.set("refreshToken", "refreshToken")
+
+                    // setTimeout(() => { }, 2000)
+                    location.reload()
+                } else {
+                    this.$refs.signInPassword.classList.add('error_input')
+                    this.$refs.errPassword.classList.add('error_email')
+                    this.errorMessage = 'Email or password is invalid.'
+                }
+            }
         }
     }
 </script>
@@ -101,9 +111,9 @@
 
         .container
             margin-left: auto !important
-    
+
         .container-fluid
-            background: #fff
+            background: #1f5077
             border-radius: 20px
             padding: 20px
             height: auto
