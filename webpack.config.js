@@ -97,7 +97,10 @@ if (process.env.NODE_ENV === 'production') {
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
+                NODE_ENV: '"production"',
+                SFL_CORE_URL:'"http://54.210.237.238:8085/graphql"',
+                SFL_PLATFORM_ADV_URL:"'http://54.210.237.238:8082/'",
+                SFL_CORE_AUTH_URL:"'http://54.210.237.238:8085/'"
             }
         }),
         new webpack.HotModuleReplacementPlugin(),

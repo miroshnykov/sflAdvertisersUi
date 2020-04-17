@@ -11,10 +11,6 @@ RUN apt-get install --yes nodejs
 
 WORKDIR /home/app
 
-ENV SFL_CORE_URL http://54.210.237.238:8082/graphql
-ENV SFL_PLATFORM_ADV_URL http://54.210.237.238:8082/
-ENV SFL_CORE_AUTH_URL http://54.210.237.238:8082/
-
 COPY . .
 RUN npm install
 RUN npm run build
