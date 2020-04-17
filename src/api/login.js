@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const loginReq = axios.create({
-    baseURL: `${process.env.SFL_CORE_GRAPHQL_URL_INTERNAL}`,
+    baseURL: `${process.env.SFL_CORE_URL}graphql`,
     headers: {
         'Content-Type': 'application/json'
     },
