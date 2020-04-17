@@ -4,7 +4,7 @@ import {getCookie} from '../helpers'
 let token = getCookie('accessToken')
 
 export const api = axios.create({
-    baseURL: `${process.env.SFL_CORE_GRAPHQL_URL_INTERNAL}`,
+    baseURL: `${process.env.SFL_CORE_URL}graphql`,
     headers: {
         'Content-Type': 'application/json',
         'Authorization':`Bearer ${token}`

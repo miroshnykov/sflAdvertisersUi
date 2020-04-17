@@ -16,7 +16,7 @@
         },
         methods: {
             signIn() {
-                window.location.href = process.env.SFL_PLATFORM_ADV_URL_EXTERNAL;
+                window.location.href = process.env.SFL_PLATFORM_ADV_URL
             }
         }
     };
