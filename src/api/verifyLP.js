@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const verify = axios.create({
-    baseURL: `${process.env.SFL_CORE_AUTH_URL}`,
+    baseURL: `${process.env.SFL_CORE_CONDITION_URL_INTERNAL}`,
 })
 
 const verifyLP = async (lp) => {
