@@ -98,10 +98,10 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"',
-                SFL_CORE_GRAPHQL_URL_INTERNAL:'"http://sfl-core-condition:4001/graphql"',
+                SFL_CORE_GRAPHQL_URL_INTERNAL:"http://sfl-core-condition:4001/graphql",
                 SFL_CORE_CONDITION_URL_INTERNAL: "http://sfl-core-condition:4001/",
-                SFL_CORE_AUTH_URL_EXTERNAL:"'http://54.210.237.238:8085/'",
-                SFL_PLATFORM_ADV_URL_EXTERNAL:"'http://54.210.237.238:8082/'",
+                SFL_CORE_AUTH_URL_EXTERNAL:"http://54.210.237.238:8085/",
+                SFL_PLATFORM_ADV_URL_EXTERNAL:"http://54.210.237.238:8082/",
             }
         }),
         new webpack.HotModuleReplacementPlugin(),
