@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+console.log(`Login regular:${process.env.SFL_CORE_URL}`)
+
 const loginReq = axios.create({
     baseURL: `${process.env.SFL_CORE_URL}graphql`,
     headers: {
