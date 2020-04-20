@@ -98,7 +98,7 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"',
-                SFL_CORE_URL:'"http://sfl-condition.surge.systems/"'
+                SFL_CORE_URL:'"https://sfl-api-advertiser.surge.systems/"',
             }
         }),
         new webpack.HotModuleReplacementPlugin(),
