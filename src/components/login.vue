@@ -146,7 +146,7 @@
                 margin-right: 10px
 
         p.or
-            color: rgba(255, 255, 255, 0.3)
+            color: #7F98A5
             text-align: center
             text-transform: uppercase
             letter-spacing: 1px
