@@ -42,6 +42,20 @@
                 </div>
             </div>
 
+            <div slot="status" slot-scope="props">
+                <span v-if="props.row.status == 'inactive'">
+                <span class="status inactive">{{props.row.status}}</span>
+                </span>
+                <span v-else-if="props.row.status == 'active'">
+                <span class="status active">{{props.row.status}}</span>
+                </span>
+                <!-- <span v-else-if="props.row.status == 'paused'">
+                <span class="status paused">{{props.row.status}}</span>
+                </span> -->
+                <!-- <span v-else>
+                <span class="status paused">{{props.formattedRow[props.row.status]}}</span>
+                </span> -->
+            </div>
 
             <div slot="actions" slot-scope="props">
 
