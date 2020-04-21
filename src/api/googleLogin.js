@@ -1,10 +1,10 @@
 import axios from 'axios'
 import {getCookie} from '../helpers'
 
-console.log(`\nSFL_CORE_URL:${process.env.SFL_CORE_URL}`)
+console.log(`\nSFL_API_ADVERTISER:${process.env.SFL_API_ADVERTISER}`)
 
 const login = axios.create({
-    baseURL: `${process.env.SFL_CORE_URL}`,
+    baseURL: `${process.env.SFL_API_ADVERTISER}`,
 })
 
 const getLoginUrl = async () => {

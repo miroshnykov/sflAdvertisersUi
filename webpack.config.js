@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const Dotenv = require('dotenv-webpack')
+const config = require('plain-config')()
 
 module.exports = {
     // entry: './src/main.js',
@@ -98,7 +99,7 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"',
-                SFL_CORE_URL:'"https://sfl-api-advertiser.surge.systems/"',
+                SFL_API_ADVERTISER: config.sflApiAdvertiser.host,
             }
         }),
         new webpack.HotModuleReplacementPlugin(),

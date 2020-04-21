@@ -1,8 +1,9 @@
 const path = require('path')
 const express = require('express')
+const config = require('plain-config')()
 
 const DIST_DIR = path.join(__dirname, '.')
-const PORT = 8080
+const PORT = config.port
 const HOST = '0.0.0.0'
 const app = express()
 
