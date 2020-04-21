@@ -3,6 +3,8 @@
         <menunav></menunav>
         <topbar></topbar>
 
+        
+
         <h1>Edit Campaign</h1>
         <b-row class="text-center">
             <b-col cols="2">
@@ -48,49 +50,6 @@
             </b-col>
         </b-row>
 
-            <!-- <section class="filter">
-
-                <div class="condition__controls">
-                    <label>Campaign ID</label>
-                    <input type="text"
-                        class="condition__matches campaign custom-input"
-                        :value="getId(`id`)"
-                        disabled
-                    >
-                </div>
-                
-                <div class="condition__controls">
-                    <label>Campaign name</label>
-                    <input type="text"
-                        placeholder="campaign name"
-                        :id="setElId(`name`)"
-                        class="condition__matches campaign custom-input"
-                        :value="getFieldName(`name`)"
-                        @change="changeField($event,`name`)"
-                    >
-                </div>
-
-                <div class="condition__controls">
-                    <label>Status</label>
-                    <select
-                            class="custom-select"
-                            @change="changeField($event, `status`)"
-                            :id="setElId(`status`)"
-                    >
-
-                        <option
-                                id="filterType"
-                                v-for="{id, name} in getStatusList()"
-                                :value="name"
-                                :selected="name.toLowerCase() === getFieldName(`status`)"
-                                :key="name"
-                        >{{name}}
-                        </option>
-
-                    </select>
-                </div>
-            </section> -->
-
         <hr>
         <h2>Advertising Budget</h2>
 
@@ -106,9 +65,9 @@
                         :value="getFieldName(`budgetTotal`)"
                         @change="changeField($event,`budgetTotal`)"
                     >
-                    <b-form-text id="password-help-block">
+                    <b-form-text id="budgetTotal">
                     Spent: $1,418.00
-                    <!-- TODO: Add Spent value -->
+                    <!-- TODO: Add Spent Total value -->
                     </b-form-text>
                 </div>
             </b-col>
@@ -123,9 +82,9 @@
                         :value="getFieldName(`budgetDaily`)"
                         @change="changeField($event,`budgetDaily`)"
                     >
-                    <b-form-text id="password-help-block">
+                    <b-form-text id="budgetDaily">
                     Spent: $624.50
-                    <!-- TODO: Add Spent value -->
+                    <!-- TODO: Add Spent Daily value -->
                     </b-form-text>
                 </div>
             </b-col>

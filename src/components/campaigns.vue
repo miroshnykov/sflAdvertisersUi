@@ -61,14 +61,14 @@
             <div slot="userName" slot-scope="props">
                 <span class="creator-name">{{props.row.userName}}</span>
                     <b-form-text id="date">
-                    on March 5th 2020
-                    <!-- TODO: Add Dated Added value -->
+                    on Apr 21, 2020
+                    <!-- TODO: Add Dated Created value -->
                     </b-form-text>
             </div>
 
             <div slot="landingPage" slot-scope="props">
               <span class="landing-page-box">
-                  <span class="landing-page-name">{{props.row.landingPage}}</span>
+                  <span class="landing-page-name" @click="copyText(props.row.landingPage)">{{props.row.landingPage}}</span>
               </span>
                 <button class="btn btn-link" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="'Copy URL to Clipboard'">
                     <i class="far fa-copy"></i>
@@ -324,6 +324,22 @@
                     sortable: tableColumnsLog,
                     filterable: tableColumnsLog,
                     highlightMatches: true,
+                    resizableColumns: false,
+                    perPage: 10,
+                    perPageValues: [5, 10, 25, 100],
+                    texts: {
+                        count: "Showing {from} to {to} of {count} campaigns|{count} segments|One campaign",
+                        first: "First",
+                        last: "Last",
+                        filter: "Filter:",
+                        filterPlaceholder: "Search...",
+                        limit: "Show per page",
+                        page: "Page:",
+                        noResults: "No matching campaigns",
+                        filterBy: "Filter by {column}",
+                        loading: "Loading...",
+                        defaultOption: "Select {column}"
+                        },
                 },
             }
         }
