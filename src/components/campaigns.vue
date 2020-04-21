@@ -10,6 +10,10 @@
 
         <v-client-table :data="getCampaigns" :columns="columns" :options="options">
 
+            <div slot="id" slot-scope="props">
+                <span class="id">{{props.row.id}}</span>
+            </div>
+
             <div slot="name" slot-scope="{row, update, setEditing, isEditing, revertValue}">
 
               <span @click="edit(row)">
@@ -25,6 +29,41 @@
                                 @click="update(row.name);setEditing(false); uCampaignName(row)"><i class="fas fa-check"></i></button>
                         <button type="button" class="btn btn-default btn-xs quickedit-cancel" @click="revertValue(); setEditing(false)"><i class="fas fa-ban"></i></button>
                     </span>
+                    <b-form-text id="spent-values">
+                    Updated: A few minutes ago
+                    <!-- TODO: Add Last Modified value -->
+                    </b-form-text>
+            </div>
+
+            <div slot="budgetTotal" slot-scope="props">
+              <span class="budget-total">${{props.row.budgetTotal}}</span>
+                    <b-form-text id="spent-values">
+                    Spent: ${{props.row.budgetTotal}}
+                    <!-- TODO: Add Daily Spent value -->
+                    </b-form-text>
+            </div>
+
+            <div slot="budgetDaily" slot-scope="props">
+              <span class="budget-daily">${{props.row.budgetDaily}}</span>
+                    <b-form-text id="spent-values">
+                    Spent: ${{props.row.budgetDaily}}
+                    <!-- TODO: Add Total Spent value -->
+                    </b-form-text>
+            </div>
+
+            <div slot="cpc" slot-scope="props">
+              <span class="budget-daily">{{props.row.cpc}}</span>
+                    <b-form-text id="currency">
+                    CAD
+                    </b-form-text>
+            </div>
+            
+            <div slot="userName" slot-scope="props">
+                <span class="creator-name">{{props.row.userName}}</span>
+                    <b-form-text id="date">
+                    on March 5th 2020
+                    <!-- TODO: Add Dated Added value -->
+                    </b-form-text>
             </div>
 
             <div slot="landingPage" slot-scope="props">
@@ -42,6 +81,20 @@
                 </div>
             </div>
 
+            <div slot="status" slot-scope="props">
+                <span v-if="props.row.status == 'inactive'">
+                <span class="status inactive">{{props.row.status}}</span>
+                </span>
+                <span v-else-if="props.row.status == 'active'">
+                <span class="status active">{{props.row.status}}</span>
+                </span>
+                <!-- <span v-else-if="props.row.status == 'paused'">
+                <span class="status paused">{{props.row.status}}</span>
+                </span> -->
+                <!-- <span v-else>
+                <span class="status paused">{{props.formattedRow[props.row.status]}}</span>
+                </span> -->
+            </div>
 
             <div slot="actions" slot-scope="props">
 
@@ -260,7 +313,7 @@
                     headings: {
                         id: 'ID',
                         name: 'Campaign Name',
-                        userName: 'Creator',
+                        userName: 'Created by',
                         budgetDaily: 'Daily Budget',
                         budgetTotal: 'Total Budget',
                         cpc: 'Max. CPC',

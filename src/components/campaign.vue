@@ -281,7 +281,8 @@
             getStatusList() {
                 return [
                     {id: 0, name: 'Active'},
-                    {id: 1, name: 'Inactive'}
+                    {id: 1, name: 'Inactive'},
+                    // {id: 2, name: 'Paused'}
                 ]
             },
             async changeField(event, field) {
