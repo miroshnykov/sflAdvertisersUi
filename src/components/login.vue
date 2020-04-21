@@ -10,6 +10,7 @@
                 <div class="login_wrapper flex center v_center">
                     <div class="wrap_for_form">
                         <form ref="login_form" action class="flex column login_form">
+                            <h2>Portal - Advertisers</h2>
                             <a class="g-signin-button" @click="redirectToGoogleSignIn"><img
                                     src="https://s3.amazonaws.com/affiliate.ad-center.com/logo-google-g.svg"> Sign in
                                 with Google
