@@ -10,6 +10,7 @@
                 <div class="login_wrapper flex center v_center">
                     <div class="wrap_for_form">
                         <form ref="login_form" action class="flex column login_form">
+                            <h2>Portal - Advertisers</h2>
                             <a class="g-signin-button" @click="redirectToGoogleSignIn"><img
                                     src="https://s3.amazonaws.com/affiliate.ad-center.com/logo-google-g.svg"> Sign in
                                 with Google
@@ -17,7 +18,6 @@
 
                             <p class="or">or</p>
 
-                            <h2>Sign in</h2>
                             <input
                                     ref="signInEmail"
                                     type="email"
@@ -113,10 +113,12 @@
             margin-left: auto !important
 
         .container-fluid
-            background: #1f5077
+            background: #fff
             border-radius: 20px
-            padding: 20px
-            height: auto
+
+            .col-7
+                background: #F7F8FC
+                border-radius: 0px 20px 20px 0px
 
         .g-signin-button
             display: inline-block
@@ -145,7 +147,7 @@
                 margin-right: 10px
 
         p.or
-            color: rgba(255, 255, 255, 0.3)
+            color: #7F98A5
             text-align: center
             text-transform: uppercase
             letter-spacing: 1px
@@ -193,7 +195,7 @@
 
             .wrap_for_form
                 form.login_form
-                    width: 400px
+                    width: 100%
                     margin: 0 auto
                     padding: 40px
                     color: #7F98A5
@@ -218,8 +220,7 @@
                         outline: 0
                         color: #fff
                         font-weight: 500
-                        background: transparent
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+                        background: #fff
 
                         &::placeholder
                             color: #ACC3CF
@@ -229,7 +230,8 @@
                         &.user_email,
                         &.password
                             width: 100%
-                            padding: 10px 0
+                            padding: 15px 25px
+                            border-radius: 10px
 
                         &.error_input
                             border-bottom: 2px solid #FE5D65
