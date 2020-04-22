@@ -3,11 +3,9 @@
         <menunav></menunav>
         <topbar></topbar>
 
-        
-
         <h1>Edit Campaign</h1>
         <b-row class="text-center">
-            <b-col cols="2">
+            <b-col cols="1">
                 <div class="condition__controls">
                     <label>ID</label>
                     <input type="text"
@@ -17,11 +15,11 @@
                     >
                 </div>
             </b-col>
-            <b-col cols="6">
+            <b-col cols="7">
                 <div class="condition__controls">
                     <label>Campaign Name</label>
                     <input type="text"
-                        placeholder="My Campaign"
+                        placeholder="ex: My First Campaign"
                         :id="setElId(`name`)"
                         class="condition__matches campaign custom-input"
                         :value="getFieldName(`name`)"
@@ -58,8 +56,8 @@
                 <div class="condition__controls">
                     <label>Total Budget (Campaign)</label>
                     <input type="number"
-                        step=10
-                        placeholder="budgetTotal"
+                        step=100
+                        placeholder="ex: 10000"
                         :id="setElId(`budgetTotal`)"
                         class="condition__matches budgetTotal custom-input"
                         :value="getFieldName(`budgetTotal`)"
@@ -76,7 +74,7 @@
                     <label>Daily Budget</label>
                     <input type="number"
                         step=10
-                        placeholder="budgetDaily"
+                        placeholder="ex: 1000"
                         :id="setElId(`budgetDaily`)"
                         class="condition__matches budgetDaily custom-input"
                         :value="getFieldName(`budgetDaily`)"
@@ -93,7 +91,7 @@
                     <label>Max. CPC (cost per click)</label>
                     <input type="number"
                         step=0.1
-                        placeholder="campaignCPC"
+                        placeholder="ex: 0.5"
                         :id="setElId(`cpc`)"
                         class="condition__matches budgetTotal custom-input"
                         :value="getFieldName(`cpc`)"
@@ -106,7 +104,7 @@
         <b-row class="text-center">
             <b-col cols="8">
                 <div class="condition__controls">
-                    <label>Landing Page URL </label>
+                    <label>Landing Page URL</label>
                     <input type="text"
                         placeholder="https://domain.com"
                         :id="setElId(`landingPage`)"
@@ -197,7 +195,18 @@
             </section> -->
 
             <hr>
-            <h2>Targeting</h2>
+        <b-row class="text-center">
+            <b-col cols="6">
+                <h2>Targeting</h2>
+            </b-col>
+            <b-col cols="4">
+                <b-button variant="secondary" class="btn-add-line" @click="addTargeting">
+                    <i class="fas fa-plus"></i> Add Line
+                </b-button>
+            </b-col>
+            <b-col cols="2">
+            </b-col>
+        </b-row>
 
             <targeting></targeting>
 

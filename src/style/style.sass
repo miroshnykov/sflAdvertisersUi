@@ -236,7 +236,7 @@ button.btn.btn-add-line.btn-secondary
   height: 25px
   padding: 0px
   border-radius: 4px
-  float: right
+  // float: right
 
 /* SEARCH BAR */
 .form-control
@@ -852,7 +852,7 @@ button.add-condition.condition-active
   background: #36b8e1 !important
 
 .btn-secondary-
-  color: #ACC3CF
+  color: #E3EEF4
   background-color: #fff
   border: 2px solid #E3EEF4
 
@@ -862,9 +862,13 @@ button.add-condition.condition-active
   border: 2px solid #E3EEF4
 
 .btn-secondary-:not(:disabled):not(.disabled):active, .btn-secondary-:not(:disabled):not(.disabled).active, .show > .btn-secondary-.dropdown-toggle
-  color: #fff
-  background-color: #36B8E1
+  color: #36B8E1
+  background-color: #fff
   border: 2px solid #36B8E1
+  z-index: 99
+
+.btn-group > .btn:not(:first-child), .btn-group > .btn-group:not(:first-child)
+  margin-left: -2px
 
 .btn-group, .btn-group-vertical
   position: relative
@@ -877,11 +881,27 @@ button.add-condition.condition-active
 .campaign-block
   // float: left
   // margin-right: 10px
+  // max-width: 200px
 
 .filter__controls
   // display: grid
   // margin-bottom: 2rem
   // justify-content: space-between
+
+  .row.align-items-center
+    width: 100%
+    margin-bottom: 20px
+
+  .col-1 
+    max-width: 3%
+
+  .col-3
+    max-width: 20%
+
+  .cpc-equal
+    margin-top: 40px
+    color: #ACC3CF
+    font-size: 12px
 
 .condition-group
   .and
@@ -985,16 +1005,29 @@ button.add-condition.condition-active
   box-shadow: 0 0 5px transparent
 
 .ui.search.dropdown > .text
-  top: -1px
+  top: 0px
   padding-right: 10px
+  cursor: text
+  position: relative
+  left: 0px
+  top: 3px
+  z-index: 3
+  font-size: 16px
+  // color: #333
+  color: #7F98A5
 
 .ui.search.dropdown
-  min-width: 160px
-  max-width: 280px
+  // min-width: 160px
+  // max-width: 280px
+
+.ui.selection.dropdown
+  min-height: 45px
+  max-height: 45px
+  border: 2px solid #e3eef4
 
 .ui.search.selection.dropdown > input.search, .ui.search.selection.dropdown > span.sizer
-  line-height: 2.2em
-  padding: .5em 2.1em .5em 1em
+  line-height: 2.2em !important
+  padding: .5em 2.1em .5em 1em !important
 
 .ui.dropdown > .dropdown.icon:before
   content: '' !important
@@ -1017,7 +1050,7 @@ select.add-condition.custom-select
   background-color: #E3EEF4
 
 .custom-select select
-  display: none /*hide original SELECT element: */
+  display: none
 
 .select-selected
   background-color: DodgerBlue

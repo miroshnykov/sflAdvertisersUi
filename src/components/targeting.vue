@@ -4,10 +4,6 @@
             <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
             <div class="filter__controls">
 
-                <b-button variant="secondary" class="btn-add-line" @click="addTargeting" style="float:right">
-                    <i class="fas fa-plus"></i> Add Line
-                </b-button>
-
                 <template v-for="item in getTargeting">
 
                         <span
@@ -46,9 +42,9 @@
                                 </select>
                             </div>
                         </b-col>
-                        <b-col cols="2">
+                        <b-col cols="3">
                             <div class="campaign-block">
-                                <label for="label-country">Country/GEO</label>
+                                <label for="label-country">Country</label>
                                 <model-select
                                         :options="getCountriesModify()"
                                         :id="setElIdByPosition(`country`,item.position)"
@@ -111,6 +107,9 @@
                                   </label>
                                 </div>
                             </div>
+                        </b-col>
+                        <b-col cols="1" align-self="center">
+                            <div class="cpc-equal"><i class="fas fa-equals"></i></div>
                         </b-col>
                         <b-col cols="2">
                             <label for="label-cpc">Max. CPC</label>
