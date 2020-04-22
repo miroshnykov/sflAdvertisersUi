@@ -14,6 +14,15 @@
                                 :id="setElIdByPosition(`condition`,item.position)"
                                 class="condition__controls"
                         >
+                        <!-- TODO: Turn exclude/include into switch buttons -->
+                        <!-- <b-form-checkbox switch size="lg">{{ checked }}</b-form-checkbox> -->
+                        <!-- <b-form-checkbox
+                                class="active"
+                                name="check-button"
+                                :checked="props.row.status==='active'"
+                                @change="activeInactiveSwitch($event, props.row)"
+                                switch>
+                        </b-form-checkbox> -->
 
                     <b-row align-v="center">
                         <b-col cols="2">
@@ -129,7 +138,6 @@
                         </b-col>
                     </b-row>
 
-                            <!-- <div class="_or"><span></span></div> -->
 
                         </span>
 
@@ -165,6 +173,7 @@
         data() {
             return {
                 loading: true,
+                // checked: [true],
             }
         },
         // mounted() {
@@ -213,6 +222,13 @@
             //     setTimeout(() => {
             //         self.loading = false
             //     }, Number(self.segmentRuleCount + 1) * 100)
+            // },
+            // activeInactiveSwitch(status, item) {
+
+            //     this.$nextTick(async () => {
+            //         await segmentsApi.updateStatusSegment(item.id, status && 'active' || 'inactive')
+            //         location.reload()
+            //     })
             // },
             mainPage() {
                 this.$router.push('/campaigns')
