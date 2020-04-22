@@ -4,6 +4,8 @@
         <a href="#" class="logo"></a>
         <b-nav-item disabled><i class="fas fa-chart-pie"></i> Overview</b-nav-item>
         <b-nav-item active><i class="fas fa-ticket"></i> Campaigns</b-nav-item>
+        <hr class="nav">
+        <b-nav-item disabled><i class="fas fa-cog"></i> Settings</b-nav-item>
     </b-nav>
     </div>
 </template>
@@ -30,6 +32,12 @@
     top: 0
     z-index: 99
 
+    hr.nav
+        border: 1px solid #DFE0EB
+        opacity: 0.1
+        width: 180px
+        margin: 150px auto 40px
+
     .logo
         display: block
         width: 183px
@@ -43,15 +51,19 @@
 .nav-link
     display: block
     padding: 1rem 0.5rem
-    margin-left: 40px
+    margin-left: 30px
 
 a.nav-link.active
     font-size: 14px
     letter-spacing: 0.5px
     color: rgba(255, 255, 255, 0.9)
+    // background: rgba(255, 255, 255, 0.1)
 
 a.nav-link.disabled
     font-size: 14px
     letter-spacing: 0.5px
     color: rgba(255, 255, 255, 0.2)
+
+li.nav-item a svg
+    margin-right: 10px
 </style>

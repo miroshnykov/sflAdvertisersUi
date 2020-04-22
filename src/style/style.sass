@@ -601,6 +601,7 @@ tr
   font-weight: 900
   content: "\f107"
   position: relative
+  font-size: 12px
 
 .VueTables__child-row-toggler--open
   color: #36b8e1
@@ -1023,7 +1024,7 @@ button.add-condition.condition-active
 .ui.selection.dropdown
   min-height: 45px
   max-height: 45px
-  border: 2px solid #e3eef4
+  border: 2px solid #e3eef4 !important
 
 .ui.search.selection.dropdown > input.search, .ui.search.selection.dropdown > span.sizer
   line-height: 2.2em !important
@@ -1032,6 +1033,11 @@ button.add-condition.condition-active
 .ui.dropdown > .dropdown.icon:before
   content: '' !important
 
+.ui.selection.active.dropdown, .ui.selection.active.dropdown .menu
+  border-color: #e3eef4 !important
+  -webkit-box-shadow: 0 0px 0px 0 rgba(34,36,38,.15) !important
+  box-shadow: 0 0px 0px 0 rgba(34,36,38,.15) !important
+
 .custom-select:before
   content: '\f11c'
   font-family: "Font Awesome 5 Free"
@@ -1039,7 +1045,7 @@ button.add-condition.condition-active
   font-size: 16px
   color: lightgrey
   float: right
-  margin-top: 0px
+  margin-top: 2px
   margin-right: -20px
 
 select.add-condition.custom-select
