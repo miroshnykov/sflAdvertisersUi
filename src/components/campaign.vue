@@ -160,13 +160,11 @@
                     > -->
                     <b-form-tags
                     input-id="tags-separators"
-                    v-model="value"
                     separator=" ,"
                     placeholder=""
                     class="mb-2 traffic"
                     tag-variant="primary"
                     remove-on-delete
-                    disableAddButton="true"
                     ></b-form-tags>
                     <b-form-text id="trafficSource">
                     Enter numbers separated by space or comma
