@@ -4,18 +4,18 @@
             <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
             <div class="filter__controls">
 
-        <b-row class="text-center">
-            <b-col cols="6">
-                <h2>Targeting</h2>
-            </b-col>
-            <b-col cols="4">
-                <b-button variant="secondary" class="btn-add-line" @click="addTargeting">
-                    <i class="fas fa-plus"></i> Add Line
-                </b-button>
-            </b-col>
-            <b-col cols="2">
-            </b-col>
-        </b-row>
+            <b-row class="text-center">
+                <b-col cols="6">
+                    <h2>Targeting</h2>
+                </b-col>
+                <b-col cols="4">
+                    <b-button variant="secondary" class="btn-add-line" @click="addTargeting">
+                        <i class="fas fa-plus"></i> Add Line
+                    </b-button>
+                </b-col>
+                <b-col cols="2">
+                </b-col>
+            </b-row>
 
                 <template v-for="item in getTargeting">
 
