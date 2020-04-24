@@ -141,6 +141,40 @@
 
         <targeting></targeting>
 
+        <hr class="small">
+
+        <b-row class="text-center">
+            <b-col cols="1">
+                <div class="condition__controls">
+                    <label>Exclude</label>
+                    <b-form-checkbox switch size="lg"></b-form-checkbox>
+                </div>
+            </b-col>
+            <b-col cols="3">
+                <div class="condition__controls">
+                    <label>Traffic Source</label>
+                    <!-- TODO: Add Traffic Source feature -->
+                    <!-- <input type="text"
+                        placeholder="ex: 350, 2821, 4729"
+                        class="condition__matches budgetDaily custom-input"
+                    > -->
+                    <b-form-tags
+                    input-id="tags-separators"
+                    v-model="value"
+                    separator=" ,"
+                    placeholder=""
+                    class="mb-2 traffic"
+                    tag-variant="primary"
+                    remove-on-delete
+                    disableAddButton="true"
+                    ></b-form-tags>
+                    <b-form-text id="trafficSource">
+                    Enter numbers separated by space or comma
+                    </b-form-text>
+                </div>
+            </b-col>
+        </b-row>
+
     </div>
 </template>
 
