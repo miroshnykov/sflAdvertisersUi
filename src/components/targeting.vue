@@ -4,6 +4,19 @@
             <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
             <div class="filter__controls">
 
+        <b-row class="text-center">
+            <b-col cols="6">
+                <h2>Targeting</h2>
+            </b-col>
+            <b-col cols="4">
+                <b-button variant="secondary" class="btn-add-line" @click="addTargeting">
+                    <i class="fas fa-plus"></i> Add Line
+                </b-button>
+            </b-col>
+            <b-col cols="2">
+            </b-col>
+        </b-row>
+
                 <template v-for="item in getTargeting">
 
                         <span
@@ -114,8 +127,10 @@
                         <b-col cols="2">
                             <label for="label-cpc">Max. CPC</label>
                             <div class="campaign-block">
+                                <!-- TODO: Implement CPC calculation and should not be editable by user -->
                                 <input type="number"
-                                       placeholder="cpc"
+                                       step=0.1
+                                       placeholder="0.1"
                                        :id="setElIdByPosition(`cpc`,item.position)"
                                        class="condition__matches custom-input"
                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
@@ -143,12 +158,12 @@
                 </template>
 
                 <span class="space"></span>
-                <b-button class="btn-back" variant="light" @click="this.mainPage"
+                <!-- <b-button class="btn-back" variant="light" @click="this.mainPage"
                           v-b-tooltip.hover.right="'Note: Unsaved changes will be cancelled'">
                     <i class="fad fa-arrow-left"></i> Manage Campaign
-                </b-button>
+                </b-button> -->
                 <b-button class="btn-save" @click="this.saveConditions">
-                    <i class="fad fa-save"></i> Save Changes
+                    Save Changes
                 </b-button>
             </div>
 
