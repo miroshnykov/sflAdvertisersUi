@@ -35,19 +35,19 @@
                     </b-form-text>
             </div>
 
-            <div slot="budgetTotal" slot-scope="props">
-              <span class="budget-total">${{props.row.budgetTotal}}</span>
-                    <b-form-text id="spent-values">
-                    Spent: ${{props.row.budgetTotal}}
-                    <!-- TODO: Add Daily Spent value -->
-                    </b-form-text>
-            </div>
-
             <div slot="budgetDaily" slot-scope="props">
               <span class="budget-daily">${{props.row.budgetDaily}}</span>
                     <b-form-text id="spent-values">
                     Spent: ${{props.row.budgetDaily}}
                     <!-- TODO: Add Total Spent value -->
+                    </b-form-text>
+            </div>
+
+            <div slot="budgetTotal" slot-scope="props">
+              <span class="budget-total">${{props.row.budgetTotal}}</span>
+                    <b-form-text id="spent-values">
+                    Spent: ${{props.row.budgetTotal}}
+                    <!-- TODO: Add Daily Spent value -->
                     </b-form-text>
             </div>
 
@@ -132,8 +132,8 @@
     let tableColumnsLog = [
         'id',
         'name',
-        'budgetTotal',
         'budgetDaily',
+        'budgetTotal',
         'cpc',
         'userName',
         'landingPage',

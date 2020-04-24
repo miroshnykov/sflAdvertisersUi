@@ -107,8 +107,12 @@ h2, .h2
   min-height: 100vh
   // margin-left: 300px
 
-#campaigns, #edit-segment
+#campaigns
   margin-top: 40px
+  margin-bottom: 40px
+
+#edit-segment
+  margin-top: 80px
   margin-bottom: 40px
 
 /* Campaigns */
@@ -137,12 +141,12 @@ span.status
     background: #FFB946
 
 /* Field Input */
-input[type="text"]:disabled
+input[type="text"]:disabled, input[type="number"]:disabled
   color: #acc3cf
   background: #e3eef4
 
   &:hover
-    border-color: transparent
+    border-color: transparent !important
     box-shadow: 0 0 0px transparent !important
 
 span.landing-page-box
@@ -190,11 +194,16 @@ button.quickedit-cancel
 .landingPage, .validateLandingPage
   float: left
 
+.custom-select,
+.custom-input,
+.ui.search.selection.dropdown > input.search
+  transition: all 0.5s ease
+
 .custom-select:hover, .custom-select:focus,
 .custom-input:hover, .custom-input:focus,
 .ui.search.selection.dropdown > input.search:hover, .ui.search.selection.dropdown > input.search:focus
   border-color: #acc3cf !important
-  box-shadow: 0 0 5px #acc3cf !important
+  box-shadow: 0 0 0px #acc3cf !important
   cursor: pointer !important
 
 .custom-input::placeholder
@@ -378,7 +387,7 @@ button.btn
     color: #5c6489
     font-size: 12px
     cursor: pointer
-    border-radius: 4px
+    border-radius: 7px
     border: 0
     transition: all 0.5s ease
 
@@ -387,13 +396,13 @@ button.btn
 
   &.btn-back
     position: fixed
-    bottom: 20px
-    left: 20px
+    top 20px
+    right: 20%
 
   &.btn-save
     position: fixed
-    bottom: 20px
-    right: 20px
+    top: 20px
+    left: 1220px
     display: block
     text-align: center
     float: right
@@ -409,7 +418,7 @@ button.btn
     color: #fff
     font-size: 12px
     cursor: pointer
-    border-radius: 4px
+    border-radius: 7px
     border: 0
     transition: all 0.5s ease
 
@@ -1025,6 +1034,9 @@ button.add-condition.condition-active
   min-height: 45px
   max-height: 45px
   border: 2px solid #e3eef4 !important
+
+  &:hover
+    border-color: #acc3cf !important
 
 .ui.search.selection.dropdown > input.search, .ui.search.selection.dropdown > span.sizer
   line-height: 2.2em !important

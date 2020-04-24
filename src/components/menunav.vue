@@ -3,7 +3,7 @@
     <b-nav vertical class="w-25">
         <a href="#" class="logo"></a>
         <b-nav-item disabled><i class="fas fa-chart-pie"></i> Overview</b-nav-item>
-        <b-nav-item active><i class="fas fa-ticket"></i> Campaigns</b-nav-item>
+        <b-nav-item active><a @click="this.mainPage"><i class="fas fa-ticket"></i> Campaigns</a></b-nav-item>
         <hr class="nav">
         <b-nav-item disabled><i class="fas fa-cog"></i> Settings</b-nav-item>
     </b-nav>
@@ -17,7 +17,13 @@
     export default {
         data() {
             return {}
-        }
+        },
+        methods: {
+            mainPage() {
+                this.$router.push('/campaigns')
+                location.reload()
+            },
+        },
     }
 </script>
 
