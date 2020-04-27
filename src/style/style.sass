@@ -37,6 +37,11 @@ hr
   margin-top: 40px
   margin-bottom: 40px
 
+hr.small
+  border: 1px solid #E3EEF4
+  margin-top: 20px
+  margin-bottom: 20px
+
 .theme-adcenter
   --fa-primary-color: #fff
   --fa-primary-opacity: 1
@@ -107,8 +112,12 @@ h2, .h2
   min-height: 100vh
   // margin-left: 300px
 
-#campaigns, #edit-segment
+#campaigns
   margin-top: 40px
+  margin-bottom: 40px
+
+#edit-segment
+  margin-top: 80px
   margin-bottom: 40px
 
 /* Campaigns */
@@ -137,12 +146,12 @@ span.status
     background: #FFB946
 
 /* Field Input */
-input[type="text"]:disabled
+input[type="text"]:disabled, input[type="number"]:disabled
   color: #acc3cf
   background: #e3eef4
 
   &:hover
-    border-color: transparent
+    border-color: transparent !important
     box-shadow: 0 0 0px transparent !important
 
 span.landing-page-box
@@ -152,6 +161,7 @@ span.landing-page-box
   border-radius: 4px
   min-width: 100px
   height: 30px
+  cursor: pointer
 
 input.quickedit
   padding: 5px 10px
@@ -189,11 +199,16 @@ button.quickedit-cancel
 .landingPage, .validateLandingPage
   float: left
 
+.custom-select,
+.custom-input,
+.ui.search.selection.dropdown > input.search
+  transition: all 0.5s ease
+
 .custom-select:hover, .custom-select:focus,
 .custom-input:hover, .custom-input:focus,
 .ui.search.selection.dropdown > input.search:hover, .ui.search.selection.dropdown > input.search:focus
   border-color: #acc3cf !important
-  box-shadow: 0 0 5px #acc3cf !important
+  box-shadow: 0 0 0px #acc3cf !important
   cursor: pointer !important
 
 .custom-input::placeholder
@@ -235,7 +250,7 @@ button.btn.btn-add-line.btn-secondary
   height: 25px
   padding: 0px
   border-radius: 4px
-  float: right
+  // float: right
 
 /* SEARCH BAR */
 .form-control
@@ -269,7 +284,7 @@ button.btn.btn-add-line.btn-secondary
 
 .VueTables__search-field input[type="text"]
   position: relative
-  color: #fff
+  color: #333
   border-color: rgba(0, 0, 0, 0.2)
 
 .VueTables__search-field::before
@@ -377,7 +392,7 @@ button.btn
     color: #5c6489
     font-size: 12px
     cursor: pointer
-    border-radius: 4px
+    border-radius: 7px
     border: 0
     transition: all 0.5s ease
 
@@ -386,13 +401,13 @@ button.btn
 
   &.btn-back
     position: fixed
-    bottom: 20px
-    left: 20px
+    top 20px
+    right: 20%
 
   &.btn-save
     position: fixed
-    bottom: 20px
-    right: 20px
+    top: 20px
+    left: 1220px
     display: block
     text-align: center
     float: right
@@ -408,7 +423,7 @@ button.btn
     color: #fff
     font-size: 12px
     cursor: pointer
-    border-radius: 4px
+    border-radius: 7px
     border: 0
     transition: all 0.5s ease
 
@@ -600,6 +615,7 @@ tr
   font-weight: 900
   content: "\f107"
   position: relative
+  font-size: 12px
 
 .VueTables__child-row-toggler--open
   color: #36b8e1
@@ -851,7 +867,7 @@ button.add-condition.condition-active
   background: #36b8e1 !important
 
 .btn-secondary-
-  color: #ACC3CF
+  color: #E3EEF4
   background-color: #fff
   border: 2px solid #E3EEF4
 
@@ -861,9 +877,13 @@ button.add-condition.condition-active
   border: 2px solid #E3EEF4
 
 .btn-secondary-:not(:disabled):not(.disabled):active, .btn-secondary-:not(:disabled):not(.disabled).active, .show > .btn-secondary-.dropdown-toggle
-  color: #fff
-  background-color: #36B8E1
+  color: #36B8E1
+  background-color: #fff
   border: 2px solid #36B8E1
+  z-index: 99
+
+.btn-group > .btn:not(:first-child), .btn-group > .btn-group:not(:first-child)
+  margin-left: -2px
 
 .btn-group, .btn-group-vertical
   position: relative
@@ -876,11 +896,27 @@ button.add-condition.condition-active
 .campaign-block
   // float: left
   // margin-right: 10px
+  // max-width: 200px
 
 .filter__controls
   // display: grid
   // margin-bottom: 2rem
   // justify-content: space-between
+
+  .row.align-items-center
+    width: 100%
+    margin-bottom: 20px
+
+  .col-1 
+    max-width: 3%
+
+  .col-3
+    max-width: 18%
+
+  .cpc-equal
+    margin-top: 40px
+    color: #ACC3CF
+    font-size: 12px
 
 .condition-group
   .and
@@ -984,19 +1020,40 @@ button.add-condition.condition-active
   box-shadow: 0 0 5px transparent
 
 .ui.search.dropdown > .text
-  top: -1px
+  top: 0px
   padding-right: 10px
+  cursor: text
+  position: relative
+  left: 0px
+  top: 3px
+  z-index: 3
+  font-size: 16px
+  // color: #333
+  color: #7F98A5
 
 .ui.search.dropdown
-  min-width: 160px
-  max-width: 280px
+  // min-width: 160px
+  // max-width: 280px
+
+.ui.selection.dropdown
+  min-height: 45px
+  max-height: 45px
+  border: 2px solid #e3eef4 !important
+
+  &:hover
+    border-color: #acc3cf !important
 
 .ui.search.selection.dropdown > input.search, .ui.search.selection.dropdown > span.sizer
-  line-height: 2.2em
-  padding: .5em 2.1em .5em 1em
+  line-height: 2.2em !important
+  padding: .5em 2.1em .5em 1em !important
 
 .ui.dropdown > .dropdown.icon:before
   content: '' !important
+
+.ui.selection.active.dropdown, .ui.selection.active.dropdown .menu
+  border-color: #e3eef4 !important
+  -webkit-box-shadow: 0 0px 0px 0 rgba(34,36,38,.15) !important
+  box-shadow: 0 0px 0px 0 rgba(34,36,38,.15) !important
 
 .custom-select:before
   content: '\f11c'
@@ -1005,7 +1062,7 @@ button.add-condition.condition-active
   font-size: 16px
   color: lightgrey
   float: right
-  margin-top: 0px
+  margin-top: 2px
   margin-right: -20px
 
 select.add-condition.custom-select
@@ -1016,7 +1073,7 @@ select.add-condition.custom-select
   background-color: #E3EEF4
 
 .custom-select select
-  display: none /*hide original SELECT element: */
+  display: none
 
 .select-selected
   background-color: DodgerBlue
@@ -1386,6 +1443,45 @@ a.back-to-login
 button.applyBtn.btn.btn-sm.btn-success
   background: #36b8e1
   padding: 5px 15px
+
+/* Tags */
+.badge-primary
+  color: #7F98A5
+  background-color: #E3EEF4
+
+.b-form-tags
+  width: 100%
+  color: #7F98A5
+  font-weight: 600
+  border-radius: 7px
+  padding: 10px 20px
+  height: 45px !important
+  text-align: left
+  border: 2px solid #e3eef4
+  // overflow: hidden
+
+.mt-n1, .my-n1
+  margin-top: -0.6rem !important
+  margin-left: -1rem !important
+
+.b-form-tag
+  font-size: 10px
+  font-weight: 500
+  line-height: 1.5
+
+.badge
+  display: inline-block
+  padding: 0.25em 0.8em
+  font-size: 14px !important
+  font-weight: 600
+  line-height: 1
+  text-align: center
+  white-space: nowrap
+  vertical-align: baseline
+  border-radius: 0.25rem
+
+.b-form-tags-button.py-0
+  display: none
 
 /* Animations */
 @-webkit-keyframes fadeIn

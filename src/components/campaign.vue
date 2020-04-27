@@ -1,11 +1,10 @@
 <template>
     <div id="edit-segment">
-        <menunav></menunav>
         <topbar></topbar>
+        <menunav></menunav>
 
-        <h1>Edit Campaign</h1>
         <b-row class="text-center">
-            <b-col cols="2">
+            <b-col cols="1">
                 <div class="condition__controls">
                     <label>ID</label>
                     <input type="text"
@@ -15,11 +14,11 @@
                     >
                 </div>
             </b-col>
-            <b-col cols="6">
+            <b-col cols="7">
                 <div class="condition__controls">
                     <label>Campaign Name</label>
                     <input type="text"
-                        placeholder="My Campaign"
+                        placeholder="ex: My First Campaign"
                         :id="setElId(`name`)"
                         class="condition__matches campaign custom-input"
                         :value="getFieldName(`name`)"
@@ -48,84 +47,41 @@
             </b-col>
         </b-row>
 
-            <!-- <section class="filter">
-
-                <div class="condition__controls">
-                    <label>Campaign ID</label>
-                    <input type="text"
-                        class="condition__matches campaign custom-input"
-                        :value="getId(`id`)"
-                        disabled
-                    >
-                </div>
-                
-                <div class="condition__controls">
-                    <label>Campaign name</label>
-                    <input type="text"
-                        placeholder="campaign name"
-                        :id="setElId(`name`)"
-                        class="condition__matches campaign custom-input"
-                        :value="getFieldName(`name`)"
-                        @change="changeField($event,`name`)"
-                    >
-                </div>
-
-                <div class="condition__controls">
-                    <label>Status</label>
-                    <select
-                            class="custom-select"
-                            @change="changeField($event, `status`)"
-                            :id="setElId(`status`)"
-                    >
-
-                        <option
-                                id="filterType"
-                                v-for="{id, name} in getStatusList()"
-                                :value="name"
-                                :selected="name.toLowerCase() === getFieldName(`status`)"
-                                :key="name"
-                        >{{name}}
-                        </option>
-
-                    </select>
-                </div>
-            </section> -->
-
         <hr>
         <h2>Advertising Budget</h2>
 
         <b-row class="text-center">
-            <b-col cols="4">
-                <div class="condition__controls">
-                    <label>Total Budget (Campaign)</label>
-                    <input type="number"
-                        step=10
-                        placeholder="budgetTotal"
-                        :id="setElId(`budgetTotal`)"
-                        class="condition__matches budgetTotal custom-input"
-                        :value="getFieldName(`budgetTotal`)"
-                        @change="changeField($event,`budgetTotal`)"
-                    >
-                    <b-form-text id="password-help-block">
-                    Spent: $1,418.00
-                    <!-- TODO: Add Spent value -->
-                    </b-form-text>
-                </div>
-            </b-col>
             <b-col cols="2">
                 <div class="condition__controls">
                     <label>Daily Budget</label>
                     <input type="number"
                         step=10
-                        placeholder="budgetDaily"
+                        placeholder="ex: 1000"
                         :id="setElId(`budgetDaily`)"
                         class="condition__matches budgetDaily custom-input"
                         :value="getFieldName(`budgetDaily`)"
                         @change="changeField($event,`budgetDaily`)"
                     >
-                    <b-form-text id="password-help-block">
+                    <b-form-text id="budgetDaily">
                     Spent: $624.50
-                    <!-- TODO: Add Spent value -->
+                    <!-- TODO: Add Spent Daily value -->
+                    </b-form-text>
+                </div>
+            </b-col>
+            <b-col cols="4">
+                <div class="condition__controls">
+                    <label>Total Budget (Campaign)</label>
+                    <input type="number"
+                        step=100
+                        placeholder="ex: 10000"
+                        :id="setElId(`budgetTotal`)"
+                        class="condition__matches budgetTotal custom-input"
+                        :value="getFieldName(`budgetTotal`)"
+                        @change="changeField($event,`budgetTotal`)"
+                    >
+                    <b-form-text id="budgetTotal">
+                    Spent: $1,418.00
+                    <!-- TODO: Add Spent Total value -->
                     </b-form-text>
                 </div>
             </b-col>
@@ -134,7 +90,7 @@
                     <label>Max. CPC (cost per click)</label>
                     <input type="number"
                         step=0.1
-                        placeholder="campaignCPC"
+                        placeholder="ex: 0.5"
                         :id="setElId(`cpc`)"
                         class="condition__matches budgetTotal custom-input"
                         :value="getFieldName(`cpc`)"
@@ -147,7 +103,7 @@
         <b-row class="text-center">
             <b-col cols="8">
                 <div class="condition__controls">
-                    <label>Landing Page URL </label>
+                    <label>Landing Page URL</label>
                     <input type="text"
                         placeholder="https://domain.com"
                         :id="setElId(`landingPage`)"
@@ -181,67 +137,41 @@
             </b-col>
         </b-row>
 
-            <!-- <section class="filter">
+        <hr>
+
+        <targeting></targeting>
+
+        <hr class="small">
+
+        <b-row class="text-center">
+            <b-col cols="1">
                 <div class="condition__controls">
-                    <label>Budget Daily </label>
-                    <input type="number"
-                        step=10
-                        placeholder="budgetDaily"
-                        :id="setElId(`budgetDaily`)"
-                        class="condition__matches budgetDaily custom-input"
-                        :value="getFieldName(`budgetDaily`)"
-                        @change="changeField($event,`budgetDaily`)"
-                    >
-                    <label>Budget Total </label>
-                    <input type="number"
-                        step=10
-                        placeholder="budgetTotal"
-                        :id="setElId(`budgetTotal`)"
-                        class="condition__matches budgetTotal custom-input"
-                        :value="getFieldName(`budgetTotal`)"
-                        @change="changeField($event,`budgetTotal`)"
-                    >
-                    <label>CPC </label>
-                    <input type="number"
-                        step=0.1
-                        placeholder="campaignCPC"
-                        :id="setElId(`cpc`)"
-                        class="condition__matches budgetTotal custom-input"
-                        :value="getFieldName(`cpc`)"
-                        @change="changeField($event,`cpc`)"
-                    >
-                    <label>Landing page </label>
-                    <input type="text"
-                        placeholder="campaignLandingPage"
-                        :id="setElId(`landingPage`)"
-                        class="condition__matches landingPage custom-input"
-                        :value="getFieldName(`landingPage`)"
-                        @change="changeField($event,`landingPage`)"
-                    >
-                    <b-form-checkbox
-                            class="validateLandingPage" size="lg"
-                            :id="setElId(`landingPageValid`)"
-                            disabled
-                            readonly
-                            :checked="getFieldName(`landingPageValid`)"
-                    ></b-form-checkbox>
-
-                    <b-button variant="primary"
-                            @click="validateLP()"
-                    >
-                        <i class="fas "></i> validate
-
-                    </b-button>
-                    <br>
+                    <label>Exclude</label>
+                    <b-form-checkbox switch size="lg"></b-form-checkbox>
                 </div>
-
-            </section> -->
-
-            <hr>
-            <h2>Targeting</h2>
-
-            <targeting></targeting>
-
+            </b-col>
+            <b-col cols="3">
+                <div class="condition__controls">
+                    <label>Traffic Source</label>
+                    <!-- TODO: Add Traffic Source feature -->
+                    <!-- <input type="text"
+                        placeholder="ex: 350, 2821, 4729"
+                        class="condition__matches budgetDaily custom-input"
+                    > -->
+                    <b-form-tags
+                    input-id="tags-separators"
+                    separator=" ,"
+                    placeholder=""
+                    class="mb-2 traffic"
+                    tag-variant="primary"
+                    remove-on-delete
+                    ></b-form-tags>
+                    <b-form-text id="trafficSource">
+                    Enter numbers separated by space or comma
+                    </b-form-text>
+                </div>
+            </b-col>
+        </b-row>
 
     </div>
 </template>
@@ -282,7 +212,9 @@
                 return [
                     {id: 0, name: 'Active'},
                     {id: 1, name: 'Inactive'},
-                    // {id: 2, name: 'Paused'}
+                    // {id: 2, name: 'Paused'},
+                    // {id: 2, name: 'Ended'}
+                    // TODO: Add 'Paused' and 'Ended' as status options
                 ]
             },
             async changeField(event, field) {
@@ -349,5 +281,5 @@
 
 <style lang="sass">
 .container
-  margin-left: 300px
+    margin-left: 300px
 </style>

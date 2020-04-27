@@ -4,9 +4,18 @@
             <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
             <div class="filter__controls">
 
-                <b-button variant="secondary" class="btn-add-line" @click="addTargeting" style="float:right">
-                    <i class="fas fa-plus"></i> Add Line
-                </b-button>
+            <b-row class="text-center">
+                <b-col cols="6">
+                    <h2>Targeting</h2>
+                </b-col>
+                <b-col cols="4">
+                    <b-button variant="secondary" class="btn-add-line" @click="addTargeting">
+                        <i class="fas fa-plus"></i> Add Line
+                    </b-button>
+                </b-col>
+                <b-col cols="2">
+                </b-col>
+            </b-row>
 
                 <template v-for="item in getTargeting">
 
@@ -14,6 +23,15 @@
                                 :id="setElIdByPosition(`condition`,item.position)"
                                 class="condition__controls"
                         >
+                        <!-- TODO: Turn exclude/include into switch buttons -->
+                        <!-- <b-form-checkbox switch size="lg">{{ checked }}</b-form-checkbox> -->
+                        <!-- <b-form-checkbox
+                                class="active"
+                                name="check-button"
+                                :checked="props.row.status==='active'"
+                                @change="activeInactiveSwitch($event, props.row)"
+                                switch>
+                        </b-form-checkbox> -->
 
                     <b-row align-v="center">
                         <b-col cols="2">
@@ -37,9 +55,9 @@
                                 </select>
                             </div>
                         </b-col>
-                        <b-col cols="2">
+                        <b-col cols="3">
                             <div class="campaign-block">
-                                <label for="label-country">Country/GEO</label>
+                                <label for="label-country">Country</label>
                                 <model-select
                                         :options="getCountriesModify()"
                                         :id="setElIdByPosition(`country`,item.position)"
@@ -103,11 +121,16 @@
                                 </div>
                             </div>
                         </b-col>
+                        <b-col cols="1" align-self="center">
+                            <div class="cpc-equal"><i class="fas fa-equals"></i></div>
+                        </b-col>
                         <b-col cols="2">
                             <label for="label-cpc">Max. CPC</label>
                             <div class="campaign-block">
+                                <!-- TODO: Implement CPC calculation and should not be editable by user -->
                                 <input type="number"
-                                       placeholder="cpc"
+                                       step=0.1
+                                       placeholder="0.1"
                                        :id="setElIdByPosition(`cpc`,item.position)"
                                        class="condition__matches custom-input"
                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
@@ -129,19 +152,18 @@
                         </b-col>
                     </b-row>
 
-                            <!-- <div class="_or"><span></span></div> -->
 
                         </span>
 
                 </template>
 
                 <span class="space"></span>
-                <b-button class="btn-back" variant="light" @click="this.mainPage"
+                <!-- <b-button class="btn-back" variant="light" @click="this.mainPage"
                           v-b-tooltip.hover.right="'Note: Unsaved changes will be cancelled'">
                     <i class="fad fa-arrow-left"></i> Manage Campaign
-                </b-button>
+                </b-button> -->
                 <b-button class="btn-save" @click="this.saveConditions">
-                    <i class="fad fa-save"></i> Save Changes
+                    Save Changes
                 </b-button>
             </div>
 
@@ -165,6 +187,7 @@
         data() {
             return {
                 loading: true,
+                // checked: [true],
             }
         },
         // mounted() {
@@ -213,6 +236,13 @@
             //     setTimeout(() => {
             //         self.loading = false
             //     }, Number(self.segmentRuleCount + 1) * 100)
+            // },
+            // activeInactiveSwitch(status, item) {
+
+            //     this.$nextTick(async () => {
+            //         await segmentsApi.updateStatusSegment(item.id, status && 'active' || 'inactive')
+            //         location.reload()
+            //     })
             // },
             mainPage() {
                 this.$router.push('/campaigns')
