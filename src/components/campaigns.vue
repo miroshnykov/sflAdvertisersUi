@@ -34,23 +34,20 @@
                     </span>
                 <b-form-text id="spent-values">
                     Updated: ${{timeSince_(row.dateUpdated)}} ago
-                    <!-- TODO: Add Last Modified value -->
                 </b-form-text>
             </div>
 
             <div slot="budgetDaily" slot-scope="props">
                 <span class="budget-daily">${{props.row.budgetDaily}}</span>
                 <b-form-text id="spent-values">
-                    Spent: ${{props.row.budgetDaily}}
-                    <!-- TODO: Add Total Spent value -->
+                    Spent: ${{props.row.spentDaily || 0}}
                 </b-form-text>
             </div>
 
             <div slot="budgetTotal" slot-scope="props">
                 <span class="budget-total">${{props.row.budgetTotal}}</span>
                 <b-form-text id="spent-values">
-                    Spent: ${{props.row.budgetTotal}}
-                    <!-- TODO: Add Daily Spent value -->
+                    Spent: ${{props.row.spentTotal || 0}}
                 </b-form-text>
             </div>
 
@@ -65,7 +62,6 @@
                 <span class="creator-name">{{props.row.userName}}</span>
                 <b-form-text id="date">
                     on {{formatData_(props.row.dateAdded)}}
-                    <!-- TODO: Add Dated Created value -->
                 </b-form-text>
             </div>
 

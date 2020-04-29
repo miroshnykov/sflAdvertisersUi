@@ -21,6 +21,8 @@ const campaigns = async () => {
                         status
                         dateAdded
                         dateUpdated
+                        spentDaily
+                        spentTotal
                     } 
                 }
             `,

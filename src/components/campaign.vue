@@ -8,9 +8,9 @@
                 <div class="condition__controls">
                     <label>ID</label>
                     <input type="text"
-                        class="condition__matches campaign custom-input"
-                        :value="getId(`id`)"
-                        disabled
+                           class="condition__matches campaign custom-input"
+                           :value="getId(`id`)"
+                           disabled
                     >
                 </div>
             </b-col>
@@ -18,11 +18,11 @@
                 <div class="condition__controls">
                     <label>Campaign Name</label>
                     <input type="text"
-                        placeholder="ex: My First Campaign"
-                        :id="setElId(`name`)"
-                        class="condition__matches campaign custom-input"
-                        :value="getFieldName(`name`)"
-                        @change="changeField($event,`name`)"
+                           placeholder="ex: My First Campaign"
+                           :id="setElId(`name`)"
+                           class="condition__matches campaign custom-input"
+                           :value="getFieldName(`name`)"
+                           @change="changeField($event,`name`)"
                     >
                 </div>
             </b-col>
@@ -55,16 +55,15 @@
                 <div class="condition__controls">
                     <label>Daily Budget</label>
                     <input type="number"
-                        step=10
-                        placeholder="ex: 1000"
-                        :id="setElId(`budgetDaily`)"
-                        class="condition__matches budgetDaily custom-input"
-                        :value="getFieldName(`budgetDaily`)"
-                        @change="changeField($event,`budgetDaily`)"
+                           step=10
+                           placeholder="ex: 1000"
+                           :id="setElId(`budgetDaily`)"
+                           class="condition__matches budgetDaily custom-input"
+                           :value="getFieldName(`budgetDaily`)"
+                           @change="changeField($event,`budgetDaily`)"
                     >
                     <b-form-text id="budgetDaily">
-                    Spent: $624.50
-                    <!-- TODO: Add Spent Daily value -->
+                        Spent: {{getFieldName(`spentDaily`) || 0}}
                     </b-form-text>
                 </div>
             </b-col>
@@ -72,16 +71,15 @@
                 <div class="condition__controls">
                     <label>Total Budget (Campaign)</label>
                     <input type="number"
-                        step=100
-                        placeholder="ex: 10000"
-                        :id="setElId(`budgetTotal`)"
-                        class="condition__matches budgetTotal custom-input"
-                        :value="getFieldName(`budgetTotal`)"
-                        @change="changeField($event,`budgetTotal`)"
+                           step=100
+                           placeholder="ex: 10000"
+                           :id="setElId(`budgetTotal`)"
+                           class="condition__matches budgetTotal custom-input"
+                           :value="getFieldName(`budgetTotal`)"
+                           @change="changeField($event,`budgetTotal`)"
                     >
                     <b-form-text id="budgetTotal">
-                    Spent: $1,418.00
-                    <!-- TODO: Add Spent Total value -->
+                        Spent: {{getFieldName(`spentTotal`)|| 0}}
                     </b-form-text>
                 </div>
             </b-col>
@@ -89,12 +87,12 @@
                 <div class="condition__controls">
                     <label>Max. CPC (cost per click)</label>
                     <input type="number"
-                        step=0.1
-                        placeholder="ex: 0.5"
-                        :id="setElId(`cpc`)"
-                        class="condition__matches budgetTotal custom-input"
-                        :value="getFieldName(`cpc`)"
-                        @change="changeField($event,`cpc`)"
+                           step=0.1
+                           placeholder="ex: 0.5"
+                           :id="setElId(`cpc`)"
+                           class="condition__matches budgetTotal custom-input"
+                           :value="getFieldName(`cpc`)"
+                           @change="changeField($event,`cpc`)"
                     >
                 </div>
             </b-col>
@@ -105,11 +103,11 @@
                 <div class="condition__controls">
                     <label>Landing Page URL</label>
                     <input type="text"
-                        placeholder="https://domain.com"
-                        :id="setElId(`landingPage`)"
-                        class="condition__matches landingPage custom-input"
-                        :value="getFieldName(`landingPage`)"
-                        @change="changeField($event,`landingPage`)"
+                           placeholder="https://domain.com"
+                           :id="setElId(`landingPage`)"
+                           class="condition__matches landingPage custom-input"
+                           :value="getFieldName(`landingPage`)"
+                           @change="changeField($event,`landingPage`)"
                     >
                 </div>
             </b-col>
@@ -117,7 +115,7 @@
                 <div class="condition__controls">
                     <label>&nbsp;</label>
                     <b-button class="btn-validate" variant="primary"
-                            @click="validateLP()"
+                              @click="validateLP()"
                     >
                         Validate
                     </b-button>
@@ -127,11 +125,11 @@
                 <div class="condition__controls">
                     <label>&nbsp;</label>
                     <b-form-checkbox
-                                class="validateLandingPage" size="lg"
-                                :id="setElId(`landingPageValid`)"
-                                disabled
-                                readonly
-                                :checked="getFieldName(`landingPageValid`)"
+                            class="validateLandingPage" size="lg"
+                            :id="setElId(`landingPageValid`)"
+                            disabled
+                            readonly
+                            :checked="getFieldName(`landingPageValid`)"
                     ></b-form-checkbox>
                 </div>
             </b-col>
@@ -159,15 +157,15 @@
                         class="condition__matches budgetDaily custom-input"
                     > -->
                     <b-form-tags
-                    input-id="tags-separators"
-                    separator=" ,"
-                    placeholder=""
-                    class="mb-2 traffic"
-                    tag-variant="primary"
-                    remove-on-delete
+                            input-id="tags-separators"
+                            separator=" ,"
+                            placeholder=""
+                            class="mb-2 traffic"
+                            tag-variant="primary"
+                            remove-on-delete
                     ></b-form-tags>
                     <b-form-text id="trafficSource">
-                    Enter numbers separated by space or comma
+                        Enter numbers separated by space or comma
                     </b-form-text>
                 </div>
             </b-col>
@@ -280,6 +278,6 @@
 </script>
 
 <style lang="sass">
-.container
-    margin-left: 300px
+    .container
+        margin-left: 300px
 </style>
