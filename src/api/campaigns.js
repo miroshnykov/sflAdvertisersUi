@@ -19,6 +19,8 @@ const campaigns = async () => {
                         user
                         landingPage
                         status
+                        dateAdded
+                        dateUpdated
                     } 
                 }
             `,
