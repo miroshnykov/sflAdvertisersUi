@@ -1,8 +1,8 @@
 <template>
     <transition name="expand-down">
 
-            <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
-            <div class="filter__controls">
+        <!-- <h3 class="filter__title">Rule: <b></b></h3> -->
+        <div class="filter__controls">
 
             <b-row class="text-center">
                 <b-col cols="10">
@@ -15,21 +15,21 @@
                 </b-col>
             </b-row>
 
-                <template v-for="item in getTargeting">
+            <template v-for="item in getTargeting">
 
                         <span
                                 :id="setElIdByPosition(`condition`,item.position)"
                                 class="condition__controls"
                         >
                         <!-- TODO: Turn exclude/include into switch buttons -->
-                        <!-- <b-form-checkbox switch size="lg">{{ checked }}</b-form-checkbox> -->
-                        <!-- <b-form-checkbox
-                                class="active"
-                                name="check-button"
-                                :checked="props.row.status==='active'"
-                                @change="activeInactiveSwitch($event, props.row)"
-                                switch>
-                        </b-form-checkbox> -->
+                            <!-- <b-form-checkbox switch size="lg">{{ checked }}</b-form-checkbox> -->
+                            <!-- <b-form-checkbox
+                                    class="active"
+                                    name="check-button"
+                                    :checked="props.row.status==='active'"
+                                    @change="activeInactiveSwitch($event, props.row)"
+                                    switch>
+                            </b-form-checkbox> -->
 
                     <b-row align-v="center">
                         <b-col cols="2">
@@ -167,17 +167,17 @@
 
                         </span>
 
-                </template>
+            </template>
 
-                <span class="space"></span>
-                <!-- <b-button class="btn-back" variant="light" @click="this.mainPage"
-                          v-b-tooltip.hover.right="'Note: Unsaved changes will be cancelled'">
-                    <i class="fad fa-arrow-left"></i> Manage Campaign
-                </b-button> -->
-                <b-button class="btn-save" @click="this.saveConditions">
-                    Save Changes
-                </b-button>
-            </div>
+            <span class="space"></span>
+            <!-- <b-button class="btn-back" variant="light" @click="this.mainPage"
+                      v-b-tooltip.hover.right="'Note: Unsaved changes will be cancelled'">
+                <i class="fad fa-arrow-left"></i> Manage Campaign
+            </b-button> -->
+            <b-button class="btn-save" @click="this.saveConditions">
+                Save Changes
+            </b-button>
+        </div>
 
     </transition>
 </template>
@@ -287,7 +287,13 @@
                 checkCampaign.forEach(item => {
                     let keys = Object.keys(item)
                     keys.forEach(key => {
-                        if (key === 'landingPageValid') return
+                        if (
+                            key === 'landingPageValid' ||
+                            key === 'spentDaily' ||
+                            key === 'spentTotal'
+                        ) {
+                            return
+                        }
                         if (Number(item[key]) === 0) {
                             emptyKey.push(key)
                         }

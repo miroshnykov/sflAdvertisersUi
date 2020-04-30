@@ -20,57 +20,58 @@
                   <span class="segment-name" @click="edit(row)">{{row.name}}</span>
               </span>
 
-                <button @click="setEditing(true)" v-if="!isEditing()" class="btn btn-link" v-b-tooltip.hover.right="'Quick edit'">
+                <button @click="setEditing(true)" v-if="!isEditing()" class="btn btn-link"
+                        v-b-tooltip.hover.right="'Quick edit'">
                     <i class="far fa-pencil"></i>
                 </button>
                 <span v-else>
                         <input type="text" v-model="row.name" class="quickedit">
                         <button type="button" class="btn btn-info btn-xs quickedit-update"
-                                @click="update(row.name);setEditing(false); uCampaignName(row)"><i class="fas fa-check"></i></button>
-                        <button type="button" class="btn btn-default btn-xs quickedit-cancel" @click="revertValue(); setEditing(false)"><i class="fas fa-ban"></i></button>
+                                @click="update(row.name);setEditing(false); uCampaignName(row)"><i
+                                class="fas fa-check"></i></button>
+                        <button type="button" class="btn btn-default btn-xs quickedit-cancel"
+                                @click="revertValue(); setEditing(false)"><i class="fas fa-ban"></i></button>
                     </span>
-                    <b-form-text id="spent-values">
-                    Updated: A few minutes ago
-                    <!-- TODO: Add Last Modified value -->
-                    </b-form-text>
+                <b-form-text id="spent-values">
+                    Updated: ${{timeSince_(row.dateUpdated)}} ago
+                </b-form-text>
             </div>
 
             <div slot="budgetDaily" slot-scope="props">
-              <span class="budget-daily">${{props.row.budgetDaily}}</span>
-                    <b-form-text id="spent-values">
-                    Spent: ${{props.row.budgetDaily}}
-                    <!-- TODO: Add Total Spent value -->
-                    </b-form-text>
+                <span class="budget-daily">${{props.row.budgetDaily}}</span>
+                <b-form-text id="spent-values">
+                    Spent: ${{props.row.spentDaily || 0}}
+                </b-form-text>
             </div>
 
             <div slot="budgetTotal" slot-scope="props">
-              <span class="budget-total">${{props.row.budgetTotal}}</span>
-                    <b-form-text id="spent-values">
-                    Spent: ${{props.row.budgetTotal}}
-                    <!-- TODO: Add Daily Spent value -->
-                    </b-form-text>
+                <span class="budget-total">${{props.row.budgetTotal}}</span>
+                <b-form-text id="spent-values">
+                    Spent: ${{props.row.spentTotal || 0}}
+                </b-form-text>
             </div>
 
             <div slot="cpc" slot-scope="props">
-              <span class="budget-daily">{{props.row.cpc}}</span>
-                    <b-form-text id="currency">
+                <span class="budget-daily">{{props.row.cpc}}</span>
+                <b-form-text id="currency">
                     CAD
-                    </b-form-text>
+                </b-form-text>
             </div>
-            
+
             <div slot="userName" slot-scope="props">
                 <span class="creator-name">{{props.row.userName}}</span>
-                    <b-form-text id="date">
-                    on Apr 21, 2020
-                    <!-- TODO: Add Dated Created value -->
-                    </b-form-text>
+                <b-form-text id="date">
+                    on {{formatData_(props.row.dateAdded)}}
+                </b-form-text>
             </div>
 
             <div slot="landingPage" slot-scope="props">
               <span class="landing-page-box">
-                  <span class="landing-page-name" @click="copyText(props.row.landingPage)">{{props.row.landingPage}}</span>
+                  <span class="landing-page-name"
+                        @click="copyText(props.row.landingPage)">{{props.row.landingPage}}</span>
               </span>
-                <button class="btn btn-link" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="'Copy URL to Clipboard'">
+                <button class="btn btn-link" @click="copyText(props.row.landingPage)"
+                        v-b-tooltip.hover.right="'Copy URL to Clipboard'">
                     <i class="far fa-copy"></i>
                 </button>
             </div>
@@ -127,7 +128,7 @@
     import {mapActions, mapState, mapGetters} from 'vuex'
     import logo from './logo.vue'
     import menunav from './menunav.vue'
-    import {formatData} from '../helpers'
+    import {formatData, timeSince} from '../helpers'
 
     let tableColumnsLog = [
         'id',
@@ -164,6 +165,12 @@
                 } catch (err) {
                     console.error('Failed to copy: ', err);
                 }
+            },
+            timeSince_(data) {
+                return timeSince(new Date(Number(data)))
+            },
+            formatData_(data) {
+                return formatData(data * 1000)
             },
             async uCampaignName(data) {
 
@@ -339,7 +346,7 @@
                         filterBy: "Filter by {column}",
                         loading: "Loading...",
                         defaultOption: "Select {column}"
-                        },
+                    },
                 },
             }
         }
@@ -347,6 +354,6 @@
 </script>
 
 <style lang="sass">
-.container
-  margin-left: 300px
+    .container
+        margin-left: 300px
 </style>

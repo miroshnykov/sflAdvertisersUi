@@ -17,6 +17,8 @@ const campaign = async (id) => {
                         landingPage
                         landingPageValid
                         status
+                        spentDaily
+                        spentTotal
                     } 
                 }
             `,

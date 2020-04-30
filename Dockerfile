@@ -10,9 +10,9 @@ RUN curl --silent --location https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install --yes nodejs
 
 WORKDIR /home/app
+
 COPY . .
 RUN npm install
 RUN npm run build
-EXPOSE 80
-CMD [ "node", "server.js" ]
-
+EXPOSE 8080
+CMD [ "npm", "start" ]

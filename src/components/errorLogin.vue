@@ -12,11 +12,12 @@
     export default {
         name: "error",
         created() {
-            this.errMessage =this.$route.params.email
+            this.errMessage = this.$route.params.email
         },
         methods: {
             signIn() {
-                window.location.href = process.env.SFL_PLATFORM_ADV_URL;
+                location.reload()
+                // window.location.href = process.env.SFL_PLATFORM_ADV_URL
             }
         }
     };

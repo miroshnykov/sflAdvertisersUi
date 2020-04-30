@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const Dotenv = require('dotenv-webpack')
+const config = require('plain-config')()
 
 module.exports = {
     // entry: './src/main.js',
@@ -94,10 +95,12 @@ module.exports = {
 if (process.env.NODE_ENV === 'production') {
     module.exports.devtool = '#source-map'
     // http://vue-loader.vuejs.org/en/workflow/production.html
+    console.log('\n before create build:', config)
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
+                NODE_ENV: '"production"',
+                SFL_API_ADVERTISER: config.sflApiAdvertiser.host,
             }
         }),
         new webpack.HotModuleReplacementPlugin(),
