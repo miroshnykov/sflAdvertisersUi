@@ -87,7 +87,7 @@
             </b-col>
             <b-col cols="2">
                 <div class="condition__controls">
-                    <label>Max. CPC (cost per click)</label>
+                    <label>Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'"><i class="fad fa-question-circle"></i></a></label>
                     <input type="number"
                         step=0.1
                         placeholder="ex: 0.5"
@@ -95,7 +95,7 @@
                         class="condition__matches budgetTotal custom-input"
                         :value="getFieldName(`cpc`)"
                         @change="changeField($event,`cpc`)"
-                        min="0.1" max="100"
+                        min="0.001" max="1000"
                         onkeypress="
                             return (
                                 event.charCode == 8
@@ -192,7 +192,7 @@
                     "
                     ></b-form-tags>
                     <b-form-text id="trafficSource">
-                    Numbers only separated by space or enter
+                    Numbers only, separated by space or enter
                     </b-form-text>
                 </div>
             </b-col>

@@ -34,12 +34,11 @@
                     <b-row align-v="center">
                         <b-col cols="2">
                             <div class="campaign-block">
-                                <label for="label-country">&nbsp;</label>
+                                <label for="label-filter">&nbsp;</label>
                                 <select
                                         class="condition__dimension-name condition__matches custom-select"
                                         @change="changeFilterType($event, item)"
                                         :id="setElIdByPosition(`filtertype`,item.position)"
-                                        maxlength="10"
                                 >
 
                                   <option
@@ -124,7 +123,7 @@
                             <div class="cpc-equal"><i class="fas fa-equals"></i></div>
                         </b-col>
                         <b-col cols="2">
-                            <label for="label-cpc">Max. CPC</label>
+                            <label for="label-cpc">Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'"><i class="fad fa-question-circle"></i></a></label>
                             <div class="campaign-block">
                                 <!-- TODO: Implement CPC calculation and should not be editable by user -->
                                 <input  type="number"
@@ -135,7 +134,7 @@
                                         @change="changeInput(Number($event.target.value), item, `cpc`)"
                                         :value="item.cpc"
                                         style="width:50%;float:left"
-                                        min="0.1" max="100"
+                                        min="0.001" max="1000"
                                         onkeypress="
                                             return (
                                                 event.charCode == 8
