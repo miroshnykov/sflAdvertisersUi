@@ -87,7 +87,7 @@
             </b-col>
             <b-col cols="2">
                 <div class="condition__controls">
-                    <label>Max. CPC (cost per click)</label>
+                    <label>Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'"><i class="fad fa-question-circle"></i></a></label>
                     <input type="number"
                         step=0.1
                         placeholder="ex: 0.5"
@@ -95,6 +95,20 @@
                         class="condition__matches budgetTotal custom-input"
                         :value="getFieldName(`cpc`)"
                         @change="changeField($event,`cpc`)"
+                        min="0.001" max="1000"
+                        onkeypress="
+                            return (
+                                event.charCode == 8
+                                || event.charCode == 0
+                                || event.charCode == 13
+                            ) ? null : event.charCode >= 48 && event.charCode <= 57"
+                        onpaste="return false"
+                        onkeyup="
+                            if(this.value === '' || parseInt(this.value)>100){
+                                this.value = 100
+                                return false
+                            }
+                        "
                     >
                 </div>
             </b-col>
@@ -143,31 +157,42 @@
 
         <hr class="small">
 
-        <b-row class="text-center">
+        <b-row class="text-center trafficSource">
             <b-col cols="1">
                 <div class="condition__controls">
                     <label>Exclude</label>
                     <b-form-checkbox switch size="lg"></b-form-checkbox>
                 </div>
             </b-col>
-            <b-col cols="3">
+            <b-col cols="5">
                 <div class="condition__controls">
                     <label>Traffic Source</label>
-                    <!-- TODO: Add Traffic Source feature -->
-                    <!-- <input type="text"
-                        placeholder="ex: 350, 2821, 4729"
-                        class="condition__matches budgetDaily custom-input"
-                    > -->
+                    <!-- TODO: Add Traffic Source backend feature -->
                     <b-form-tags
                     input-id="tags-separators"
-                    separator=" ,"
+                    separator=" "
                     placeholder=""
                     class="mb-2 traffic"
                     tag-variant="primary"
                     remove-on-delete
+                    onkeypress="
+                        return (
+                            event.charCode == 8
+                            || event.charCode == 0
+                            || event.charCode == 13
+                            || event.charCode == 32
+                            || event.charCode == 188
+                        ) ? null : event.charCode >= 48 && event.charCode <= 57"
+                    onpaste="return false"
+                    onkeyup="
+                        if(this.value === '' || parseInt(this.value)>100){
+                            this.value = 100
+                            return false
+                        }
+                    "
                     ></b-form-tags>
                     <b-form-text id="trafficSource">
-                    Enter numbers separated by space or comma
+                    Numbers only, separated by space or enter
                     </b-form-text>
                 </div>
             </b-col>
