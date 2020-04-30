@@ -6,6 +6,7 @@ import googleAuth from './googleAuth'
 import campaigns from './campaigns'
 import campaign from './campaign'
 import targeting from './targeting'
+import publisherTargeting from './publisherTargeting'
 import user from './user'
 import countries from './countries'
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
         campaigns,
         campaign,
         targeting,
+        publisherTargeting,
         user,
         countries
     }

@@ -123,26 +123,29 @@
                             <div class="cpc-equal"><i class="fas fa-equals"></i></div>
                         </b-col>
                         <b-col cols="2">
-                            <label for="label-cpc">Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'"><i class="fad fa-question-circle"></i></a></label>
+                            <label for="label-cpc">Max. CPC <a class="question"
+                                                               v-b-tooltip.hover.right="'Cost per click'"><i
+                                    class="fad fa-question-circle"></i></a></label>
                             <div class="campaign-block">
                                 <!-- TODO: Implement CPC calculation and should not be editable by user -->
-                                <input  type="number"
-                                        step=0.1
-                                        placeholder="0.1"
-                                        :id="setElIdByPosition(`cpc`,item.position)"
-                                        class="condition__matches custom-input"
-                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
-                                        :value="item.cpc"
-                                        style="width:50%;float:left"
-                                        min="0.001" max="1000"
-                                        onkeypress="
+                                <input type="number"
+                                       step=0.1
+                                       readonly
+                                       placeholder="0.1"
+                                       :id="setElIdByPosition(`cpc`,item.position)"
+                                       class="condition__matches custom-input"
+                                       @change="changeInput(Number($event.target.value), item, `cpc`)"
+                                       :value="item.cpc"
+                                       style="width:50%;float:left;background-color:#dacaca;"
+                                       min="0.001" max="1000"
+                                       onkeypress="
                                             return (
                                                 event.charCode == 8
                                                 || event.charCode == 0
                                                 || event.charCode == 13
                                             ) ? null : event.charCode >= 48 && event.charCode <= 57"
-                                        onpaste="return false"
-                                        onkeyup="
+                                       onpaste="return false"
+                                       onkeyup="
                                             if(this.value === '' || parseInt(this.value)>100){
                                                 this.value = 100
                                                 return false
@@ -194,6 +197,7 @@
             ...mapGetters('targeting', ['getTargeting', 'getCampaignId']),
             ...mapGetters('campaign', ['getCampaign']),
             ...mapGetters('countries', ['getCountries']),
+            ...mapGetters('publisherTargeting', ['getPublisherTargeting']),
             // ...mapMutations("targeting", ["removeTargeting"])
         },
         data() {
@@ -211,6 +215,7 @@
                 item.field = field
                 item.fieldValue = !item[field]
                 this.saveTargetingItem(item)
+                this.matchTargeting(item)
             },
             addClassActive(value) {
                 return value && 'active' || ''
@@ -233,8 +238,62 @@
 
                 item.field = field
                 item.fieldValue = value
-                this.saveTargetingItem(item)
 
+                this.saveTargetingItem(item)
+                if (field === 'geo') {
+                    this.matchTargeting(item)
+                }
+
+            },
+            matchTargeting(item) {
+                let matchConditions = this.compareTargeting(this.getPublisherTargeting, item)
+                item.cpc = 0
+                if (matchConditions.length > 0) {
+                    item.cpc = matchConditions[0].cpc
+                }
+
+            },
+            compareTargeting(pub, adv) {
+
+                pub = pub.map(item => {
+                    return {
+                        targetingId: item.id,
+                        cpc: item.cpc,
+                        geo: item.geo,
+                        platformAndroid: item.platformAndroid,
+                        platformIos: item.platformIos,
+                        platformWindows: item.platformWindows,
+                        sourceTypeSweepstakes: item.sourceTypeSweepstakes,
+                        sourceTypeVod: item.sourceTypeVod
+                    }
+                })
+                let advItem = {}
+                advItem.geo = adv.geo
+                advItem.platformAndroid = adv.platformAndroid
+                advItem.platformIos = adv.platformIos
+                advItem.platformWindows = adv.platformWindows
+                advItem.sourceTypeSweepstakes = adv.sourceTypeSweepstakes
+                advItem.sourceTypeVod = adv.sourceTypeVod
+
+                if (pub.length === 0) return []
+                let findRecords = []
+                pub.forEach(pub_ => {
+                    const targetingAdv = pub_.targetingId
+                    const cpcAdv = pub_.cpc
+
+                    let advCheck = advItem
+                    let pubCheck = pub_
+                    delete pubCheck.targetingId
+                    delete pubCheck.cpc
+                    if (JSON.stringify(advCheck) === JSON.stringify(pubCheck)) {
+                        pub_.targetingId_ = targetingAdv
+                        pub_.cpc = cpcAdv
+                        findRecords.push(pub_)
+                    }
+
+
+                })
+                return findRecords
             },
             getCountriesModify() {
                 return this.getCountries.map(item => {
