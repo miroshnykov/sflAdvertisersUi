@@ -5,15 +5,13 @@
             <div class="filter__controls">
 
             <b-row class="text-center">
-                <b-col cols="6">
+                <b-col cols="10">
                     <h2>Targeting</h2>
                 </b-col>
-                <b-col cols="4">
+                <b-col cols="2">
                     <b-button variant="secondary" class="btn-add-line" @click="addTargeting">
                         <i class="fas fa-plus"></i> Add Line
                     </b-button>
-                </b-col>
-                <b-col cols="2">
                 </b-col>
             </b-row>
 
@@ -41,6 +39,7 @@
                                         class="condition__dimension-name condition__matches custom-select"
                                         @change="changeFilterType($event, item)"
                                         :id="setElIdByPosition(`filtertype`,item.position)"
+                                        maxlength="10"
                                 >
 
                                   <option
@@ -55,7 +54,7 @@
                                 </select>
                             </div>
                         </b-col>
-                        <b-col cols="3">
+                        <b-col cols="4">
                             <div class="campaign-block">
                                 <label for="label-country">Country</label>
                                 <model-select
@@ -128,14 +127,28 @@
                             <label for="label-cpc">Max. CPC</label>
                             <div class="campaign-block">
                                 <!-- TODO: Implement CPC calculation and should not be editable by user -->
-                                <input type="number"
-                                       step=0.1
-                                       placeholder="0.1"
-                                       :id="setElIdByPosition(`cpc`,item.position)"
-                                       class="condition__matches custom-input"
-                                       @change="changeInput(Number($event.target.value), item, `cpc`)"
-                                       :value="item.cpc"
-                                       style="width:50%;float:left"
+                                <input  type="number"
+                                        step=0.1
+                                        placeholder="0.1"
+                                        :id="setElIdByPosition(`cpc`,item.position)"
+                                        class="condition__matches custom-input"
+                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
+                                        :value="item.cpc"
+                                        style="width:50%;float:left"
+                                        min="0.1" max="100"
+                                        onkeypress="
+                                            return (
+                                                event.charCode == 8
+                                                || event.charCode == 0
+                                                || event.charCode == 13
+                                            ) ? null : event.charCode >= 48 && event.charCode <= 57"
+                                        onpaste="return false"
+                                        onkeyup="
+                                            if(this.value === '' || parseInt(this.value)>100){
+                                                this.value = 100
+                                                return false
+                                            }
+                                        "
                                 >
                             </div>
                             <div class="condition-button-delete">
