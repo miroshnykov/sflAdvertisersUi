@@ -127,7 +127,6 @@
                                                                v-b-tooltip.hover.right="'Cost per click'"><i
                                     class="fad fa-question-circle"></i></a></label>
                             <div class="campaign-block">
-                                <!-- TODO: Implement CPC calculation and should not be editable by user -->
                                 <input type="number"
                                        step=0.1
                                        readonly
