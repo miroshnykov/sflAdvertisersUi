@@ -33,7 +33,7 @@
                                 @click="revertValue(); setEditing(false)"><i class="fas fa-ban"></i></button>
                     </span>
                 <b-form-text id="spent-values">
-                    Updated: ${{timeSince_(row.dateUpdated)}} ago
+                    Updated: {{timeSince_(row.dateUpdated)}} ago
                 </b-form-text>
             </div>
 
