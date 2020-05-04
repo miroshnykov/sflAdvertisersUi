@@ -146,7 +146,7 @@ span.status
     background: #FFB946
 
 /* Field Input */
-input[type="text"]:disabled, input[type="number"]:disabled
+input[type="text"]:disabled, input[type="number"]:disabled, input[type="number"]:read-only
   color: #acc3cf
   background: #e3eef4
 
@@ -569,8 +569,8 @@ tr
 
 .custom-control-input:checked ~ .custom-control-label::before
   color: #fff
-  border-color: #58da94
-  background-color: #58da94
+  border-color: #36B8E1
+  background-color: #36B8E1
 
 .custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before
   background-color: transparent
@@ -593,6 +593,18 @@ tr
   content: "\f00c"
   position: relative
   background: none !important
+
+.custom-control-label::before
+  position: absolute
+  top: 0.25rem
+  left: -1.5rem
+  display: block
+  width: 1rem
+  height: 1rem
+  pointer-events: none
+  content: ""
+  background-color: #fff
+  border: #adb5bd solid 1px
 
 /* Segment Child Table */
 .VueTables__child-row-toggler
