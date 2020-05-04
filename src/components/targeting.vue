@@ -123,9 +123,8 @@
                             <div class="cpc-equal"><i class="fas fa-equals"></i></div>
                         </b-col>
                         <b-col cols="2">
-                            <label for="label-cpc">Max. CPC <a class="question"
-                                                               v-b-tooltip.hover.right="'Cost per click'"><i
-                                    class="fad fa-question-circle"></i></a></label>
+                            <label for="label-cpc">Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'">
+                                <i class="fad fa-question-circle"></i></a></label>
                             <div class="campaign-block">
                                 <input type="number"
                                        step=0.1
@@ -135,7 +134,7 @@
                                        class="condition__matches custom-input"
                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
                                        :value="item.cpc"
-                                       style="width:50%;float:left;background-color:#dacaca;"
+                                       style="width:50%;float:left;"
                                        min="0.001" max="1000"
                                        onkeypress="
                                             return (

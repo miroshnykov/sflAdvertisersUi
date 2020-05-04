@@ -89,25 +89,14 @@
                     <input type="number"
                         step=0.1
                         placeholder="ex: 0.5"
+                        min="0.001" max="1000"
                         :id="setElId(`cpc`)"
                         class="condition__matches budgetTotal custom-input"
                         :value="getFieldName(`cpc`)"
                         @change="changeField($event,`cpc`)"
-                        min="0.001" max="1000"
-                        onkeypress="
-                            return (
-                                event.charCode == 8
-                                || event.charCode == 0
-                                || event.charCode == 13
-                            ) ? null : event.charCode >= 48 && event.charCode <= 57"
-                        onpaste="return false"
-                        onkeyup="
-                            if(this.value === '' || parseInt(this.value)>100){
-                                this.value = 100
-                                return false
-                            }
-                        "
-                    >
+                        pattern="^\d+(?:\.\d{1,2})?$"
+                        onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'transparent'
+                    ">
                 </div>
             </b-col>
         </b-row>
