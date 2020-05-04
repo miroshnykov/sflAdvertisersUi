@@ -218,7 +218,7 @@
                         letter-spacing: 0.5px
                         border: 0
                         outline: 0
-                        color: #fff
+                        color: #7F98A5
                         font-weight: 500
                         background: #fff
 
@@ -234,7 +234,7 @@
                             border-radius: 10px
 
                         &.error_input
-                            border-bottom: 2px solid #FE5D65
+                            border: 2px solid #FE5D65
 
                     .error
                         display: none
