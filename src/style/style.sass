@@ -1031,14 +1031,14 @@ button.add-condition.condition-active
   transition: all 0.3s ease
   -webkit-appearance: none
   -moz-appearance: none
-  background: url("data:image/svg+xml;utf8,<svg fill='grey' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") #fff
+  background: url("data:image/svg+xml;utf8,<svg fill='lightsteelblue' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") #fff
   background-repeat: no-repeat
   background-position-x: 99%
   background-position-y: 10px
 
 .custom-select:disabled:hover
-  border-color: transparent
-  box-shadow: 0 0 5px transparent
+  border-color: transparent !important
+  box-shadow: 0 0 5px transparent !important
 
 .ui.search.dropdown > .text
   top: 0px
@@ -1055,11 +1055,16 @@ button.add-condition.condition-active
 .ui.search.dropdown
   // min-width: 160px
   // max-width: 280px
-
+    
 .ui.selection.dropdown
   min-height: 45px
   max-height: 45px
   border: 2px solid #e3eef4 !important
+  -webkit-transition: all 0.3s ease !important
+  -o-transition: all 0.3s ease !important
+  -moz-transition: all 0.3s ease !important
+  -ms-transition: all 0.3s ease !important
+  transition: all 0.3s ease !important
 
   &:hover
     border-color: #acc3cf !important
@@ -1100,9 +1105,8 @@ select.add-condition.custom-select
   background-color: DodgerBlue
 
 .custom-select:disabled
-  color: #6c757d
-  background-color: #e9ecef
-  opacity: 0.5
+  color: #acc3cf
+  background-color: #e3eef4
 
 /* Style the arrow inside the select element: */
 .select-selected:after
