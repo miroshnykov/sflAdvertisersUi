@@ -7,10 +7,11 @@
                 <b-col col lg="4">
                     <b-row align-v="center">
                         <b-col cols="8">
-                            <div class="header-icons">
+                            <!-- Hide for now -->
+                            <!-- <div class="header-icons">
                                 <span class="search"><i class="fas fa-search"></i></span>
                                 <span class="notification"><i class="fas fa-bell"></i></span>
-                            </div>
+                            </div> -->
                         </b-col>
 
                         <b-col cols="4">
