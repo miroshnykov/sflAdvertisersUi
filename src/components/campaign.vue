@@ -112,6 +112,10 @@
                            :value="getFieldName(`landingPage`)"
                            @change="changeField($event,`landingPage`)"
                     >
+                    <!-- TODO: Add real Click data -->
+                    <b-form-text id="totalClicks">
+                        Page Clicks: {{counter}}
+                    </b-form-text>
                 </div>
             </b-col>
             <b-col cols="2">
@@ -141,7 +145,7 @@
         <hr>
 
         <targeting></targeting>
-        
+
         <!-- Hide for now -->
         <!-- <hr class="small">
 
@@ -286,6 +290,7 @@
         },
         data() {
             return {
+                counter: 1,
                 id: Number(this.$route.params.id)
             };
         }
