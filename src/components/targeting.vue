@@ -348,7 +348,9 @@
                         if (
                             key === 'landingPageValid' ||
                             key === 'spentDaily' ||
-                            key === 'spentTotal'
+                            key === 'spentTotal' ||
+                            key === 'countClickTotal' ||
+                            key === 'countClickDaily'
                         ) {
                             return
                         }
