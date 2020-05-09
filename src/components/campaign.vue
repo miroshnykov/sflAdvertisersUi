@@ -112,9 +112,8 @@
                            :value="getFieldName(`landingPage`)"
                            @change="changeField($event,`landingPage`)"
                     >
-                    <!-- TODO: Add real Click data -->
                     <b-form-text id="totalClicks">
-                        Page Clicks: {{counter}}
+                        Page Clicks: Total-{{getFieldName(`countClickTotal`) || 0}} Daily-{{getFieldName(`countClickDaily`) || 0}}
                     </b-form-text>
                 </div>
             </b-col>
@@ -290,7 +289,6 @@
         },
         data() {
             return {
-                counter: 1,
                 id: Number(this.$route.params.id)
             };
         }

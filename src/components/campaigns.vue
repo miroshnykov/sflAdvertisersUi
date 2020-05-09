@@ -68,16 +68,14 @@
             <div slot="landingPage" slot-scope="props">
               <span class="landing-page-box">
                   <span class="landing-page-name"
-                        @click="copyText(props.row.landingPage)"
-                        v-on:click="counter += 1">{{props.row.landingPage}}</span>
+                        @click="copyText(props.row.landingPage)">{{props.row.landingPage}}</span>
               </span>
                 <button class="btn btn-link" @click="copyText(props.row.landingPage)"
                         v-b-tooltip.hover.right="'Copy URL to Clipboard'">
                     <i class="far fa-copy"></i>
                 </button>
                 <b-form-text id="date">
-                <!-- TODO: Add real Click data -->
-                    Clicks: {{counter}}
+                    Clicks: Today:{{props.row.countClickDaily || 0}}
                 </b-form-text>
             </div>
 
@@ -103,8 +101,7 @@
             </div>
 
             <div slot="clicks" slot-scope="props">
-                <!-- TODO: Add real Click data -->
-                <span class="id">{{counter}}</span>
+                <span class="id">{{props.row.countClickTotal}}</span>
             </div>
 
             <div slot="actions" slot-scope="props">

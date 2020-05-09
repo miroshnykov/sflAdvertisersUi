@@ -19,6 +19,8 @@ const campaign = async (id) => {
                         status
                         spentDaily
                         spentTotal
+                        countClickTotal
+                        countClickDaily
                     } 
                 }
             `,
