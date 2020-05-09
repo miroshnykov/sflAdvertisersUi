@@ -74,6 +74,9 @@
                         v-b-tooltip.hover.right="'Copy URL to Clipboard'">
                     <i class="far fa-copy"></i>
                 </button>
+                <b-form-text id="date">
+                    Clicks: Today:{{props.row.countClickDaily || 0}}
+                </b-form-text>
             </div>
 
             <div slot="child_row" slot-scope="props">
@@ -97,8 +100,11 @@
                 </span> -->
             </div>
 
-            <div slot="actions" slot-scope="props">
+            <div slot="clicks" slot-scope="props">
+                <span class="id">{{props.row.countClickTotal}}</span>
+            </div>
 
+            <div slot="actions" slot-scope="props">
                 <button
                         class="btn btn-link"
                         v-b-tooltip.hover.top="'Edit Campaign'"
@@ -114,8 +120,6 @@
                 >
                     <i class="fas fa-trash-alt"></i>
                 </button>
-
-
             </div>
 
         </v-client-table>
@@ -139,7 +143,8 @@
         'userName',
         'landingPage',
         'status',
-        'actions'
+        'clicks',
+        'actions',
     ]
     export default {
         // mounted() {
@@ -308,6 +313,7 @@
         },
         data() {
             return {
+                counter: 0,
                 segmentName: '',
                 isModalVisible: false,
                 eventData: [],
@@ -325,7 +331,8 @@
                         budgetTotal: 'Total Budget',
                         cpc: 'Max. CPC',
                         landingPage: 'Landing Page URL',
-                        status: 'Status'
+                        status: 'Status',
+                        clicks: 'Clicks'
                     },
                     editableColumns: ['name'],
                     sortable: tableColumnsLog,
@@ -335,7 +342,7 @@
                     perPage: 10,
                     perPageValues: [5, 10, 25, 100],
                     texts: {
-                        count: "Showing {from} to {to} of {count} campaigns|{count} segments|One campaign",
+                        count: "Showing {from} to {to} of {count} campaigns|Showing {count} campaigns|Showing 1 campaign",
                         first: "First",
                         last: "Last",
                         filter: "Filter:",

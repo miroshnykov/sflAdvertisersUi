@@ -23,6 +23,8 @@ const campaigns = async () => {
                         dateUpdated
                         spentDaily
                         spentTotal
+                        countClickTotal
+                        countClickDaily
                     } 
                 }
             `,

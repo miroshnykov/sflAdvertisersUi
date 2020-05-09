@@ -39,6 +39,7 @@
                                         class="condition__dimension-name condition__matches custom-select"
                                         @change="changeFilterType($event, item)"
                                         :id="setElIdByPosition(`filtertype`,item.position)"
+                                        disabled
                                 >
 
                                   <option

@@ -112,6 +112,9 @@
                            :value="getFieldName(`landingPage`)"
                            @change="changeField($event,`landingPage`)"
                     >
+                    <b-form-text id="totalClicks">
+                        Page Clicks: Total-{{getFieldName(`countClickTotal`) || 0}} Daily-{{getFieldName(`countClickDaily`) || 0}}
+                    </b-form-text>
                 </div>
             </b-col>
             <b-col cols="2">
@@ -142,9 +145,10 @@
 
         <targeting></targeting>
 
-        <hr class="small">
+        <!-- Hide for now -->
+        <!-- <hr class="small">
 
-        <b-row class="text-center trafficSource">
+        <b-row class="text-center trafficSource" style="display: none">
             <b-col cols="1">
                 <div class="condition__controls">
                     <label>Exclude</label>
@@ -153,9 +157,9 @@
             </b-col>
             <b-col cols="5">
                 <div class="condition__controls">
-                    <label>Traffic Source</label>
+                    <label>Traffic Source</label> -->
                     <!-- TODO: Add Traffic Source backend feature -->
-                    <b-form-tags
+                    <!-- <b-form-tags
                     input-id="tags-separators"
                     separator=" "
                     placeholder=""
@@ -183,7 +187,7 @@
                     </b-form-text>
                 </div>
             </b-col>
-        </b-row>
+        </b-row> -->
 
     </div>
 </template>
