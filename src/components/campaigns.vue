@@ -71,7 +71,7 @@
                 <span class="landing-page-name" v-if="props.row.landingPage.length<12" @click="copyText(props.row.landingPage)">
                     {{ props.row.landingPage }}
                 </span>
-                <span class="landing-page-name" v-if="props.row.landingPage.length>=12" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="'{{props.row.landingPage}}'">
+<span class="landing-page-name" v-if="props.row.landingPage.length>=12" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="''"> <!-- TODO: Full URL to display on hover tooltip -->
                     {{ props.row.landingPage.substring(0,12)+"..." }}
                 </span>
               </span>
@@ -319,7 +319,6 @@
         },
         data() {
             return {
-                username: 'AVERYLONGGGNAMMEEEEEEEEEEEEEEEEEE',
                 segmentName: '',
                 isModalVisible: false,
                 eventData: [],
