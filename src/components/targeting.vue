@@ -367,7 +367,7 @@
                     })
                     this.$swal.fire({
                         title: 'Validation Error',
-                        text: `Please check field:${JSON.stringify(emptyKey)}`,
+                        text: `Please check fields: ${JSON.stringify(emptyKey)}`,
                     })
                     return
                 }
