@@ -113,7 +113,7 @@
                            @change="changeField($event,`landingPage`)"
                     >
                     <b-form-text id="totalClicks">
-                        Page Clicks: Total-{{getFieldName(`countClickTotal`) || 0}} Daily-{{getFieldName(`countClickDaily`) || 0}}
+                        Page Clicks: Total {{getFieldName(`countClickTotal`) || 0}} | Daily {{getFieldName(`countClickDaily`) || 0}}
                     </b-form-text>
                 </div>
             </b-col>
@@ -278,8 +278,8 @@
                     updateFieldData.field = `landingPageValid`
                     this.updateField(updateFieldData)
                     this.$swal.fire({
-                        title: 'Validation Error',
-                        text: `Please check domain name:${lp.value}`,
+                        title: 'Invalid Domain',
+                        text: `Please check domain name: ${lp.value}`,
                     })
                 }
 

@@ -105,7 +105,7 @@ h2, .h2
 
 /* Containers */
 .container, .container-lg, .container-md, .container-sm, .container-xl
-  max-width: 1350px
+  max-width: 1400px
 
 .container
   height: 100%
@@ -511,7 +511,7 @@ table
     font-size: 14px
     font-weight: 600
     letter-spacing: 0.2px
-    padding: 1.5rem 0.5rem
+    padding: 1.5rem 1rem
     vertical-align: middle
     border-top: 0px
 
@@ -536,20 +536,24 @@ tr:nth-child(odd), .table-striped tbody tr:nth-of-type(odd)
   background: rgba(255, 255, 255, 0.95)
 
 span.VueTables__heading
-  font-size: 16px
+  font-size: 14px
   font-weight: 600
   letter-spacing: 0.3px
   transition: all 0.3s ease
 
-// th#VueTables_th--name, th#VueTables_th--weight, th#VueTables_th--countConditions, th#VueTables_th--multiplier, th#VueTables_th--salesStats, th#VueTables_th--userName
-//   &:hover
-//     color: #36B8E1
-//     cursor: pointer
+th#VueTables_th--id, th#VueTables_th--name, th#VueTables_th--userName, #VueTables_th--budgetDaily, #VueTables_th--budgetTotal, #VueTables_th--cpc, #VueTables_th--landingPage, #VueTables_th--clicks, #VueTables_th--status
+  &:hover
+    color: #36B8E1
+    cursor: pointer
+
+th#VueTables_th--id
+  text-align: center
 
 .VueTables__sort-icon.pull-right
   margin-left: 5px
+  margin-top: 4px
   color: rgba(0, 0, 0, 0.5)
-  font-size: 0.7em
+  font-size: 0.9em
 
 .table-bordered thead
   th, td

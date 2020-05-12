@@ -10,7 +10,7 @@
 
         <v-client-table :data="getCampaigns" :columns="columns" :options="options">
 
-            <div slot="id" slot-scope="props">
+            <div slot="id" slot-scope="props" class="text-center">
                 <span class="id">{{props.row.id}}</span>
             </div>
 
@@ -33,7 +33,7 @@
                                 @click="revertValue(); setEditing(false)"><i class="fas fa-ban"></i></button>
                     </span>
                 <b-form-text id="spent-values">
-                    Updated: {{timeSince_(row.dateUpdated)}} ago
+                    Updated {{timeSince_(row.dateUpdated)}} ago
                 </b-form-text>
             </div>
 
@@ -52,38 +52,44 @@
             </div>
 
             <div slot="cpc" slot-scope="props">
-                <span class="budget-daily">{{props.row.cpc}}</span>
+                <span class="budget-daily">${{props.row.cpc}}</span>
                 <b-form-text id="currency">
                     CAD
                 </b-form-text>
             </div>
 
             <div slot="userName" slot-scope="props">
-                <span class="creator-name">{{props.row.userName}}</span>
+                <span v-if="props.row.userName.length<12" class="creator-name">{{props.row.userName}}</span>
+                <span v-if="props.row.userName.length>=12" class="creator-name">{{ props.row.userName.substring(0,12)+"..." }}</span>
                 <b-form-text id="date">
-                    on {{formatData_(props.row.dateAdded)}}
+                    on {{ formatData_(props.row.dateAdded).substring(0,10) }}
                 </b-form-text>
             </div>
 
             <div slot="landingPage" slot-scope="props">
               <span class="landing-page-box">
-                  <span class="landing-page-name"
-                        @click="copyText(props.row.landingPage)">{{props.row.landingPage}}</span>
+                <span class="landing-page-name" v-if="props.row.landingPage.length<12" @click="copyText(props.row.landingPage)">
+                    {{ props.row.landingPage }}
+                </span>
+<span class="landing-page-name" v-if="props.row.landingPage.length>=12" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="''"> <!-- TODO: Full URL to display on hover tooltip -->
+                    {{ props.row.landingPage.substring(0,12)+"..." }}
+                </span>
               </span>
                 <button class="btn btn-link" @click="copyText(props.row.landingPage)"
                         v-b-tooltip.hover.right="'Copy URL to Clipboard'">
                     <i class="far fa-copy"></i>
                 </button>
                 <b-form-text id="date">
-                    Clicks: Today:{{props.row.countClickDaily || 0}}
+                    Clicks - Today: {{props.row.countClickDaily || 0}}
                 </b-form-text>
             </div>
 
-            <div slot="child_row" slot-scope="props">
+            <!-- Hide for now -->
+            <!-- <div slot="child_row" slot-scope="props">
                 <div class="segment-child animated fadeIn">
 
                 </div>
-            </div>
+            </div> -->
 
             <div slot="status" slot-scope="props">
                 <span v-if="props.row.status == 'inactive'">
@@ -100,7 +106,7 @@
                 </span> -->
             </div>
 
-            <div slot="clicks" slot-scope="props">
+            <div slot="clicks" slot-scope="props" class="text-center" width="10px">
                 <span class="id">{{props.row.countClickTotal}}</span>
             </div>
 
@@ -142,8 +148,8 @@
         'cpc',
         'userName',
         'landingPage',
-        'status',
         'clicks',
+        'status',
         'actions',
     ]
     export default {
@@ -313,7 +319,6 @@
         },
         data() {
             return {
-                counter: 0,
                 segmentName: '',
                 isModalVisible: false,
                 eventData: [],
@@ -332,15 +337,26 @@
                         cpc: 'Max. CPC',
                         landingPage: 'Landing Page URL',
                         status: 'Status',
-                        clicks: 'Clicks'
+                        clicks: 'Total Clicks'
                     },
                     editableColumns: ['name'],
-                    sortable: tableColumnsLog,
+                    // sortable: tableColumnsLog,
+                    // sortable: [''],
+                    sortable: ['id','name', 'userName', 'budgetDaily', 'budgetTotal', 'cpc', 'landingPage', 'status', 'clicks'],
+                    sortIcon: {
+                        base: 'fa fad',
+                        up: 'fa-sort-up',
+                        down: 'fa-sort-down',
+                        is: 'fa-sort'
+                    },
                     filterable: tableColumnsLog,
                     highlightMatches: true,
                     resizableColumns: false,
                     perPage: 10,
                     perPageValues: [5, 10, 25, 100],
+                    pagination:{
+                        virtual: true
+                    },
                     texts: {
                         count: "Showing {from} to {to} of {count} campaigns|Showing {count} campaigns|Showing 1 campaign",
                         first: "First",
