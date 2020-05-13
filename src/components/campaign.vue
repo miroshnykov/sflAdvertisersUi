@@ -69,7 +69,7 @@
             </b-col>
             <b-col cols="4">
                 <div class="condition__controls">
-                    <label>Total Budget (Campaign)</label>
+                    <label>Total Budget</label>
                     <input type="number"
                            step=100
                            placeholder="ex: 10000"
@@ -85,7 +85,7 @@
             </b-col>
             <b-col cols="2">
                 <div class="condition__controls">
-                    <label>Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'"><i class="fad fa-question-circle"></i></a></label>
+                    <label>Total Max. CPC <a class="question" v-b-tooltip.hover.right.html="'<b>Cost per click.</b><br>Value must be higher than Targeting Max. CPC'"><i class="fad fa-question-circle"></i></a></label>
                     <input type="number"
                         step=0.1
                         placeholder="ex: 0.5"
