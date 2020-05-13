@@ -124,7 +124,7 @@
                             <div class="cpc-equal"><i class="fas fa-equals"></i></div>
                         </b-col>
                         <b-col cols="2">
-                            <label for="label-cpc">Max. CPC <a class="question" v-b-tooltip.hover.right="'Cost per click'">
+                            <label for="label-cpc">Max. CPC <a class="question" v-b-tooltip.hover.right.html="'<b>Cost per click.</b><br>Value must be lower than Campaign Max. CPC'">
                                 <i class="fad fa-question-circle"></i></a></label>
                             <div class="campaign-block">
                                 <input type="number"
