@@ -68,11 +68,11 @@
 
             <div slot="landingPage" slot-scope="props">
               <span class="landing-page-box">
-                <span class="landing-page-name" v-if="props.row.landingPage.length<14" @click="copyText(props.row.landingPage)">
+                <span class="landing-page-name" v-if="props.row.landingPage.length<=14" @click="copyText(props.row.landingPage)">
                     {{ props.row.landingPage }}
                 </span>
-                <span class="landing-page-name" v-if="props.row.landingPage.length>=14" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.html.right="props.row.landingPage">
-                    {{ props.row.landingPage.substring(0,14)+"..." }}
+                <span class="landing-page-name" v-if="props.row.landingPage.length>=15" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.html.right="props.row.landingPage">
+                    {{ props.row.landingPage.substring(0,15)+"..." }}
                 </span>
               </span>
                 <button class="btn btn-link" @click="copyText(props.row.landingPage)"
