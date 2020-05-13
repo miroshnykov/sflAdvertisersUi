@@ -59,8 +59,8 @@
             </div>
 
             <div slot="userName" slot-scope="props">
-                <span v-if="props.row.userName.length<12" class="creator-name">{{props.row.userName}}</span>
-                <span v-if="props.row.userName.length>=12" class="creator-name">{{ props.row.userName.substring(0,12)+"..." }}</span>
+                <span v-if="props.row.userName.length<14" class="creator-name">{{props.row.userName}}</span>
+                <span v-if="props.row.userName.length>=14" class="creator-name">{{ props.row.userName.substring(0,14)+"..." }}</span>
                 <b-form-text id="date">
                     on {{ formatData_(props.row.dateAdded).substring(0,10) }}
                 </b-form-text>
@@ -68,11 +68,11 @@
 
             <div slot="landingPage" slot-scope="props">
               <span class="landing-page-box">
-                <span class="landing-page-name" v-if="props.row.landingPage.length<12" @click="copyText(props.row.landingPage)">
+                <span class="landing-page-name" v-if="props.row.landingPage.length<14" @click="copyText(props.row.landingPage)">
                     {{ props.row.landingPage }}
                 </span>
-<span class="landing-page-name" v-if="props.row.landingPage.length>=12" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.right="''"> <!-- TODO: Full URL to display on hover tooltip -->
-                    {{ props.row.landingPage.substring(0,12)+"..." }}
+                <span class="landing-page-name" v-if="props.row.landingPage.length>=14" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.html="props.row.landingPage">
+                    {{ props.row.landingPage.substring(0,14)+"..." }}
                 </span>
               </span>
                 <button class="btn btn-link" @click="copyText(props.row.landingPage)"
