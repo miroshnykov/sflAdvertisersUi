@@ -59,8 +59,8 @@
             </div>
 
             <div slot="userName" slot-scope="props">
-                <span v-if="props.row.userName.length<14" class="creator-name">{{props.row.userName}}</span>
-                <span v-if="props.row.userName.length>=14" class="creator-name">{{ props.row.userName.substring(0,14)+"..." }}</span>
+                <span v-if="props.row.userName.length<=12" class="creator-name">{{props.row.userName}}</span>
+                <span v-if="props.row.userName.length>=13" class="creator-name" v-b-tooltip.hover.html.right="props.row.userName">{{ props.row.userName.substring(0,13)+"..." }}</span>
                 <b-form-text id="date">
                     on {{ formatData_(props.row.dateAdded).substring(0,10) }}
                 </b-form-text>
@@ -71,7 +71,7 @@
                 <span class="landing-page-name" v-if="props.row.landingPage.length<14" @click="copyText(props.row.landingPage)">
                     {{ props.row.landingPage }}
                 </span>
-                <span class="landing-page-name" v-if="props.row.landingPage.length>=14" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.html="props.row.landingPage">
+                <span class="landing-page-name" v-if="props.row.landingPage.length>=14" @click="copyText(props.row.landingPage)" v-b-tooltip.hover.html.right="props.row.landingPage">
                     {{ props.row.landingPage.substring(0,14)+"..." }}
                 </span>
               </span>
@@ -84,12 +84,11 @@
                 </b-form-text>
             </div>
 
-            <!-- Hide for now -->
-            <!-- <div slot="child_row" slot-scope="props">
+            <div slot="child_row" slot-scope="props">
                 <div class="segment-child animated fadeIn">
 
                 </div>
-            </div> -->
+            </div>
 
             <div slot="status" slot-scope="props">
                 <span v-if="props.row.status == 'inactive'">
@@ -322,9 +321,9 @@
                 segmentName: '',
                 isModalVisible: false,
                 eventData: [],
+                tableData: [],
                 editableColumns: ['name', 'budgetDaily'],
                 columns: tableColumnsLog,
-                tableData: [],
                 countOfRecords: 0,
                 options: {
                     // columnsDropdown: true,
@@ -352,10 +351,12 @@
                     filterable: tableColumnsLog,
                     highlightMatches: true,
                     resizableColumns: false,
+                    showChildRowToggler: false,
                     perPage: 10,
                     perPageValues: [5, 10, 25, 100],
-                    pagination:{
-                        virtual: true
+                    pagination: {
+                        nav: 'fixed',
+                        edge: true,
                     },
                     texts: {
                         count: "Showing {from} to {to} of {count} campaigns|Showing {count} campaigns|Showing 1 campaign",
