@@ -85,17 +85,19 @@
             </b-col>
             <b-col cols="2">
                 <div class="condition__controls">
-                    <label>Campaign Max. CPC <a class="question" v-b-tooltip.hover.right.html="'<b>Cost per click.</b><br>Value must be higher than Targeting Max. CPC'"><i class="fad fa-question-circle"></i></a></label>
+                    <label>Campaign Max. CPC <a class="question"
+                                                v-b-tooltip.hover.right.html="'<b>Cost per click.</b><br>Value must be higher than Targeting Max. CPC'"><i
+                            class="fad fa-question-circle"></i></a></label>
                     <input type="number"
-                        step=0.1
-                        placeholder="ex: 0.5"
-                        min="0.001" max="1000"
-                        :id="setElId(`cpc`)"
-                        class="condition__matches budgetTotal custom-input"
-                        :value="getFieldName(`cpc`)"
-                        @change="changeField($event,`cpc`)"
-                        pattern="^\d+(?:\.\d{1,2})?$"
-                        onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'transparent'
+                           step=0.1
+                           placeholder="ex: 0.5"
+                           min="0.001" max="1000"
+                           :id="setElId(`cpc`)"
+                           class="condition__matches budgetTotal custom-input"
+                           :value="getFieldName(`cpc`)"
+                           @change="changeField($event,`cpc`)"
+                           pattern="^\d+(?:\.\d{1,2})?$"
+                           onblur="this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'transparent'
                     ">
                 </div>
             </b-col>
@@ -113,7 +115,8 @@
                            @change="changeField($event,`landingPage`)"
                     >
                     <b-form-text id="totalClicks">
-                        Page Clicks: Total {{getFieldName(`countClickTotal`) || 0}} | Daily {{getFieldName(`countClickDaily`) || 0}}
+                        Page Clicks: Total {{getFieldName(`countClickTotal`) || 0}} | Daily
+                        {{getFieldName(`countClickDaily`) || 0}}
                     </b-form-text>
                 </div>
             </b-col>
@@ -158,36 +161,36 @@
             <b-col cols="5">
                 <div class="condition__controls">
                     <label>Traffic Source</label> -->
-                    <!-- TODO: Add Traffic Source backend feature -->
-                    <!-- <b-form-tags
-                    input-id="tags-separators"
-                    separator=" "
-                    placeholder=""
-                    class="mb-2 traffic"
-                    tag-variant="primary"
-                    remove-on-delete
-                    onkeypress="
-                        return (
-                            event.charCode == 8
-                            || event.charCode == 0
-                            || event.charCode == 13
-                            || event.charCode == 32
-                            || event.charCode == 188
-                        ) ? null : event.charCode >= 48 && event.charCode <= 57"
-                    onpaste="return false"
-                    onkeyup="
-                        if(this.value === '' || parseInt(this.value)>100){
-                            this.value = 100
-                            return false
-                        }
-                    "
-                    ></b-form-tags>
-                    <b-form-text id="trafficSource">
-                    Numbers only, separated by space or enter
-                    </b-form-text>
-                </div>
-            </b-col>
-        </b-row> -->
+        <!-- TODO: Add Traffic Source backend feature -->
+        <!-- <b-form-tags
+        input-id="tags-separators"
+        separator=" "
+        placeholder=""
+        class="mb-2 traffic"
+        tag-variant="primary"
+        remove-on-delete
+        onkeypress="
+            return (
+                event.charCode == 8
+                || event.charCode == 0
+                || event.charCode == 13
+                || event.charCode == 32
+                || event.charCode == 188
+            ) ? null : event.charCode >= 48 && event.charCode <= 57"
+        onpaste="return false"
+        onkeyup="
+            if(this.value === '' || parseInt(this.value)>100){
+                this.value = 100
+                return false
+            }
+        "
+        ></b-form-tags>
+        <b-form-text id="trafficSource">
+        Numbers only, separated by space or enter
+        </b-form-text>
+    </div>
+</b-col>
+</b-row> -->
 
     </div>
 </template>
@@ -205,6 +208,7 @@
             ...mapState('campaign', ['campaign']),
             // ...mapState('targeting', ['targeting']),
             ...mapGetters("campaign", ["getCampaign"]),
+            ...mapGetters("targeting", ["getTargeting"]),
             // ...mapMutations("targeting", ["addTargeting"])
         },
         async mounted() {
@@ -234,6 +238,25 @@
                 ]
             },
             async changeField(event, field) {
+
+                if (field === 'cpc') {
+                    let checkTargeting = this.getTargeting
+                    let cpc = event.target.value
+
+                    let valid = []
+                    checkTargeting.forEach(item => {
+                        let elColor = document.querySelector(`#cpc-${item.position}`)
+                        elColor.style.color = '#7f98a5'
+                        if (item.cpc > cpc) {
+                            valid.push(item)
+                        }
+                    })
+                    valid.forEach(item => {
+                        let elColor = document.querySelector(`#cpc-${item.position}`)
+                        elColor.style.color = 'red'
+                    })
+                }
+
                 let el = document.querySelector(`#${field}-${this.id}`)
                 if (Number(event.target.value) === 0) {
                     el && el.classList.add('error')
