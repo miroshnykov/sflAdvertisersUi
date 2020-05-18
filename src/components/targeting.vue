@@ -124,7 +124,8 @@
                             <div class="cpc-equal"><i class="fas fa-equals"></i></div>
                         </b-col>
                         <b-col cols="2">
-                            <label for="label-cpc">Max. CPC <a class="question" v-b-tooltip.hover.right.html="'<b>Cost per click.</b><br>Value must be lower than Campaign Max. CPC'">
+                            <label for="label-cpc">Max. CPC <a class="question"
+                                                               v-b-tooltip.hover.right.html="'<b>Cost per click.</b><br>Value must be lower than Campaign Max. CPC'">
                                 <i class="fad fa-question-circle"></i></a></label>
                             <div class="campaign-block">
                                 <input type="number"
@@ -135,7 +136,7 @@
                                        class="condition__matches custom-input"
                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
                                        :value="item.cpc"
-                                       style="width:50%;float:left;"
+                                       :style="getStyleCpc(item)"
                                        min="0.001" max="1000"
                                        onkeypress="
                                             return (
@@ -215,6 +216,10 @@
                 item.fieldValue = !item[field]
                 this.saveTargetingItem(item)
                 this.matchTargeting(item)
+            },
+            getStyleCpc(item) {
+                let color = parseFloat(this.getCampaign[0].cpc) > parseFloat(item.cpc) ? '#7f98a5' : 'red'
+                return `width:50%;float:left;color:${color}`
             },
             addClassActive(value) {
                 return value && 'active' || ''
