@@ -222,7 +222,7 @@
                                     showConfirmButton: false,
                                     timer: 1000
                                 })
-                                location.reload()
+                                // location.reload()
                             } else {
                                 self.$swal.fire({
                                     title: 'Error on backend ',
