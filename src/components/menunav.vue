@@ -22,7 +22,7 @@
         methods: {
             mainPage() {
                 this.$router.push('/campaigns')
-                location.reload()
+                // location.reload()
             },
         },
     }
