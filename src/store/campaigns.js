@@ -17,7 +17,9 @@ export default {
 
         addCampaign(state, data) {
             const {campaigns} = state
-            state.campaigns = Object.assign(campaigns, data)
+            state.campaigns = [...data, ...campaigns]
+            console.log(' **** state.campaigns')
+            console.table(reFormatJSON(state.campaigns))
         },
 
     },
@@ -28,8 +30,6 @@ export default {
         async addCampaignsStore({commit}, data) {
             let campaign = data.$store.state.campaign.campaign
             campaign[0].userName = data.$store.state.user.user[0].name
-            console.log(' **** addCampaignsStore')
-            console.table(reFormatJSON(campaign))
             commit('addCampaign', campaign)
         },
         async delCampaign({commit}, id) {
