@@ -17,7 +17,8 @@ export default {
 
         addCampaign(state, data) {
             const {campaigns} = state
-            state.campaigns = [...data, ...campaigns]
+            // state.campaigns = [...data, ...campaigns]
+            state.campaigns = Object.assign(campaigns, data)
             console.log(' **** state.campaigns')
             console.table(reFormatJSON(state.campaigns))
         },
