@@ -58,7 +58,7 @@
 .nav-link
     display: block
     padding: 1rem 0.5rem
-    margin-left: 30px
+    margin-left: 20px
 
 a.nav-link.active
     font-size: 14px
