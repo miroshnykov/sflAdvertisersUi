@@ -25,7 +25,7 @@
                     <i class="far fa-pencil"></i>
                 </button>
                 <span v-else>
-                        <input type="text" v-model="row.name" class="quickedit">
+                        <input type="text" v-model="row.name" maxlength="25" class="quickedit">
                         <button type="button" class="btn btn-info btn-xs quickedit-update"
                                 @click="update(row.name);setEditing(false); uCampaignName(row)"><i
                                 class="fas fa-check"></i></button>
