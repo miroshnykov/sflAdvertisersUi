@@ -2,11 +2,11 @@
     <div class="header">
         <div class="header-container">
             <b-row class="text-center" align-v="center">
-                <b-col col lg="8">
+                <b-col col lg="7">
                 </b-col>
-                <b-col col lg="4">
+                <b-col col lg="5">
                     <b-row align-v="center">
-                        <b-col cols="8">
+                        <b-col cols="7">
                             <!-- Hide for now -->
                             <!-- <div class="header-icons">
                                 <span class="search"><i class="fas fa-search"></i></span>
@@ -14,7 +14,7 @@
                             </div> -->
                         </b-col>
 
-                        <b-col cols="4">
+                        <b-col cols="5">
                         <img class="user-avatar" :src="getUrlAvatar()" />
                             <b-nav>
                                 <b-nav-item-dropdown
@@ -167,7 +167,7 @@
                     border-right: 0.2em solid transparent
                     border-bottom: 0
                     border-left: 0.2em solid transparent
-                    color: rgba(255, 255, 255, 0.5)
+                    color: rgba(0,0,0,.5)
 
         span.user
             float: right
