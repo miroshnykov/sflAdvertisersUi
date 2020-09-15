@@ -264,7 +264,7 @@
                     el && el.classList.remove('error')
                 }
                 let updateFieldData = {}
-                updateFieldData.value = event.target.value.toLowerCase()
+                updateFieldData.value = event.target.value
                 updateFieldData.field = field
                 this.updateField(updateFieldData)
                 if (field === 'landingPage') {
