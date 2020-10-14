@@ -219,7 +219,7 @@
             },
             getStyleCpc(item) {
                 let color = parseFloat(this.getCampaign[0].cpc) >= parseFloat(item.cpc) ? '#7f98a5' : 'red'
-                return `width:50%;float:left;color:${color}`
+                return `width:55%;float:left;color:${color}`
             },
             addClassActive(value) {
                 return value && 'active' || ''
