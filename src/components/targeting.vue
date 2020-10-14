@@ -137,7 +137,7 @@
                                        @change="changeInput(Number($event.target.value), item, `cpc`)"
                                        :value="item.cpc"
                                        :style="getStyleCpc(item)"
-                                       min="0.001" max="1000"
+                                       min="0.0001" max="1000"
                                        onkeypress="
                                             return (
                                                 event.charCode == 8

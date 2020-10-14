@@ -91,7 +91,7 @@
                     <input type="number"
                            step=0.1
                            placeholder="ex: 0.5"
-                           min="0.001" max="1000"
+                           min="0.0001" max="1000"
                            :id="setElId(`cpc`)"
                            class="condition__matches budgetTotal custom-input"
                            :value="getFieldName(`cpc`)"
