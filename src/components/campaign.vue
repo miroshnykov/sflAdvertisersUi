@@ -50,13 +50,26 @@
         <hr>
         <h2>Advertising Budget</h2>
 
+        <b-col cols="2">
+            <div class="condition__controls">
+                <label>&nbsp;No limit</label>
+                <b-form-checkbox
+                        class="validateLandingPage" size="lg"
+                        :id="setElId(`noLimit`)"
+                        :checked="getFieldName(`noLimit`)"
+                        @change="changeField($event,`noLimit`)"
+                ></b-form-checkbox>
+            </div>
+        </b-col>
         <b-row class="text-center">
+
             <b-col cols="2">
                 <div class="condition__controls">
                     <label>Daily Budget</label>
                     <input type="number"
                            step=10
                            placeholder="ex: 1000"
+                           :disabled="getFieldName(`noLimit`)"
                            :id="setElId(`budgetDaily`)"
                            class="condition__matches budgetDaily custom-input"
                            :value="getFieldName(`budgetDaily`)"
@@ -73,6 +86,7 @@
                     <input type="number"
                            step=100
                            placeholder="ex: 10000"
+                           :disabled="getFieldName(`noLimit`)"
                            :id="setElId(`budgetTotal`)"
                            class="condition__matches budgetTotal custom-input"
                            :value="getFieldName(`budgetTotal`)"
@@ -92,6 +106,7 @@
                            step=0.1
                            placeholder="ex: 0.5"
                            min="0.0001" max="1000"
+                           :disabled="getFieldName(`noLimit`)"
                            :id="setElId(`cpc`)"
                            class="condition__matches budgetTotal custom-input"
                            :value="getFieldName(`cpc`)"
@@ -257,16 +272,25 @@
                     })
                 }
 
-                let el = document.querySelector(`#${field}-${this.id}`)
-                if (Number(event.target.value) === 0) {
-                    el && el.classList.add('error')
-                } else {
-                    el && el.classList.remove('error')
+                if (event.target){
+                    let el = document.querySelector(`#${field}-${this.id}`)
+                    if (Number(event.target.value) === 0) {
+                        el && el.classList.add('error')
+                    } else {
+                        el && el.classList.remove('error')
+                    }
+                    let updateFieldData = {}
+                    updateFieldData.value = event.target.value
+                    updateFieldData.field = field
+                    this.updateField(updateFieldData)
                 }
-                let updateFieldData = {}
-                updateFieldData.value = event.target.value
-                updateFieldData.field = field
-                this.updateField(updateFieldData)
+
+                if (field === 'noLimit') {
+                    this.updateField({
+                        field: `noLimit`,
+                        value: event
+                    })
+                }
                 if (field === 'landingPage') {
                     this.updateField({
                         field: `landingPageValid`,
