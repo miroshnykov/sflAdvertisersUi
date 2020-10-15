@@ -16,6 +16,7 @@ const campaign = async (id) => {
                         user
                         landingPage
                         landingPageValid
+                        noLimit
                         status
                         spentDaily
                         spentTotal
@@ -44,7 +45,8 @@ const addCampaign = async (data) => {
         budgetDaily,
         cpc,
         landingPage,
-        landingPageValid
+        landingPageValid,
+        noLimit
     } = data
 
     try {
@@ -57,7 +59,8 @@ const addCampaign = async (data) => {
                             budgetTotal:${budgetTotal || 0},
                             budgetDaily:${budgetDaily || 0},
                             cpc:${cpc || 0},
-                            landingPage:"${landingPage || ""}"
+                            noLimit:${noLimit},
+                            landingPage:"${landingPage || ""}",
                             landingPageValid:${landingPageValid || false}
                         ){
                             id
@@ -86,6 +89,7 @@ const updateCampaign = async (data) => {
         cpc,
         landingPage,
         landingPageValid,
+        noLimit,
         status
     } = data
 
@@ -101,6 +105,7 @@ const updateCampaign = async (data) => {
                             budgetDaily:${budgetDaily || 0},
                             status: "${status}",
                             cpc:${cpc || 0},
+                            noLimit:${noLimit},
                             landingPage:"${landingPage || ""}"
                             landingPageValid:${landingPageValid}
                         ){
