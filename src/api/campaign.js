@@ -59,7 +59,7 @@ const addCampaign = async (data) => {
                             budgetTotal:${budgetTotal || 0},
                             budgetDaily:${budgetDaily || 0},
                             cpc:${cpc || 0},
-                            noLimit:${noLimit},
+                            noLimit:${noLimit||false},
                             landingPage:"${landingPage || ""}",
                             landingPageValid:${landingPageValid || false}
                         ){
