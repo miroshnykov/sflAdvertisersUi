@@ -409,7 +409,7 @@
                 let saveConditionsResponse = await this.$store.dispatch('campaign/saveConditionsAction')
                 let saveTargetingDbResponse = await this.$store.dispatch('targeting/saveTargetingDb', this)
 
-                await this.$store.dispatch('campaigns/addCampaignsStore',this)
+                // await this.$store.dispatch('campaigns/addCampaignsStore',this)
                 if (saveConditionsResponse.id && saveTargetingDbResponse) {
                     this.$swal.fire({
                         type: 'success',

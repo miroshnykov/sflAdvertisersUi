@@ -56,10 +56,10 @@ const addCampaign = async (data) => {
                     mutation{
                         addCampaign(
                             name:"${name}",
-                            budgetTotal:${budgetTotal || 0},
-                            budgetDaily:${budgetDaily || 0},
-                            cpc:${cpc || 0},
-                            noLimit:${noLimit||false},
+                            budgetTotal:${Number(budgetTotal) || 0},
+                            budgetDaily:${Number(budgetDaily) || 0},
+                            cpc:${Number(cpc) || 0},
+                            noLimit:${noLimit || false},
                             landingPage:"${landingPage || ""}",
                             landingPageValid:${landingPageValid || false}
                         ){
@@ -101,10 +101,10 @@ const updateCampaign = async (data) => {
                         updateCampaign(
                             id:${id},
                             name:"${name}",
-                            budgetTotal:${budgetTotal || 0},
-                            budgetDaily:${budgetDaily || 0},
+                            budgetTotal:${Number(budgetTotal) || 0},
+                            budgetDaily:${Number(budgetDaily) || 0},
                             status: "${status}",
-                            cpc:${cpc || 0},
+                            cpc:${Number(cpc) || 0},
                             noLimit:${noLimit},
                             landingPage:"${landingPage || ""}"
                             landingPageValid:${landingPageValid}
