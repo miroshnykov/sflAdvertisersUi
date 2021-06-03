@@ -100,7 +100,8 @@ if (process.env.NODE_ENV === 'production') {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"',
-                SFL_API_ADVERTISER: config.sflApiAdvertiser.host,
+                SFL_CORE_CONDITION: config.sflApiAdvertiser.host,
+                SSO_API: config.sso.host,
             }
         }),
         new webpack.HotModuleReplacementPlugin(),

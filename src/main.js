@@ -31,22 +31,19 @@ new Vue({
     store,
     render: h => h(App),
     async created() {
-        await store.dispatch('googleAuth/SaveGoogleAuthUrl')
+        await store.dispatch('user/SaveGoogleAuthUrl')
         let token = getCookie('accessToken')
         if (token) {
-            await store.dispatch('googleAuth/VerifyTokenEmailSave')
+            await store.dispatch('user/VerifyTokenEmailSave', token)
 
-
-            if (this.verifyTokenEmail) {
-                await store.dispatch('user/saveUserStore', this.verifyTokenEmail)
-                await store.dispatch('campaigns/saveCampaignsStore')
-                await store.dispatch('countries/saveCountriesStore')
-                await store.dispatch('publisherTargeting/savePublisherTargetingStore')
-                router.push('/campaigns')
-            } else {
-                console.log(' *** verifyToken is not valid *** ')
-                router.push('/')
+            if (!this.verifyTokenEmail) {
+                throw new Error('invalid token')
             }
+            await store.dispatch('user/saveUserStore', this.verifyTokenEmail)
+            await store.dispatch('campaigns/saveCampaignsStore')
+            await store.dispatch('countries/saveCountriesStore')
+            await store.dispatch('publisherTargeting/savePublisherTargetingStore')
+            router.push('/campaigns')
 
         } else {
             let checkPatch = this.$root._route.path.includes('successLogin')
@@ -59,6 +56,6 @@ new Vue({
         }
     },
     computed: {
-        ...mapState('googleAuth', ['verifyTokenEmail']),
+        ...mapState('user', ['verifyTokenEmail']),
     },
 })
