@@ -12,6 +12,9 @@ config = {
     sflApiAdvertiser: {
         host: '"https://sfl-api-advertiser.surge.systems/"'
     },
+    sso:{
+        host:'"https://am-ssoauth.surge.systems/"'
+    }
 }
 
 module.exports = config

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const verify = axios.create({
-    baseURL: `${process.env.SFL_API_ADVERTISER}`,
+    baseURL: `${process.env.SFL_CORE_CONDITION}`,
 })
 
 const verifyLP = async (lp) => {
